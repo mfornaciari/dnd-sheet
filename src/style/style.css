@@ -1,0 +1,7 @@
+#header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  padding: 0.5rem;
+  border-style: solid;
+};

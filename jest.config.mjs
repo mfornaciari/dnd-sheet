@@ -4,4 +4,7 @@ export default {
   testEnvironment: 'jsdom',
   collectCoverage: true,
   coverageProvider: 'v8',
+  moduleNameMapper: {
+    '^.+\\.css$': "<rootDir>/__mocks__/styleMock.js",
+  }
 }

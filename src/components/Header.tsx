@@ -1,3 +1,5 @@
+import '../style/style.css';
+
 export default function Header() {
   const raceNames = [
     'Anão',
@@ -29,7 +31,7 @@ export default function Header() {
   ];
 
   return (
-    <header>
+    <header id='header'>
       <label htmlFor='nameInput'>Nome</label>
       <input type='text' id='nameInput' placeholder='Nome do personagem' />
 
