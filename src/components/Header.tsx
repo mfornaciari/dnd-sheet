@@ -42,12 +42,12 @@ export default function Header() {
 
       <label htmlFor='classInput'>Classe</label>
       <select id='classInput'>
-      { classNames.map((className, index) => <option key={index} value={index}>{className}</option>) }
+        { classNames.map((className, index) => <option key={index} value={index}>{className}</option>) }
       </select>
 
       <label htmlFor='levelInput'>Nível</label>
       <select id='levelInput'>
-      { levels.map(level => <option key={Number(level)} value={Number(level)}>{level}</option>) }
+        { levels.map(level => <option key={Number(level)} value={Number(level)}>{level}</option>) }
       </select>
     </header>
   );
