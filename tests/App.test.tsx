@@ -47,7 +47,6 @@ describe('App', () => {
     expect(nameInput).toHaveAttribute('placeholder', 'Nome do personagem');
     for (const option of raceOptions) {
       const optionValue = option.getAttribute('value');
-
       expect(option.textContent).toEqual(raceNames[Number(optionValue)]);
     }
     for (const option of classOptions) {
