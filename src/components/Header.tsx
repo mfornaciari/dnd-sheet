@@ -31,7 +31,7 @@ export default function Header() {
   ];
 
   return (
-    <header id='header'>
+    <header>
       <label htmlFor='nameInput'>Nome</label>
       <input type='text' id='nameInput' placeholder='Nome do personagem' />
 

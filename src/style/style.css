@@ -1,7 +1,9 @@
-#header {
+header {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
   padding: 0.5rem;
   border-style: solid;
+  border-width: 0.1rem;
+  border-radius: 0.5rem;
 };
