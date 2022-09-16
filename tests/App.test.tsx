@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import {render, screen, within} from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import App from '../src/App';
 
 describe('App', () => {
@@ -29,9 +29,6 @@ describe('App', () => {
     'Monge',
     'Paladino'
   ]
-  const levels = [
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'
-  ]
 
   it('renders header correctly', () => {
     render(<App />);
@@ -41,8 +38,8 @@ describe('App', () => {
     const raceOptions = within(raceInput).getAllByRole('option');
     const classInput = within(header).getByRole('combobox', { name: 'Classe' });
     const classOptions = within(classInput).getAllByRole('option');
-    const levelInput = within(header).getByRole('combobox', { name: 'Nível' });
-    const levelOptions = within(levelInput).getAllByRole('option');
+    const xpInput = within(header).getByRole('spinbutton', { name: 'Experiência' });
+    const levelParagraph = within(header).getByRole('region', { name: 'Nível' });
 
     expect(nameInput).toHaveAttribute('placeholder', 'Nome do personagem');
     for (const option of raceOptions) {
@@ -53,9 +50,7 @@ describe('App', () => {
       const optionValue = option.getAttribute('value');
       expect(option.textContent).toEqual(classNames[Number(optionValue)]);
     }
-    for (const option of levelOptions) {
-      const optionValue = option.getAttribute('value');
-      expect(option.textContent).toEqual(levels[Number(optionValue) - 1]);
-    }
+    expect(xpInput).toHaveAttribute('min', '0');
+    expect(levelParagraph).toHaveTextContent('Nível 1');
   });
 });
