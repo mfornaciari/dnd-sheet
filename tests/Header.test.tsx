@@ -29,6 +29,11 @@ describe('Header', () => {
       expect(classOption.textContent).toEqual(classNames[optionValue]);
     }
     expect(xpInput).toHaveAttribute('min', '0');
+    expect(xpInput).toHaveAttribute('max', '355000');
     expect(levelDiv).toHaveTextContent('Nível 1');
+  });
+
+  it('increases level based on character experience', () => {
+
   });
 });

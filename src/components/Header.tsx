@@ -17,10 +17,10 @@ export default function Header() {
 
       <Select labelText='Classe' optionNames={classNames} />
 
-      <InputNumber labelText='Experiência' minValue='0' />
+      <InputNumber labelText='Experiência' minValue='0' maxValue='355000' />
 
       <div role='region' aria-labelledby='levelLabel' >
-        <span id='levelLabel'>Nível</span> <span className='field'>1</span>
+        <span id='levelLabel'> Nível </span> <span className='field'>1</span>
       </div>
     </header>
   );

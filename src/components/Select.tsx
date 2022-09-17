@@ -6,10 +6,18 @@ type SelectProps = {
 export default ({ labelText, optionNames }: SelectProps) => {
   return (
     <div>
-      <label htmlFor={`${labelText}Select`}>{labelText}</label>
+      <label htmlFor={`${labelText}Select`}>
+        {labelText}
+      </label>
       <select id={`${labelText}Select`} className='field'>
         {optionNames.map((name, index) =>
-          <option className='option' key={index} value={index}>{name}</option>
+          <option
+            key={index}
+            value={index}
+            className='option'
+          >
+            {name}
+          </option>
         )}
       </select>
     </div>
