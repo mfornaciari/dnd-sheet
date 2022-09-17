@@ -1,31 +1,10 @@
 import '../style/style.css';
+import raceData from '../../data/raceData.json';
+import classData from '../../data/classData.json';
 
 export default function Header() {
-  const raceNames = [
-    'Anão',
-    'Draconato',
-    'Elfo',
-    'Gnomo',
-    'Humano',
-    'Meio-elfo',
-    'Meio-orc',
-    'Pequenino',
-    'Tiferino'
-  ];
-  const classNames = [
-    'Bárbaro',
-    'Bardo',
-    'Bruxo',
-    'Clérigo',
-    'Druida',
-    'Feiticeiro',
-    'Guardião',
-    'Guerreiro',
-    'Ladino',
-    'Mago',
-    'Monge',
-    'Paladino'
-  ];
+  const raceNames: Array<String> = raceData.races.map(characterRace => characterRace.name);
+  const classNames: Array<String> = classData.classes.map(characterClass => characterClass.name);
 
   return (
     <header>

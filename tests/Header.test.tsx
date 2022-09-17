@@ -1,36 +1,15 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, within } from '@testing-library/react';
+import raceData from '../data/raceData.json';
+import classData from '../data/classData.json';
 import Header from '../src/components/Header';
 
 describe('Header', () => {
-  const raceNames = [
-    'Anão',
-    'Draconato',
-    'Elfo',
-    'Gnomo',
-    'Humano',
-    'Meio-elfo',
-    'Meio-orc',
-    'Pequenino',
-    'Tiferino'
-  ]
-  const classNames = [
-    'Bárbaro',
-    'Bardo',
-    'Bruxo',
-    'Clérigo',
-    'Druida',
-    'Feiticeiro',
-    'Guardião',
-    'Guerreiro',
-    'Ladino',
-    'Mago',
-    'Monge',
-    'Paladino'
-  ]
+  const raceNames: Array<String> = raceData.races.map(characterRace => characterRace.name);
+  const classNames: Array<String> = classData.classes.map(characterClass => characterClass.name);
 
-  it('renders header correctly', () => {
+  it('renders correctly', () => {
     render(<Header />);
     const nameInput = screen.getByRole('textbox', { name: 'Nome' });
     const raceInput = screen.getByRole('combobox', { name: 'Raça' });
@@ -41,13 +20,13 @@ describe('Header', () => {
     const levelDiv = screen.getByRole('region', { name: 'Nível' });
 
     expect(nameInput).toHaveAttribute('placeholder', 'Nome do personagem');
-    for (const option of raceOptions) {
-      const optionValue = Number(option.getAttribute('value'));
-      expect(option.textContent).toEqual(raceNames[optionValue]);
+    for (const raceOption of raceOptions) {
+      const optionValue = Number(raceOption.getAttribute('value'));
+      expect(raceOption.textContent).toEqual(raceNames[optionValue]);
     }
-    for (const option of classOptions) {
-      const optionValue = Number(option.getAttribute('value'));
-      expect(option.textContent).toEqual(classNames[optionValue]);
+    for (const classOption of classOptions) {
+      const optionValue = Number(classOption.getAttribute('value'));
+      expect(classOption.textContent).toEqual(classNames[optionValue]);
     }
     expect(xpInput).toHaveAttribute('min', '0');
     expect(levelDiv).toHaveTextContent('Nível 1');

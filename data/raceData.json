@@ -1,0 +1,40 @@
+{
+  "races": [
+    {
+      "id": 0,
+      "name": "Anão"
+    },
+    {
+      "id": 1,
+      "name": "Draconato"
+    },
+    {
+      "id": 2,
+      "name": "Elfo"
+    },
+    {
+      "id": 3,
+      "name": "Gnomo"
+    },
+    {
+      "id": 4,
+      "name": "Humano"
+    },
+    {
+      "id": 5,
+      "name": "Meio-elfo"
+    },
+    {
+      "id": 6,
+      "name": "Meio-orc"
+    },
+    {
+      "id": 7,
+      "name": "Pequenino"
+    },
+    {
+      "id": 7,
+      "name": "Tiferino"
+    }
+  ]
+}
