@@ -44,6 +44,7 @@ export default function Header() {
 
       <label htmlFor='xpInput'>Experiência</label>
       <input type='number' id='xpInput' min='0' />
+
       <div role='region' aria-labelledby='level'>
         <span id='level'>Nível</span> <span>1</span>
       </div>
