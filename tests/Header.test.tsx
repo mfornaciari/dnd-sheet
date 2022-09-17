@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Header from '../src/components/Header';
 import type { levelInfo } from '../src/types';
@@ -45,10 +45,28 @@ describe('Header', () => {
       const maxExperience = String(levelInfo.maxExperience);
       const level = String(levelInfo.level);
 
-      userEvent.clear(xpInput);
+      await userEvent.clear(xpInput);
       await userEvent.type(xpInput, maxExperience);
 
       expect(levelDiv).toHaveTextContent(level);
     }
+  });
+
+  it('shows level as 1 if negative experience value is set', async () => {
+    render(<Header />);
+    const xpInput = screen.getByRole('spinbutton', { name: 'Experiência' });
+    const levelDiv = screen.getByRole('region', { name: 'Nível' });
+
+    await userEvent.type(xpInput, '-1');
+    expect(levelDiv).toHaveTextContent('1');
+  });
+
+  it('shows level as 20 if experience value over 999.999 is set', async () => {
+    render(<Header />);
+    const xpInput = screen.getByRole('spinbutton', { name: 'Experiência' });
+    const levelDiv = screen.getByRole('region', { name: 'Nível' });
+
+    await userEvent.type(xpInput, '1000000');
+    expect(levelDiv).toHaveTextContent('20');
   });
 });
