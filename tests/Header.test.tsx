@@ -1,15 +1,18 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import Header from '../src/components/Header';
+import type { levelInfo } from '../src/types';
 import raceData from '../data/raceData.json';
 import classData from '../data/classData.json';
-import Header from '../src/components/Header';
+import levelData from '../data/levelData.json';
 
 describe('Header', () => {
-  const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
-  const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
-
   it('renders correctly', () => {
+    const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
+    const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
+
     render(<Header />);
     const nameInput = screen.getByRole('textbox', { name: 'Nome' });
     const raceInput = screen.getByRole('combobox', { name: 'Raça' });
@@ -33,7 +36,19 @@ describe('Header', () => {
     expect(levelDiv).toHaveTextContent('Nível 1');
   });
 
-  it('increases level based on character experience', () => {
+  it('increases level based on character experience', async () => {
+    render(<Header />);
+    const xpInput = screen.getByRole('spinbutton', { name: 'Experiência' });
+    const levelDiv = screen.getByRole('region', { name: 'Nível' });
+    const levels: levelInfo[] = levelData.levels;
+    for (const levelInfo of levels) {
+      const maxExperience = String(levelInfo.maxExperience);
+      const level = String(levelInfo.level);
 
+      userEvent.clear(xpInput);
+      await userEvent.type(xpInput, maxExperience);
+
+      expect(levelDiv).toHaveTextContent(level);
+    }
   });
 });
