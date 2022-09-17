@@ -6,8 +6,8 @@ import classData from '../data/classData.json';
 import Header from '../src/components/Header';
 
 describe('Header', () => {
-  const raceNames: Array<String> = raceData.races.map(characterRace => characterRace.name);
-  const classNames: Array<String> = classData.classes.map(characterClass => characterClass.name);
+  const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
+  const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
 
   it('renders correctly', () => {
     render(<Header />);

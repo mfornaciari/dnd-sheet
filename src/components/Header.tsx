@@ -1,31 +1,26 @@
 import '../style/style.css';
+import InputText from './InputText';
+import InputNumber from './InputNumber';
+import Select from './Select';
 import raceData from '../../data/raceData.json';
 import classData from '../../data/classData.json';
 
 export default function Header() {
-  const raceNames: Array<String> = raceData.races.map(characterRace => characterRace.name);
-  const classNames: Array<String> = classData.classes.map(characterClass => characterClass.name);
+  const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
+  const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
 
   return (
     <header>
-      <label htmlFor='nameInput'>Nome</label>
-      <input type='text' id='nameInput' placeholder='Nome do personagem' />
+      <InputText labelText='Nome' placeholderText='Nome do personagem' />
 
-      <label htmlFor='raceInput'>Raça</label>
-      <select id='raceInput'>
-        {raceNames.map((raceName, index) => <option key={index} value={index}>{raceName}</option>)}
-      </select>
+      <Select labelText='Raça' optionNames={raceNames} />
 
-      <label htmlFor='classInput'>Classe</label>
-      <select id='classInput'>
-        {classNames.map((className, index) => <option key={index} value={index}>{className}</option>)}
-      </select>
+      <Select labelText='Classe' optionNames={classNames} />
 
-      <label htmlFor='xpInput'>Experiência</label>
-      <input type='number' id='xpInput' min='0' />
+      <InputNumber labelText='Experiência' minValue='0' />
 
-      <div role='region' aria-labelledby='level'>
-        <span id='level'>Nível</span> <span>1</span>
+      <div role='region' aria-labelledby='levelLabel' >
+        <span id='levelLabel'>Nível</span> <span className='field'>1</span>
       </div>
     </header>
   );

@@ -1,9 +1,31 @@
 header {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
+  flex-flow: row nowrap;
+  overflow: auto;
+  gap: 2%;
   padding: 0.5rem;
   border-style: solid;
   border-width: 0.1rem;
   border-radius: 0.5rem;
-};
+  border-color: darkgrey;
+}
+
+header>div {
+  flex-basis: 100%;
+  min-width: fit-content;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+  row-gap: 0.1rem;
+}
+
+.field {
+  padding: 0.1rem 0.3rem;
+  border-style: solid;
+  border-width: 0.05rem;
+  border-radius: 0.3rem;
+  border-color: darkgrey;
+  background: none;
+  font: unset;
+  font-size: medium;
+}
