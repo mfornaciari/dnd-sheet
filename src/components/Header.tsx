@@ -36,7 +36,6 @@ export default function Header() {
       <InputNumber
         labelText='Experiência'
         minValue='0'
-        maxValue='355000'
         setFormValue={setCurrentXp}
       />
 
