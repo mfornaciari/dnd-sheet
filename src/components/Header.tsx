@@ -33,11 +33,7 @@ export default function Header() {
 
       <Select labelText='Classe' optionNames={classNames} />
 
-      <InputNumber
-        labelText='Experiência'
-        minValue='0'
-        setFormValue={setCurrentXp}
-      />
+      <InputNumber labelText='Experiência' minValue='0' setFormValue={setCurrentXp} />
 
       <div role='region' aria-labelledby='levelLabel' >
         <span id='levelLabel'> Nível </span> <span className='field'>{currentLevel}</span>

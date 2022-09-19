@@ -32,15 +32,14 @@ describe('Header', () => {
       expect(classOption.textContent).toEqual(classNames[optionValue]);
     }
     expect(xpInput).toHaveAttribute('min', '0');
-    expect(xpInput).toHaveAttribute('max', '355000');
     expect(levelDiv).toHaveTextContent('Nível 1');
   });
 
   it('increases level based on character experience', async () => {
+    const levels: levelInfo[] = levelData.levels;
     render(<Header />);
     const xpInput = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv = screen.getByRole('region', { name: 'Nível' });
-    const levels: levelInfo[] = levelData.levels;
     for (const levelInfo of levels) {
       const maxExperience = String(levelInfo.maxExperience);
       const level = String(levelInfo.level);
@@ -50,15 +49,6 @@ describe('Header', () => {
 
       expect(levelDiv).toHaveTextContent(level);
     }
-  });
-
-  it('shows level as 1 if negative experience value is set', async () => {
-    render(<Header />);
-    const xpInput = screen.getByRole('spinbutton', { name: 'Experiência' });
-    const levelDiv = screen.getByRole('region', { name: 'Nível' });
-
-    await userEvent.type(xpInput, '-1');
-    expect(levelDiv).toHaveTextContent('1');
   });
 
   it('shows level as 20 if experience value over 999.999 is set', async () => {

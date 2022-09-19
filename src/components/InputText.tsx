@@ -9,6 +9,7 @@ export default ({ labelText, placeholderText }: InputTextProps) => {
       <label htmlFor={`${labelText}Input`}>
         {labelText}
       </label>
+
       <input
         type='text'
         id={`${labelText}Input`}

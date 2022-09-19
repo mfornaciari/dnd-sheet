@@ -9,6 +9,7 @@ export default ({ labelText, optionNames }: SelectProps) => {
       <label htmlFor={`${labelText}Select`}>
         {labelText}
       </label>
+
       <select id={`${labelText}Select`} className='field'>
         {optionNames.map((name, index) =>
           <option

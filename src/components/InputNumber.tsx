@@ -6,13 +6,17 @@ type InputNumberProps = {
 }
 
 export default ({ labelText, minValue, maxValue, setFormValue }: InputNumberProps) => {
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!checkAllowed(event.key)) event.preventDefault();
+  function handleChange(event: React.ChangeEvent<HTMLInputElement> ) {
+    setFormValue(event.currentTarget.value);
   }
 
-  const checkAllowed = (key: string): boolean => {
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (!isAllowed(event.key)) event.preventDefault();
+  }
+
+  function isAllowed(key: string): boolean {
     const allowedKeys = [
-      'Backspace', 'Delete', 'Tab', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+      'ArrowLeft', 'ArrowRight', 'Backspace', 'Delete', 'Tab', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     ];
     return allowedKeys.includes(key);
   }
@@ -27,14 +31,10 @@ export default ({ labelText, minValue, maxValue, setFormValue }: InputNumberProp
         id={`${labelText}Input`}
         min={minValue}
         max={maxValue}
-        onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(event)}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFormValue(event.target.value)}
+        onKeyDown={handleKeyDown}
+        onChange={handleChange}
         className='field'
       />
     </div>
   )
 }
-
-
-
-
