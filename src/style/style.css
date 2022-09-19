@@ -1,3 +1,13 @@
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 header {
   display: flex;
   flex-flow: row nowrap;
@@ -5,7 +15,7 @@ header {
   gap: 2%;
   padding: 0.5rem;
   border-style: solid;
-  border-width: 0.1rem;
+  border-width: 0.15rem;
   border-radius: 0.5rem;
   border-color: darkgrey;
 }
@@ -16,13 +26,14 @@ header>div {
   display: flex;
   flex-flow: column nowrap;
   overflow: hidden;
+  padding: 0.1rem;
   row-gap: 0.1rem;
 }
 
 .field {
   padding: 0.1rem 0.3rem;
   border-style: solid;
-  border-width: 0.05rem;
+  border-width: 0.1rem;
   border-radius: 0.3rem;
   border-color: darkgrey;
   background: none;
