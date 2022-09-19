@@ -37,7 +37,7 @@ export default function Header() {
         labelText='Experiência'
         minValue='0'
         maxValue='355000'
-        handleChange={setCurrentXp}
+        setFormValue={setCurrentXp}
       />
 
       <div role='region' aria-labelledby='levelLabel' >
