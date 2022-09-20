@@ -17,12 +17,9 @@ export default () => {
     localStorage.setItem('characterData', stringifiedCharacterData);
   }, [characterData])
 
-  function handleSubmit() { }
-
   return (
     <form>
       <FormTop characterData={characterData} setCharacterData={setCharacterData} />
-      <button onClick={handleSubmit}>Salvar</button>
     </form>
   );
 }
