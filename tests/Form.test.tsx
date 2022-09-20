@@ -64,7 +64,7 @@ describe('Form', () => {
     expect(levelDiv).toHaveTextContent(/^Nível 20$/);
   });
 
-  it('exports character data as JSON when save button is clicked', async () => {
+  it('saves character data to local storage', async () => {
     render(<Form />);
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
     const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
