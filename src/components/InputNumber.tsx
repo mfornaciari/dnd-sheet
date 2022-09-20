@@ -1,8 +1,8 @@
 type InputNumberProps = {
-  labelText: string,
-  minValue?: string,
-  maxValue?: string,
-  setFormValue: Function,
+  readonly labelText: string,
+  readonly minValue?: string,
+  readonly maxValue?: string,
+  readonly setFormValue: Function,
 }
 
 export default ({ labelText, minValue, maxValue, setFormValue }: InputNumberProps) => {

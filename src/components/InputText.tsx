@@ -1,6 +1,6 @@
 type InputTextProps = {
-  labelText: string,
-  placeholderText: string,
+  readonly labelText: string,
+  readonly placeholderText: string,
 }
 
 export default ({ labelText, placeholderText }: InputTextProps) => {

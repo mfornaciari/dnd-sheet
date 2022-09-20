@@ -1,6 +1,6 @@
 export type levelInfo = {
-  id: number,
-  level: number,
-  minExperience: number,
-  maxExperience: number
+  readonly id: number,
+  readonly level: number,
+  readonly minExperience: number,
+  readonly maxExperience: number
 }

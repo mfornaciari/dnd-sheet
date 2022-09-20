@@ -1,6 +1,6 @@
 type SelectProps = {
-  labelText: string,
-  optionNames: string[],
+  readonly labelText: string,
+  readonly optionNames: string[],
 }
 
 export default ({ labelText, optionNames }: SelectProps) => {
