@@ -2,24 +2,20 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import i18next from 'i18next';
+import ptbr from '../locales/pt-BR.json';
 import InputNumber from '../src/components/InputNumber';
+
+i18next.init({
+  lng: 'ptbr',
+  debug: false,
+  resources: ptbr
+});
 
 describe('InputNumber', () => {
   it('does not allow user to type in non-numeric characters', async () => {
-    const characterDataMock = {
-        name: 'José da Silva',
-        class: 0,
-        race: 0,
-        experience: 100,
-      };
-    const setCharacterDataMock = jest.fn();
-    render(
-      <InputNumber
-        labelText='test'
-        characterData={characterDataMock}
-        setCharacterData={setCharacterDataMock}
-        changedCharacterValue={'experience'}
-      />
+    const registerMock = jest.fn();
+    render(<InputNumber name='test' register={registerMock} />
     );
     const input = screen.getByRole('spinbutton', { name: 'test' });
 

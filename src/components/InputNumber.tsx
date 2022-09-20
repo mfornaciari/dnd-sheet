@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 type InputNumberProps = Readonly<{
   name: string,
   minValue?: string,
@@ -6,6 +8,8 @@ type InputNumberProps = Readonly<{
 }>
 
 export default ({ name, minValue, maxValue, register }: InputNumberProps) => {
+  const i18nName = i18next.t(name);
+
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (!isAllowed(event.key)) event.preventDefault();
   }
@@ -19,7 +23,7 @@ export default ({ name, minValue, maxValue, register }: InputNumberProps) => {
 
   return (
     <div>
-      <label htmlFor={name}>{name}</label>
+      <label htmlFor={name}>{i18nName}</label>
 
       <input
         type='number'
