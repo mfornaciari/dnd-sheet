@@ -26,7 +26,7 @@ export default () => {
   }
 
   return (
-    <section>
+    <section id='form-top'>
       <InputText labelText='Nome' placeholderText='Nome do personagem' />
 
       <Select labelText='Raça' optionNames={raceNames} />
