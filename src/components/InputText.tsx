@@ -1,9 +1,9 @@
-import type { characterDataType } from '../types';
+import type { CharacterDataType } from '../types';
 
 type InputTextProps = Readonly<{
   labelText: string,
   placeholderText: string,
-  characterData: characterDataType,
+  characterData: CharacterDataType,
   setCharacterData: Function,
   changedCharacterValue: string,
 }>

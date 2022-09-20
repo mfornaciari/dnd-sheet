@@ -1,10 +1,10 @@
-import { characterDataType } from "../types";
+import { CharacterDataType } from "../types";
 
 type InputNumberProps = Readonly<{
   labelText: string,
   minValue?: string,
   maxValue?: string,
-  characterData: characterDataType,
+  characterData: CharacterDataType,
   setCharacterData: Function,
   changedCharacterValue: string,
 }>

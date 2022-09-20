@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { characterDataType } from '../types';
+import type { CharacterDataType } from '../types';
 import FormTop from "./FormTop";
 
 const initialCharacterData = {
@@ -10,7 +10,7 @@ const initialCharacterData = {
 }
 
 export default () => {
-  const [characterData, setCharacterData] = useState<characterDataType>(initialCharacterData);
+  const [characterData, setCharacterData] = useState<CharacterDataType>(initialCharacterData);
 
   useEffect(() => {
     console.log(characterData);

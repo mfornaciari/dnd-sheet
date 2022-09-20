@@ -1,4 +1,4 @@
-import type { characterDataType, levelInfo } from '../types';
+import type { CharacterDataType, LevelInfo } from '../types';
 import '../style/style.css';
 import InputText from './InputText';
 import InputNumber from './InputNumber';
@@ -7,19 +7,19 @@ import raceData from '../../data/raceData.json';
 import classData from '../../data/classData.json';
 import levelData from '../../data/levelData.json';
 
-type formTopProps = Readonly<{
-  characterData: characterDataType,
+type FormTopProps = Readonly<{
+  characterData: CharacterDataType,
   setCharacterData: Function,
 }>
 
 const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
 const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
-const levels: levelInfo[] = levelData.levels;
+const levels: LevelInfo[] = levelData.levels;
 
-export default ({ characterData, setCharacterData }: formTopProps) => {
+export default ({ characterData, setCharacterData }: FormTopProps) => {
   const currentLevel: number = getCurrentLevel(levels, characterData.experience);
 
-  function getCurrentLevel(levels: levelInfo[], currentXp: number): number {
+  function getCurrentLevel(levels: LevelInfo[], currentXp: number): number {
     const foundLevelInfo = levels.find(level => {
       return level.minExperience <= currentXp && level.maxExperience >= currentXp
     });

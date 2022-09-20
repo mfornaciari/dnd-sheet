@@ -1,11 +1,11 @@
-export type levelInfo = Readonly<{
+export type LevelInfo = Readonly<{
   id: number,
   level: number,
   minExperience: number,
   maxExperience: number
 }>
 
-export type characterDataType = Readonly<{
+export type CharacterDataType = Readonly<{
   name: string,
   class: number,
   race: number,
