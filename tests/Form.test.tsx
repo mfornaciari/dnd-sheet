@@ -2,18 +2,18 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import FormTop from '../src/components/FormTop';
+import Form from '../src/components/Form';
 import type { levelInfo } from '../src/types';
 import raceData from '../data/raceData.json';
 import classData from '../data/classData.json';
 import levelData from '../data/levelData.json';
 
-describe('FormTop', () => {
+describe('Form', () => {
   it('renders correctly', () => {
     const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
     const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
 
-    render(<FormTop />);
+    render(<Form />);
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
     const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
     const raceOptions = within(raceInput).getAllByRole('option');
@@ -39,7 +39,7 @@ describe('FormTop', () => {
 
   it('increases level based on character experience', async () => {
     const levels: levelInfo[] = levelData.levels;
-    render(<FormTop />);
+    render(<Form />);
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv = screen.getByRole('region', { name: 'Nível' });
     for (const levelInfo of levels) {
@@ -55,7 +55,7 @@ describe('FormTop', () => {
   });
 
   it('shows level as 20 if experience value over 999.999 is set', async () => {
-    render(<FormTop />);
+    render(<Form />);
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv = screen.getByRole('region', { name: 'Nível' });
 

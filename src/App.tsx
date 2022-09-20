@@ -1,7 +1,7 @@
-import FormTop from './components/FormTop';
+import Form from './components/Form';
 
 export default function App() {
   return (
-  <FormTop />
+  <Form />
   );
 }
