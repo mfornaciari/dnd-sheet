@@ -1,16 +1,26 @@
-type SelectProps = {
-  readonly labelText: string,
-  readonly optionNames: string[],
-}
+import React from 'react';
+import type { characterDataType } from '../types';
 
-export default ({ labelText, optionNames }: SelectProps) => {
+type SelectProps = Readonly<{
+  labelText: string,
+  optionNames: string[],
+  characterData: characterDataType,
+  setCharacterData: Function,
+  changedCharacterValue: string,
+}>
+
+export default ({ labelText, optionNames, characterData, setCharacterData, changedCharacterValue }: SelectProps) => {
+  function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    setCharacterData({ ...characterData, [changedCharacterValue]: event?.currentTarget.value })
+  }
+
   return (
     <div>
       <label htmlFor={`${labelText}Select`}>
         {labelText}
       </label>
 
-      <select id={`${labelText}Select`} className='field'>
+      <select id={`${labelText}Select`} onChange={handleChange} className='field'>
         {optionNames.map((name, index) =>
           <option
             key={index}

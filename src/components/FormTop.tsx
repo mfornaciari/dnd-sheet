@@ -1,23 +1,26 @@
-import { useState } from 'react';
+import type { characterDataType, levelInfo } from '../types';
 import '../style/style.css';
 import InputText from './InputText';
 import InputNumber from './InputNumber';
 import Select from './Select';
-import type { levelInfo } from '../types';
 import raceData from '../../data/raceData.json';
 import classData from '../../data/classData.json';
 import levelData from '../../data/levelData.json';
 
-export default () => {
-  const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
-  const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
-  const levels: levelInfo[] = levelData.levels;
+type formTopProps = Readonly<{
+  characterData: characterDataType,
+  setCharacterData: Function,
+}>
 
-  const [currentXp, setCurrentXp] = useState<number>(0);
-  const currentLevel: number = getCurrentLevel(levels, currentXp);
+const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
+const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
+const levels: levelInfo[] = levelData.levels;
+
+export default ({ characterData, setCharacterData }: formTopProps) => {
+  const currentLevel: number = getCurrentLevel(levels, characterData.experience);
 
   function getCurrentLevel(levels: levelInfo[], currentXp: number): number {
-    const foundLevelInfo: levelInfo | undefined = levels.find(level => {
+    const foundLevelInfo = levels.find(level => {
       return level.minExperience <= currentXp && level.maxExperience >= currentXp
     });
     if (!foundLevelInfo) return 20; // XP over 999.999
@@ -27,16 +30,41 @@ export default () => {
 
   return (
     <section id='form-top'>
-      <InputText labelText='Nome' placeholderText='Nome do personagem' />
+      <InputText
+        labelText='Nome'
+        placeholderText='Nome do personagem'
+        characterData={characterData}
+        setCharacterData={setCharacterData}
+        changedCharacterValue={'name'}
+      />
 
-      <Select labelText='Raça' optionNames={raceNames} />
+      <Select
+        labelText='Raça'
+        optionNames={raceNames}
+        characterData={characterData}
+        setCharacterData={setCharacterData}
+        changedCharacterValue={'race'}
+      />
 
-      <Select labelText='Classe' optionNames={classNames} />
+      <Select
+        labelText='Classe'
+        optionNames={classNames}
+        characterData={characterData}
+        setCharacterData={setCharacterData}
+        changedCharacterValue={'class'}
+        />
 
-      <InputNumber labelText='Experiência' minValue='0' maxValue='999999' setFormValue={setCurrentXp} />
+      <InputNumber
+        labelText='Experiência'
+        minValue='0'
+        maxValue='999999'
+        characterData={characterData}
+        setCharacterData={setCharacterData}
+        changedCharacterValue={'experience'}
+      />
 
       <div role='region' aria-labelledby='levelLabel' >
-        <span id='levelLabel'> Nível </span> <span className='field'>{currentLevel}</span>
+        <span id='levelLabel'>Nível</span> <span className='field'>{currentLevel}</span>
       </div>
     </section>
   );

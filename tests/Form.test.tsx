@@ -55,6 +55,8 @@ describe('Form', () => {
   });
 
   it('shows level as 20 if experience value over 999.999 is set', async () => {
+    const fs = require('fs');
+    jest.spyOn(fs, 'writeFileSync').mockImplementation();
     render(<Form />);
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv = screen.getByRole('region', { name: 'Nível' });
@@ -63,4 +65,21 @@ describe('Form', () => {
 
     expect(levelDiv).toHaveTextContent(/^Nível 20$/);
   });
+
+  // it.only('exports character data as JSON when save button is clicked', () => {
+  //   const characterDataMock = JSON.stringify({
+  //     character: {
+  //       name: 'José da Silva',
+  //       class: 0,
+  //       race: 0,
+  //       experience: 100,
+  //     }
+  //   });
+  //   render(<Form />);
+  //   const saveButton = screen.getByRole('button', { name: 'Salvar' });
+
+  //   userEvent.click(saveButton);
+
+  //   expect().toHaveBeenCalledWith('./characterData.json', characterDataMock);
+  // });
 });
