@@ -1,19 +1,13 @@
 import { CharacterDataType } from "../types";
 
 type InputNumberProps = Readonly<{
-  labelText: string,
+  name: string,
   minValue?: string,
   maxValue?: string,
-  characterData: CharacterDataType,
-  setCharacterData: Function,
-  changedCharacterValue: string,
+  register: Function,
 }>
 
-export default ({ labelText, minValue, maxValue, characterData, setCharacterData, changedCharacterValue }: InputNumberProps) => {
-  function handleChange(event: React.ChangeEvent<HTMLInputElement> ) {
-    setCharacterData({...characterData, [changedCharacterValue]: event.currentTarget.value});
-  }
-
+export default ({ name, minValue, maxValue, register }: InputNumberProps) => {
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (!isAllowed(event.key)) event.preventDefault();
   }
@@ -27,17 +21,16 @@ export default ({ labelText, minValue, maxValue, characterData, setCharacterData
 
   return (
     <div>
-      <label htmlFor={`${labelText}Input`}>
-        {labelText}
-      </label>
+      <label htmlFor={name}>{name}</label>
+
       <input
         type='number'
-        id={`${labelText}Input`}
+        id={name}
         min={minValue}
         max={maxValue}
         onKeyDown={handleKeyDown}
-        onChange={handleChange}
         className='field'
+        {...register(name)}
       />
     </div>
   )

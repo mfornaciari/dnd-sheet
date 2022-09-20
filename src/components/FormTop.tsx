@@ -1,5 +1,6 @@
-import type { CharacterDataType, LevelInfo } from '../types';
+import type { LevelInfo } from '../types';
 import '../style/style.css';
+import type { CharacterDataType } from '../types';
 import InputText from './InputText';
 import InputNumber from './InputNumber';
 import Select from './Select';
@@ -9,17 +10,17 @@ import levelData from '../../data/levelData.json';
 
 type FormTopProps = Readonly<{
   characterData: CharacterDataType,
-  setCharacterData: Function,
+  register: Function,
 }>
 
 const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
 const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
 const levels: LevelInfo[] = levelData.levels;
 
-export default ({ characterData, setCharacterData }: FormTopProps) => {
-  const currentLevel: number = getCurrentLevel(levels, characterData.experience);
+export default ({ characterData, register }: FormTopProps) => {
+  const currentLevel: number = calculateLevel(levels, characterData.experience);
 
-  function getCurrentLevel(levels: LevelInfo[], currentXp: number): number {
+  function calculateLevel(levels: LevelInfo[], currentXp: number): number {
     const foundLevelInfo = levels.find(level => {
       return level.minExperience <= currentXp && level.maxExperience >= currentXp
     });
@@ -31,36 +32,28 @@ export default ({ characterData, setCharacterData }: FormTopProps) => {
   return (
     <section id='form-top'>
       <InputText
-        labelText='Nome'
+        name='name'
         placeholderText='Nome do personagem'
-        characterData={characterData}
-        setCharacterData={setCharacterData}
-        changedCharacterValue={'name'}
+        register={register}
       />
 
       <Select
-        labelText='Raça'
+        name='race'
         optionNames={raceNames}
-        characterData={characterData}
-        setCharacterData={setCharacterData}
-        changedCharacterValue={'race'}
+        register={register}
       />
 
       <Select
-        labelText='Classe'
+        name='class'
         optionNames={classNames}
-        characterData={characterData}
-        setCharacterData={setCharacterData}
-        changedCharacterValue={'class'}
-        />
+        register={register}
+      />
 
       <InputNumber
-        labelText='Experiência'
+        name='experience'
         minValue='0'
         maxValue='999999'
-        characterData={characterData}
-        setCharacterData={setCharacterData}
-        changedCharacterValue={'experience'}
+        register={register}
       />
 
       <div role='region' aria-labelledby='levelLabel' >

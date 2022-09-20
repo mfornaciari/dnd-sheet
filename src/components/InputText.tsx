@@ -1,30 +1,22 @@
 import type { CharacterDataType } from '../types';
 
 type InputTextProps = Readonly<{
-  labelText: string,
+  name: string,
   placeholderText: string,
-  characterData: CharacterDataType,
-  setCharacterData: Function,
-  changedCharacterValue: string,
+  register: Function,
 }>
 
-export default ({ labelText, placeholderText, characterData, setCharacterData, changedCharacterValue }: InputTextProps) => {
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setCharacterData({ ...characterData, [changedCharacterValue]: event?.currentTarget.value })
-  }
-
+export default ({ name, placeholderText, register }: InputTextProps) => {
   return (
     <div>
-      <label htmlFor={`${labelText}Input`}>
-        {labelText}
-      </label>
+      <label htmlFor={name}>{name}</label>
 
       <input
         type='text'
-        id={`${labelText}Input`}
+        id={name}
         placeholder={placeholderText}
         className='field'
-        onChange={handleChange}
+        {...register(name)}
       />
     </div>
   )
