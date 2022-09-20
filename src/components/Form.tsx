@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import type { CharacterDataType } from '../types';
 import FormTop from "./FormTop";
 
 const initialCharacterData = {
@@ -11,12 +10,12 @@ const initialCharacterData = {
 }
 
 export default () => {
-  const { register, watch } = useForm<CharacterDataType>({ defaultValues: initialCharacterData });
+  const { register, watch } = useForm({ defaultValues: initialCharacterData });
   const characterData = watch();
 
   useEffect(() => {
-    const stringifiedCharacterData = JSON.stringify(characterData);
-    localStorage.setItem('characterData', stringifiedCharacterData);
+    const stringifiedData = JSON.stringify(characterData);
+    localStorage.setItem('characterData', stringifiedData);
   }, [characterData])
 
   return (

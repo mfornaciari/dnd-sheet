@@ -1,5 +1,3 @@
-import { CharacterDataType } from "../types";
-
 type InputNumberProps = Readonly<{
   name: string,
   minValue?: string,

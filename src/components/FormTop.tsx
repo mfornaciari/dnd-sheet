@@ -1,6 +1,6 @@
+import type { CharacterDataType } from '../types';
 import type { LevelInfo } from '../types';
 import '../style/style.css';
-import type { CharacterDataType } from '../types';
 import InputText from './InputText';
 import InputNumber from './InputNumber';
 import Select from './Select';

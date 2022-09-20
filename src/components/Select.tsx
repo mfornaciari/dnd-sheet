@@ -1,6 +1,3 @@
-import React from 'react';
-import type { CharacterDataType } from '../types';
-
 type SelectProps = Readonly<{
   name: string,
   optionNames: string[],
