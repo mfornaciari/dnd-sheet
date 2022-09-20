@@ -20,7 +20,7 @@ export default function Header() {
     const foundLevelInfo: levelInfo | undefined = levels.find(level => {
       return level.minExperience <= currentXp && level.maxExperience >= currentXp
     });
-    if (!foundLevelInfo) return currentXp < 0 ? 1 : 20;
+    if (!foundLevelInfo) return 20; // XP over 999.999
 
     return foundLevelInfo.level;
   }
@@ -33,7 +33,7 @@ export default function Header() {
 
       <Select labelText='Classe' optionNames={classNames} />
 
-      <InputNumber labelText='Experiência' minValue='0' setFormValue={setCurrentXp} />
+      <InputNumber labelText='Experiência' minValue='0' maxValue='999999' setFormValue={setCurrentXp} />
 
       <div role='region' aria-labelledby='levelLabel' >
         <span id='levelLabel'> Nível </span> <span className='field'>{currentLevel}</span>
