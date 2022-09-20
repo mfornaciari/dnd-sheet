@@ -1,5 +1,7 @@
-import Header from './components/Header';
+import FormTop from './components/FormTop';
 
 export default function App() {
-  return <Header />;
+  return (
+  <FormTop />
+  );
 }

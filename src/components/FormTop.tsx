@@ -8,7 +8,7 @@ import raceData from '../../data/raceData.json';
 import classData from '../../data/classData.json';
 import levelData from '../../data/levelData.json';
 
-export default function Header() {
+export default () => {
   const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
   const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
   const levels: levelInfo[] = levelData.levels;
@@ -26,7 +26,7 @@ export default function Header() {
   }
 
   return (
-    <header>
+    <section>
       <InputText labelText='Nome' placeholderText='Nome do personagem' />
 
       <Select labelText='Raça' optionNames={raceNames} />
@@ -38,6 +38,6 @@ export default function Header() {
       <div role='region' aria-labelledby='levelLabel' >
         <span id='levelLabel'> Nível </span> <span className='field'>{currentLevel}</span>
       </div>
-    </header>
+    </section>
   );
 }
