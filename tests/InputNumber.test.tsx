@@ -6,8 +6,21 @@ import InputNumber from '../src/components/InputNumber';
 
 describe('InputNumber', () => {
   it('does not allow user to type in non-numeric characters', async () => {
-    const setFormValueMock = jest.fn();
-    render(<InputNumber labelText='test' setFormValue={setFormValueMock} />);
+    const characterDataMock = {
+        name: 'José da Silva',
+        class: 0,
+        race: 0,
+        experience: 100,
+      };
+    const setCharacterDataMock = jest.fn();
+    render(
+      <InputNumber
+        labelText='test'
+        characterData={characterDataMock}
+        setCharacterData={setCharacterDataMock}
+        changedCharacterValue={'experience'}
+      />
+    );
     const input = screen.getByRole('spinbutton', { name: 'test' });
 
     await userEvent.type(input, '!-.,1a2');

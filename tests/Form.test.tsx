@@ -1,9 +1,9 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Form from '../src/components/Form';
-import type { levelInfo } from '../src/types';
+import type { LevelInfo } from '../src/types';
 import raceData from '../data/raceData.json';
 import classData from '../data/classData.json';
 import levelData from '../data/levelData.json';
@@ -38,7 +38,7 @@ describe('Form', () => {
   });
 
   it('increases level based on character experience', async () => {
-    const levels: levelInfo[] = levelData.levels;
+    const levels: LevelInfo[] = levelData.levels;
     render(<Form />);
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv = screen.getByRole('region', { name: 'Nível' });
@@ -55,8 +55,6 @@ describe('Form', () => {
   });
 
   it('shows level as 20 if experience value over 999.999 is set', async () => {
-    const fs = require('fs');
-    jest.spyOn(fs, 'writeFileSync').mockImplementation();
     render(<Form />);
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv = screen.getByRole('region', { name: 'Nível' });
@@ -66,20 +64,29 @@ describe('Form', () => {
     expect(levelDiv).toHaveTextContent(/^Nível 20$/);
   });
 
-  // it.only('exports character data as JSON when save button is clicked', () => {
-  //   const characterDataMock = JSON.stringify({
-  //     character: {
-  //       name: 'José da Silva',
-  //       class: 0,
-  //       race: 0,
-  //       experience: 100,
-  //     }
-  //   });
-  //   render(<Form />);
-  //   const saveButton = screen.getByRole('button', { name: 'Salvar' });
+  it('exports character data as JSON when save button is clicked', async () => {
+    render(<Form />);
+    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
+    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
+    const dwarfId = '0';
+    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
+    const fighterId = '7';
+    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
+    // const saveButton: HTMLButtonElement = screen.getByRole('button', { name: 'Salvar' });
 
-  //   userEvent.click(saveButton);
+    await userEvent.type(nameInput, 'José da Silva');
+    await userEvent.selectOptions(raceInput, within(raceInput).getByRole('option', { name: 'Anão' }));
+    await userEvent.selectOptions(classInput, within(classInput).getByRole('option', { name: 'Guerreiro' }));
+    await userEvent.type(xpInput, '300');
+    // userEvent.click(saveButton);
 
-  //   expect().toHaveBeenCalledWith('./characterData.json', characterDataMock);
-  // });
+    const storedData = JSON.parse(localStorage.characterData);
+    const expectedData = {
+      'name': 'José da Silva',
+      'race': dwarfId,
+      'class': fighterId,
+      'experience': '300',
+    };
+    expect(storedData).toEqual(expectedData);
+  });
 });

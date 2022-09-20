@@ -13,7 +13,8 @@ export default () => {
   const [characterData, setCharacterData] = useState<CharacterDataType>(initialCharacterData);
 
   useEffect(() => {
-    console.log(characterData);
+    const stringifiedCharacterData = JSON.stringify(characterData);
+    localStorage.setItem('characterData', stringifiedCharacterData);
   }, [characterData])
 
   function handleSubmit() { }
