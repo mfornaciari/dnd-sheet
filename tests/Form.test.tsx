@@ -72,13 +72,11 @@ describe('Form', () => {
     const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
     const fighterId = '7';
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-    // const saveButton: HTMLButtonElement = screen.getByRole('button', { name: 'Salvar' });
 
     await userEvent.type(nameInput, 'José da Silva');
     await userEvent.selectOptions(raceInput, within(raceInput).getByRole('option', { name: 'Anão' }));
     await userEvent.selectOptions(classInput, within(classInput).getByRole('option', { name: 'Guerreiro' }));
     await userEvent.type(xpInput, '300');
-    // userEvent.click(saveButton);
 
     const storedData = JSON.parse(localStorage.characterData);
     const expectedData = {
