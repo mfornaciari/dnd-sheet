@@ -15,13 +15,7 @@ export default ({ name, optionNames, register }: SelectProps) => {
 
       <select id={name} className='field' {...register(name)}>
         {optionNames.map((name, index) =>
-          <option
-            key={index}
-            value={index}
-            className='option'
-          >
-            {name}
-          </option>
+          <option key={index} value={index}>{name}</option>
         )}
       </select>
     </div>

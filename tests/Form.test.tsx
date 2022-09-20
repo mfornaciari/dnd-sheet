@@ -17,15 +17,15 @@ i18next.init({
 
 describe('Form', () => {
   it('renders correctly', () => {
-    const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
-    const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
+    const raceNames = raceData.races.map(characterRace => characterRace.name);
+    const classNames = classData.classes.map(characterClass => characterClass.name);
 
     render(<Form />);
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
     const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
-    const raceOptions = within(raceInput).getAllByRole('option');
+    const raceOptions: HTMLOptionElement[] = within(raceInput).getAllByRole('option');
     const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
-    const classOptions = within(classInput).getAllByRole('option');
+    const classOptions: HTMLOptionElement[] = within(classInput).getAllByRole('option');
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv = screen.getByRole('region', { name: 'Nível' });
 
@@ -75,9 +75,9 @@ describe('Form', () => {
     render(<Form />);
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
     const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
-    const dwarfId = '0';
+    const dwarfRaceId: string = '0';
     const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
-    const fighterId = '7';
+    const fighterClassId: string = '7';
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
 
     await userEvent.type(nameInput, 'José da Silva');
@@ -88,8 +88,8 @@ describe('Form', () => {
     const storedData = JSON.parse(localStorage.characterData);
     const expectedData = {
       'name': 'José da Silva',
-      'race': dwarfId,
-      'class': fighterId,
+      'race': dwarfRaceId,
+      'class': fighterClassId,
       'experience': '300',
     };
     expect(storedData).toEqual(expectedData);

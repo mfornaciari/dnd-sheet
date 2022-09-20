@@ -20,9 +20,9 @@ export default ({ characterData, register }: FormTopProps) => {
   const currentLevel: number = calculateLevel(levels, characterData.experience);
 
   function calculateLevel(levels: LevelInfo[], currentXp: number): number {
-    const foundLevelInfo = levels.find(level => {
-      return level.minExperience <= currentXp && level.maxExperience >= currentXp
-    });
+    const foundLevelInfo = levels.find(level =>
+      level.minExperience <= currentXp && level.maxExperience >= currentXp
+    );
     if (!foundLevelInfo) return 20; // XP over 999.999
 
     return foundLevelInfo.level;
@@ -55,7 +55,7 @@ export default ({ characterData, register }: FormTopProps) => {
         register={register}
       />
 
-      <div role='region' aria-labelledby='levelLabel' >
+      <div role='region' aria-labelledby='levelLabel'>
         <span id='levelLabel'>Nível</span> <span className='field'>{currentLevel}</span>
       </div>
     </section>
