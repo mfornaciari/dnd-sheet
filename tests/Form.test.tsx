@@ -4,7 +4,6 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import i18next from 'i18next';
 import ptbr from '../locales/pt-BR.json';
-import type { LevelInfo } from '../src/types';
 import Form from '../src/components/Form';
 import raceData from '../data/raceData.json';
 import classData from '../data/classData.json';
@@ -46,7 +45,7 @@ describe('Form', () => {
   });
 
   it('increases level based on character experience', async () => {
-    const levels: LevelInfo[] = levelData.levels;
+    const levels = levelData.levels;
     render(<Form />);
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv = screen.getByRole('region', { name: 'Nível' });

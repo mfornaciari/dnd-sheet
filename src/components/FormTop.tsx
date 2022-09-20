@@ -1,5 +1,4 @@
-import type { CharacterDataType } from '../types';
-import type { LevelInfo } from '../types';
+import type { CharacterDataType, LevelInfo } from '../types';
 import '../style/style.css';
 import InputText from './InputText';
 import InputNumber from './InputNumber';
@@ -13,9 +12,9 @@ type FormTopProps = Readonly<{
   register: Function,
 }>
 
-const raceNames: string[] = raceData.races.map(characterRace => characterRace.name);
-const classNames: string[] = classData.classes.map(characterClass => characterClass.name);
-const levels: LevelInfo[] = levelData.levels;
+const raceNames = raceData.races.map(characterRace => characterRace.name);
+const classNames = classData.classes.map(characterClass => characterClass.name);
+const levels = levelData.levels;
 
 export default ({ characterData, register }: FormTopProps) => {
   const currentLevel: number = calculateLevel(levels, characterData.experience);
