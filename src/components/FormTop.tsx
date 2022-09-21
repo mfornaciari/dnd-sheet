@@ -14,8 +14,8 @@ const levels = levelData.levels;
 
 export default () => {
   const { getValues } = useFormContext();
-  const characterData = getValues();
-  const currentLevel: number = calculateLevel(levels, characterData.experience);
+  const characterExperience: number = getValues('experience');
+  const currentLevel: number = calculateLevel(levels, characterExperience);
 
   function calculateLevel(levels: LevelInfo[], currentXp: number): number {
     const foundLevelInfo = levels.find(level =>
