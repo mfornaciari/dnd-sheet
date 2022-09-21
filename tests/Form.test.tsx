@@ -2,18 +2,11 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import i18next from 'i18next';
-import ptbr from '../locales/pt-BR.json';
+import '../src/services/i18n.ts';
 import Form from '../src/components/Form';
 import raceData from '../data/raceData.json';
 import classData from '../data/classData.json';
 import levelData from '../data/levelData.json';
-
-i18next.init({
-  lng: 'ptbr',
-  debug: false,
-  resources: ptbr
-});
 
 describe('Form', () => {
   it('renders correctly', () => {
