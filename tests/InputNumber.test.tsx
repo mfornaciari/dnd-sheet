@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import i18next from 'i18next';
 import ptbr from '../locales/pt-BR.json';
 import InputNumber from '../src/components/InputNumber';
+import { useForm, FormProvider } from 'react-hook-form';
 
 i18next.init({
   lng: 'ptbr',
@@ -14,9 +15,15 @@ i18next.init({
 
 describe('InputNumber', () => {
   it('does not allow user to type in non-numeric characters', async () => {
-    const registerMock = jest.fn();
-    render(<InputNumber name='test' register={registerMock} />
-    );
+    function TestInput() {
+      const methods = useForm();
+      return (
+        <FormProvider {...methods}>
+          <InputNumber name='test' />
+        </FormProvider>
+      );
+    }
+    render(<TestInput />);
     const input = screen.getByRole('spinbutton', { name: 'test' });
 
     await userEvent.type(input, '!-.,1a2');
