@@ -1,13 +1,14 @@
+import { useFormContext } from 'react-hook-form';
 import i18next from 'i18next';
 
 type InputNumberProps = Readonly<{
   name: string,
   minValue?: string,
   maxValue?: string,
-  register: Function,
 }>
 
-export default ({ name, minValue, maxValue, register }: InputNumberProps) => {
+export default ({ name, minValue, maxValue }: InputNumberProps) => {
+  const { register } = useFormContext();
   const i18nName = i18next.t(name);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {

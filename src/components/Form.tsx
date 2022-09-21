@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
+import { CharacterDataType } from '../types';
 import FormTop from "./FormTop";
 
-const initialCharacterData = {
+const initialCharacterData: CharacterDataType = {
   name: '',
   race: 0,
   class: 0,
@@ -10,8 +11,8 @@ const initialCharacterData = {
 }
 
 export default () => {
-  const { register, watch } = useForm({ defaultValues: initialCharacterData });
-  const characterData = watch();
+  const methods = useForm({ defaultValues: initialCharacterData });
+  const characterData = methods.watch();
 
   useEffect(() => {
     const stringifiedData = JSON.stringify(characterData);
@@ -19,8 +20,10 @@ export default () => {
   }, [characterData])
 
   return (
-    <form>
-      <FormTop characterData={characterData} register={register} />
-    </form>
+    <FormProvider { ...methods }>
+      <form>
+        <FormTop />
+      </form>
+    </FormProvider>
   );
 }

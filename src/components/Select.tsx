@@ -1,12 +1,13 @@
+import { useFormContext } from 'react-hook-form';
 import i18next from 'i18next';
 
 type SelectProps = Readonly<{
   name: string,
   optionNames: string[],
-  register: Function,
 }>
 
-export default ({ name, optionNames, register }: SelectProps) => {
+export default ({ name, optionNames }: SelectProps) => {
+  const { register } = useFormContext();
   const i18nName = i18next.t(name);
 
   return (
