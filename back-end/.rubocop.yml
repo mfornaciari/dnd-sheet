@@ -20,6 +20,7 @@ AllCops:
     - bin/**/*
     - vendor/**/*
     - db/**/*
+    - app/controllers/graphql_controller.rb
 
 Style/Documentation:
   Enabled: false
