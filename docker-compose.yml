@@ -1,0 +1,13 @@
+services:
+  front-end:
+    image: node:18
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./front-end:/app
+      - yarn-cache:/usr/local/share/.cache/yarn/v6
+    command: bash -c "yarn && yarn dev --host"
+
+volumes:
+  yarn-cache:
