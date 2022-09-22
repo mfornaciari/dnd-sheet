@@ -9,9 +9,6 @@ services:
     volumes:
       - ./front-end:/app
       - yarn-cache:/usr/local/share/.cache/yarn/v6
-    user:
-      - 1000:1000
-
     command: bash -c "yarn && yarn dev --host"
 
   back-end:
@@ -28,9 +25,6 @@ services:
       TZ: America/Sao_Paulo
     env_file:
       - .env
-    user:
-      - 1000:1000
-
     command: bash -c "bin/setup && rails s -b 0.0.0.0"
 
   db:
