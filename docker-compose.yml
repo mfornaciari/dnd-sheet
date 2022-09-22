@@ -1,6 +1,8 @@
 services:
   front-end:
     image: node:18
+    depends_on:
+      - back-end
     ports:
       - 3000:3000
     working_dir: /app
@@ -9,5 +11,32 @@ services:
       - yarn-cache:/usr/local/share/.cache/yarn/v6
     command: bash -c "yarn && yarn dev --host"
 
+  back-end:
+    image: ruby:3.1.2
+    depends_on:
+      - db
+    ports:
+      - 3001:3000
+    working_dir: /app
+    volumes:
+      - ./back-end:/app
+      - rubygems:/usr/local/bundle
+    environment:
+      TZ: America/Sao_Paulo
+    env_file:
+      - .env
+    command: bash -c "bin/setup && rails s -b 0.0.0.0"
+
+  db:
+    image: postgres:14.5
+    volumes:
+      - database:/var/lib/postgresql/data
+    environment:
+      TZ: America/Sao_Paulo
+    env_file:
+      - .env
+
 volumes:
   yarn-cache:
+  rubygems:
+  database:
