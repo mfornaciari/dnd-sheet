@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
-FactoryBot.create :character_class, name: 'Bardo'
+class_names = %w[Bárbaro Bardo Bruxo Clérigo Druida Feiticeiro Guardião Guerreiro Ladino Mago Monge Paladino]
+class_names.each { |name| FactoryBot.create :character_class, name: name }
 
 puts 'Seeding finished'
