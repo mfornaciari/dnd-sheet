@@ -36,5 +36,19 @@ module Types
     def race(id:)
       Race.find(id)
     end
+
+    field :levels, [Types::LevelType], null: false
+
+    def levels
+      Level.all
+    end
+
+    field :level, Types::LevelType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def level(id:)
+      Level.find(id)
+    end
   end
 end
