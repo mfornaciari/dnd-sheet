@@ -22,5 +22,19 @@ module Types
     def character_class(id:)
       CharacterClass.find(id)
     end
+
+    field :races, [Types::RaceType], null: false
+
+    def races
+      Race.all
+    end
+
+    field :race, Types::RaceType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def race(id:)
+      Race.find(id)
+    end
   end
 end
