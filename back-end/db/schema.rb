@@ -18,12 +18,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_23_163214) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_character_classes_on_name", unique: true
   end
 
   create_table "races", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_races_on_name", unique: true
   end
 
 end
