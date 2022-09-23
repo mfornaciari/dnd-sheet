@@ -35,4 +35,36 @@ describe 'POST /graphql' do
 
     expect(format(response.body)).to eq(expected_response)
   end
+
+  it 'finds a single level by ID and returns it' do
+    levels = [
+      {
+        level: 1,
+        min_experience: 0,
+        max_experience: 1
+      },
+      {
+        level: 2,
+        min_experience: 2,
+        max_experience: 999_999
+      }
+    ]
+    levels.each do |details|
+      create :level, level: details[:level],
+                     min_experience: details[:min_experience],
+                     max_experience: details[:max_experience]
+    end
+    level1 = Level.find_by(level: 1)
+    expected_response = {
+      data: {
+        level: {
+          id: level1.id.to_s, level: 1, minExperience: 0, maxExperience: 1
+        }
+      }
+    }
+
+    post '/graphql', params: { query: "query { level(id: #{level1.id}) { id level minExperience maxExperience } }" }
+
+    expect(format(response.body)).to eq(expected_response)
+  end
 end
