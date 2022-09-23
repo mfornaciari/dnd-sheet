@@ -16,11 +16,7 @@ describe 'POST /graphql' do
         max_experience: 999_999
       }
     ]
-    levels.each do |details|
-      create :level, level: details[:level],
-                     min_experience: details[:min_experience],
-                     max_experience: details[:max_experience]
-    end
+    create_levels(levels)
     level1, level2 = Level.all
     expected_response = {
       data: {
@@ -49,11 +45,7 @@ describe 'POST /graphql' do
         max_experience: 999_999
       }
     ]
-    levels.each do |details|
-      create :level, level: details[:level],
-                     min_experience: details[:min_experience],
-                     max_experience: details[:max_experience]
-    end
+    create_levels(levels)
     level1 = Level.find_by(level: 1)
     expected_response = {
       data: {
@@ -66,5 +58,9 @@ describe 'POST /graphql' do
     post '/graphql', params: { query: "query { level(id: #{level1.id}) { id level minExperience maxExperience } }" }
 
     expect(format(response.body)).to eq(expected_response)
+  end
+
+  def create_levels(level_hashes)
+    level_hashes.each { |hash| create :level, hash }
   end
 end

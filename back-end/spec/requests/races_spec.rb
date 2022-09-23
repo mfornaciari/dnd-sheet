@@ -4,9 +4,13 @@ require 'rails_helper'
 
 describe 'POST /graphql' do
   it 'returns all races' do
-    race_names = %w[Anão Draconato Elfo]
-    race_names.each { |name| create :race, name: name }
-    race1, race2, race3 = Race.where(name: race_names)
+    races = [
+      { name: 'Anão' },
+      { name: 'Draconato' },
+      { name: 'Elfo' }
+    ]
+    create_races(races)
+    race1, race2, race3 = Race.all
     expected_response = {
       data: {
         races: [
@@ -23,8 +27,12 @@ describe 'POST /graphql' do
   end
 
   it 'finds a single race by ID and returns it' do
-    race_names = %w[Anão Draconato Elfo]
-    race_names.each { |name| create :race, name: name }
+    races = [
+      { name: 'Anão' },
+      { name: 'Draconato' },
+      { name: 'Elfo' }
+    ]
+    create_races(races)
     race1 = Race.find_by(name: 'Anão')
     expected_response = {
       data: {
@@ -38,5 +46,9 @@ describe 'POST /graphql' do
     post '/graphql', params: { query: "query { race(id: #{race1.id}) { id name } }" }
 
     expect(format(response.body)).to eq(expected_response)
+  end
+
+  def create_races(race_hashes)
+    race_hashes.each { |hash| create :race, hash }
   end
 end

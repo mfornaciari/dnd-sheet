@@ -4,9 +4,13 @@ require 'rails_helper'
 
 describe 'POST /graphql' do
   it 'returns all classes' do
-    class_names = %w[Bárbaro Bardo Bruxo]
-    class_names.each { |name| create :character_class, name: name }
-    class1, class2, class3 = CharacterClass.where(name: class_names)
+    character_classes = [
+      { name: 'Bárbaro' },
+      { name: 'Bardo' },
+      { name: 'Bruxo' }
+    ]
+    create_classes(character_classes)
+    class1, class2, class3 = CharacterClass.all
     expected_response = {
       data: {
         characterClasses: [
@@ -23,8 +27,12 @@ describe 'POST /graphql' do
   end
 
   it 'finds a single class by ID and returns it' do
-    class_names = %w[Bárbaro Bardo Bruxo]
-    class_names.each { |name| create :character_class, name: name }
+    character_classes = [
+      { name: 'Bárbaro' },
+      { name: 'Bardo' },
+      { name: 'Bruxo' }
+    ]
+    create_classes(character_classes)
     class1 = CharacterClass.find_by(name: 'Bárbaro')
     expected_response = {
       data: {
@@ -38,5 +46,9 @@ describe 'POST /graphql' do
     post '/graphql', params: { query: "query { characterClass(id: #{class1.id}) { id name } }" }
 
     expect(format(response.body)).to eq(expected_response)
+  end
+
+  def create_classes(class_hashes)
+    class_hashes.each { |hash| create :character_class, hash }
   end
 end
