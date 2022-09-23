@@ -9,11 +9,18 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-                               description: 'An example field added by the generator'
-    def test_field
-      'Hello World!'
+    field :character_classes, [Types::CharacterClassType], null: false
+
+    def character_classes
+      CharacterClass.all
+    end
+
+    field :character_class, Types::CharacterClassType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def character_class(id:)
+      CharacterClass.find(id)
     end
   end
 end
