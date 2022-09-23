@@ -39,8 +39,4 @@ describe 'POST /graphql' do
 
     expect(format(response.body)).to eq(expected_response)
   end
-
-  def format(response_body)
-    JSON.parse(response_body, symbolize_names: true)
-  end
 end
