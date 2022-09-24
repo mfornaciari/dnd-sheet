@@ -27,3 +27,8 @@ export type LevelType = Readonly<{
   minExperience: number,
   maxExperience: number,
 }>
+
+export type OptionDataType = Readonly<{
+  id: number,
+  name: string,
+}>

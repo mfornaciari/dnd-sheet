@@ -1,12 +1,13 @@
 import { useFormContext } from 'react-hook-form';
 import i18next from 'i18next';
+import type { OptionDataType } from '../types';
 
 type SelectProps = Readonly<{
   name: string,
-  optionNames: string[],
+  optionData: OptionDataType[],
 }>
 
-export default ({ name, optionNames }: SelectProps) => {
+export default ({ name, optionData }: SelectProps) => {
   const { register } = useFormContext();
   const i18nName = i18next.t(name);
 
@@ -15,8 +16,8 @@ export default ({ name, optionNames }: SelectProps) => {
       <label htmlFor={name}>{i18nName}</label>
 
       <select id={name} className='field' {...register(name)}>
-        {optionNames.map((name, index) =>
-          <option key={index} value={index}>{name}</option>
+        {optionData.map(({ id, name }) =>
+          <option key={id} value={id}>{name}</option>
         )}
       </select>
     </div>

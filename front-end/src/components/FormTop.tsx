@@ -10,10 +10,10 @@ type FormTopProps = Readonly<{
 }>
 
 export default ({ fetchedData }: FormTopProps) => {
-  const raceNames = fetchedData.races.map(characterRace => characterRace.name);
-  const classNames = fetchedData.characterClasses.map(characterClass => characterClass.name);
-  const levels = fetchedData.levels;
   const { getValues } = useFormContext();
+  const races = fetchedData.races;
+  const characterClasses = fetchedData.characterClasses;
+  const levels = fetchedData.levels;
   const characterExperience: number = getValues('experience');
   const currentLevel: number = calculateLevel(levels, characterExperience);
 
@@ -35,12 +35,12 @@ export default ({ fetchedData }: FormTopProps) => {
 
       <Select
         name='race'
-        optionNames={raceNames}
+        optionData={races}
       />
 
       <Select
         name='class'
-        optionNames={classNames}
+        optionData={characterClasses}
       />
 
       <InputNumber
