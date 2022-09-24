@@ -2,10 +2,17 @@ import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '../src/services/i18n.ts';
+import { FetchedDataType } from '../src/types';
 import Form from '../src/components/Form';
 import raceData from '../data/raceData.json';
 import classData from '../data/classData.json';
 import levelData from '../data/levelData.json';
+
+const fetchedDataMock: FetchedDataType = {
+  characterClasses: classData.classes,
+  races: raceData.races,
+  levels: levelData.levels,
+}
 
 describe('Form', () => {
   it('renders correctly', () => {

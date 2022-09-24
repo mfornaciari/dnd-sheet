@@ -1,23 +1,23 @@
 import { useFormContext } from 'react-hook-form';
-import type { LevelInfo } from '../types';
+import type { FetchedDataType, LevelType } from '../types';
 import '../style/style.css';
 import InputText from './InputText';
 import InputNumber from './InputNumber';
 import Select from './Select';
-import raceData from '../../data/raceData.json';
-import classData from '../../data/classData.json';
-import levelData from '../../data/levelData.json';
 
-const raceNames = raceData.races.map(characterRace => characterRace.name);
-const classNames = classData.classes.map(characterClass => characterClass.name);
-const levels = levelData.levels;
+type FormTopProps = Readonly<{
+  fetchedData: FetchedDataType,
+}>
 
-export default () => {
+export default ({ fetchedData }: FormTopProps) => {
+  const raceNames = fetchedData.races.map(characterRace => characterRace.name);
+  const classNames = fetchedData.characterClasses.map(characterClass => characterClass.name);
+  const levels = fetchedData.levels;
   const { getValues } = useFormContext();
   const characterExperience: number = getValues('experience');
   const currentLevel: number = calculateLevel(levels, characterExperience);
 
-  function calculateLevel(levels: LevelInfo[], currentXp: number): number {
+  function calculateLevel(levels: LevelType[], currentXp: number): number {
     const foundLevelInfo = levels.find(level =>
       level.minExperience <= currentXp && level.maxExperience >= currentXp
     );
