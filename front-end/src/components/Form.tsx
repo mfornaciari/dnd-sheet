@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { FetchedDataType, CharacterDataType } from '../types';
-import FormTop from "./FormTop";
+import { FetchedDataType, CharacterDataType } from '@/types';
+import FormTop from "@/components/FormTop";
 
 const initialFetchedData: FetchedDataType = {
   characterClasses: [],

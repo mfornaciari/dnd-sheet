@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import i18next from 'i18next';
-import type { OptionDataType } from '../types';
+import type { OptionDataType } from '@/types';
 
 type SelectProps = Readonly<{
   name: string,

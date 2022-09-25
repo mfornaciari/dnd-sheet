@@ -2,9 +2,9 @@ import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { strict as assert } from 'node:assert';
-import '../src/services/i18n.ts';
-import type { OptionDataType } from '../src/types';
-import Form from '../src/components/Form';
+import '@/services/i18n.ts';
+import type { OptionDataType } from '@/types';
+import Form from '@/components/Form';
 
 const responseMock = {
   json: () => {
