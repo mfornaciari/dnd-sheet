@@ -1,13 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useQuery, gql } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FetchedDataType, CharacterDataType } from '@/types';
 import FormTop from "@/components/FormTop";
 
-const initialFetchedData: FetchedDataType = {
-  characterClasses: [],
-  races: [],
-  levels: [],
-}
+export const GET_DATA = gql`
+  query GetData {
+    races {
+      id
+      name
+    }
+    characterClasses {
+      id
+      name
+    }
+    levels {
+      id
+      level
+      minExperience
+      maxExperience
+    }
+  }
+`;
 
 const initialCharacterData: CharacterDataType = {
   name: '',
@@ -16,41 +30,26 @@ const initialCharacterData: CharacterDataType = {
   experience: 0,
 }
 
-const postBody = {
-  query: '{ characterClasses { id name } races { id name } levels { id level minExperience maxExperience } }'
-}
-
-const fetchInit = {
-  method: 'POST',
-  headers: { 'Content-type': 'application/json' },
-  body: JSON.stringify(postBody),
-}
-
 export default () => {
-  const [fetchedData, setFetchedData] = useState(initialFetchedData);
+  const { loading, data } = useQuery<FetchedDataType>(GET_DATA);
   const methods = useForm({ defaultValues: initialCharacterData });
   const characterData = methods.watch();
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const stringifiedData = JSON.stringify(characterData);
     localStorage.setItem('characterData', stringifiedData);
   }, [characterData]);
 
-  async function fetchData() {
-    const response = await fetch('http://localhost:3001/graphql', fetchInit);
-    const jsonResponse = await response.json();
-    const data: FetchedDataType = jsonResponse.data;
-    setFetchedData(previousFetchedData => data);
-  }
+  if (loading) return (
+    <div role='status' aria-labelledby='loading'>
+      <p id='loading'>Carregando...</p>
+    </div>
+  );
 
   return (
     <FormProvider {...methods}>
       <form>
-        <FormTop fetchedData={fetchedData} />
+        {data && <FormTop fetchedData={data} />}
       </form>
     </FormProvider>
   );

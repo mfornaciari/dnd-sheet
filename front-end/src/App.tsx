@@ -1,7 +1,15 @@
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import Form from '@/components/Form';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:3001/graphql',
+  cache: new InMemoryCache(),
+});
 
 export default function App() {
   return (
-    <Form />
+    <ApolloProvider client={client}>
+      <Form />
+    </ApolloProvider>
   );
 }

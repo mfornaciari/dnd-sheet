@@ -6,8 +6,8 @@ export type CharacterDataType = Readonly<{
 }>
 
 export type FetchedDataType = Readonly<{
-  characterClasses: CharacterClassType[],
   races: RaceType[],
+  characterClasses: CharacterClassType[],
   levels: LevelType[],
 }>
 
