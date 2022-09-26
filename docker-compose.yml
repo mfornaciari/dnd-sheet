@@ -9,7 +9,7 @@ services:
     volumes:
       - ./front-end:/app
       - yarn-cache:/usr/local/share/.cache/yarn/v6
-    command: bash -c "yarn && yarn dev --host"
+    command: bash -c "yarn && yarn dev"
 
   back-end:
     image: ruby:3.1.2
