@@ -1,6 +1,5 @@
 import { useFormContext } from 'react-hook-form';
 import type { FetchedDataType, LevelType } from '@/types';
-import '@/style/style.css';
 import InputText from '@/components/InputText';
 import InputNumber from '@/components/InputNumber';
 import Select from '@/components/Select';
