@@ -32,11 +32,14 @@ describe('Form', () => {
     await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
     const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
-    const raceOptions: HTMLOptionElement[] = await within(raceInput).findAllByRole('option');
+    const raceOptions: HTMLOptionElement[] = within(raceInput).getAllByRole('option');
     const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
-    const classOptions: HTMLOptionElement[] = await within(classInput).findAllByRole('option');
+    const classOptions: HTMLOptionElement[] = within(classInput).getAllByRole('option');
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
+    const selectedTab: HTMLDivElement = screen.getByRole('tabpanel', { name: 'Aba de detalhes pessoais' });
+    const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
+    const tabButtons: HTMLButtonElement[] = within(tabList).getAllByRole('tab');
 
     expect(nameInput).toHaveAttribute('placeholder', 'Nome do personagem');
     for (const raceOption of raceOptions) {
@@ -49,6 +52,13 @@ describe('Form', () => {
     }
     expect(xpInput).toHaveAttribute('min', '0');
     expect(levelDiv).toHaveTextContent(/^Nível 1$/);
+    expect
+    expect(tabButtons[0]).toHaveTextContent(/^Pessoal$/);
+    expect(tabButtons[1]).toHaveTextContent(/^Atributos$/);
+    expect(tabButtons[2]).toHaveTextContent(/^Classe$/);
+    expect(tabButtons[3]).toHaveTextContent(/^Magias$/);
+    expect(tabButtons[4]).toHaveTextContent(/^Itens$/);
+    expect(selectedTab).toHaveTextContent(/^Pessoal$/);
   });
 
   it('increases level based on character experience', async () => {

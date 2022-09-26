@@ -1,3 +1,6 @@
+import { JSX_TYPES } from "@babel/types"
+import React from "react"
+
 export type CharacterDataType = Readonly<{
   name: string,
   class: number,

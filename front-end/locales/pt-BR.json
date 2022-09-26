@@ -4,7 +4,15 @@
       "name": "Nome",
       "race": "Raça",
       "class": "Classe",
-      "experience": "Experiência"
+      "experience": "Experiência",
+      "personal": "Pessoal",
+      "attributes": "Atributos",
+      "characterClass": "Classe",
+      "spells": "Magias",
+      "items": "Itens",
+      "tabpanels": {
+        "personal": "Aba de detalhes pessoais"
+      }
     }
   }
 }
