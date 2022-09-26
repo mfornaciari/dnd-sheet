@@ -8,6 +8,12 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 #form-top {
   display: flex;
   flex-flow: row nowrap;
@@ -28,6 +34,10 @@ input[type=number]::-webkit-outer-spin-button {
   overflow: hidden;
   padding: 0.1rem;
   row-gap: 0.1rem;
+}
+
+.loading-div {
+  margin: auto;
 }
 
 .field {

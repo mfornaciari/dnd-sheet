@@ -13,7 +13,7 @@ export default ({ name, optionData }: SelectProps) => {
 
   return (
     <div>
-      <label htmlFor={name}>{i18nName}</label>
+      <label htmlFor={name}><strong>{i18nName}</strong></label>
 
       <select id={name} className='field' {...register(name)}>
         {optionData.map(({ id, name }) =>

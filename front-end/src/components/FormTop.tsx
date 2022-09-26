@@ -47,7 +47,7 @@ export default ({ fetchedData }: FormTopProps) => {
       />
 
       <div role='region' aria-labelledby='levelLabel'>
-        <span id='levelLabel'>Nível</span> <span className='field'>{currentLevel}</span>
+        <span id='levelLabel'><strong>Nível</strong></span> <span className='field'>{currentLevel}</span>
       </div>
     </section>
   );

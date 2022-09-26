@@ -41,8 +41,8 @@ export default () => {
   }, [characterData]);
 
   if (loading) return (
-    <div role='status' aria-labelledby='loading'>
-      <p id='loading'>Carregando...</p>
+    <div role='status' aria-labelledby='loading-text' className='loading-div'>
+      <p id='loading-text'><strong>Carregando...</strong></p>
     </div>
   );
 
