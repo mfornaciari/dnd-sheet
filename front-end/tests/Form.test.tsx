@@ -56,7 +56,6 @@ describe('Form', () => {
     }
     expect(xpInput).toHaveAttribute('min', '0');
     expect(levelDiv).toHaveTextContent(/^Nível 1$/);
-    expect
     expect(tabPersonal).toHaveTextContent(/^Pessoal$/);
     expect(tabPersonal).toHaveAttribute('aria-selected', 'true');
     expect(tabAttributes).toHaveTextContent(/^Atributos$/);
@@ -123,32 +122,36 @@ describe('Form', () => {
     await userEvent.click(tabPersonal);
 
     let activeTabPanel = screen.getByRole('tabpanel', {name: 'Pessoal'});
-    expect(activeTabPanel).toHaveTextContent(/^Pessoal$/);
+    expect(activeTabPanel).toBeInTheDocument();
+    expect(tabPersonal).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabAttributes);
 
     activeTabPanel = screen.getByRole('tabpanel', {name: 'Atributos'});
-    expect(activeTabPanel).toHaveTextContent(/^Atributos$/);
+    expect(activeTabPanel).toBeInTheDocument();
+    expect(tabAttributes).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabCharacterClass);
 
     activeTabPanel = screen.getByRole('tabpanel', {name: 'Classe'});
-    expect(activeTabPanel).toHaveTextContent(/^Classe$/);
+    expect(activeTabPanel).toBeInTheDocument();
+    expect(tabCharacterClass).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabSpells);
 
     activeTabPanel = screen.getByRole('tabpanel', {name: 'Magias'});
-    expect(activeTabPanel).toHaveTextContent(/^Magias$/);
+    expect(activeTabPanel).toBeInTheDocument();
+    expect(tabSpells).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabItems);
 
     activeTabPanel = screen.getByRole('tabpanel', {name: 'Itens'});
     expect(activeTabPanel).toHaveTextContent(/^Itens$/);
+    expect(tabItems).toHaveAttribute('aria-selected', 'true');
     expect(tabPersonal).toHaveAttribute('aria-selected', 'false');
     expect(tabAttributes).toHaveAttribute('aria-selected', 'false');
     expect(tabCharacterClass).toHaveAttribute('aria-selected', 'false');
     expect(tabSpells).toHaveAttribute('aria-selected', 'false');
-    expect(tabItems).toHaveAttribute('aria-selected', 'true');
   });
 
   it('saves character data to local storage', async () => {
