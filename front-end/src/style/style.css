@@ -69,6 +69,7 @@ form {
 .tab-list {
   display: flex;
   flex-flow: row nowrap;
+  gap: 0.1rem;
   padding: 0 0.15rem 0;
   margin: 0;
 }
