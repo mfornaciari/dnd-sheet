@@ -74,7 +74,7 @@ export default () => {
   if (loading) {
     return (
       <div role='status' aria-labelledby='loading-text' className='loading-div'>
-        <p id='loading-text'><strong>Carregando...</strong></p>
+        <p id='loading-text' className='loading-text'><strong>Carregando...</strong></p>
       </div>
     );
   }

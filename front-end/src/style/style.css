@@ -9,6 +9,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
 }
 
@@ -74,5 +76,13 @@ form {
 }
 
 .loading-div {
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-text{
+  margin: 0;
 }
