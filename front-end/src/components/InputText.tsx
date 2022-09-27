@@ -6,7 +6,7 @@ type InputTextProps = Readonly<{
   placeholderText: string,
 }>
 
-export default ({ name, placeholderText }: InputTextProps) => {
+export default function InputText({ name, placeholderText }: InputTextProps) {
   const { register } = useFormContext();
   const i18nName = i18next.t(name);
 

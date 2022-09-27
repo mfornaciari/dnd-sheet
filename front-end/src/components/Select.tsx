@@ -7,7 +7,7 @@ type SelectProps = Readonly<{
   optionData: OptionDataType[],
 }>
 
-export default ({ name, optionData }: SelectProps) => {
+export default function Select ({ name, optionData }: SelectProps) {
   const { register } = useFormContext();
   const i18nName = i18next.t(name);
 

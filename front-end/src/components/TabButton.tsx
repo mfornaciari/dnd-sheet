@@ -7,7 +7,7 @@ type TabButtonProps = {
   handleTabClick: React.MouseEventHandler<HTMLButtonElement>,
 }
 
-export default ({ tabName, isSelected, handleTabClick }: TabButtonProps) => {
+export default function TabButton({ tabName, isSelected, handleTabClick }: TabButtonProps) {
   const i18nTabName = i18next.t(tabName);
 
   return (

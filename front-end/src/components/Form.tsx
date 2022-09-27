@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FetchedDataType, CharacterDataType, TabsType, TabNameType } from '@/types';
+import GET_DATA from '@/queries/get_data';
 import LoadingMessage from '@/components/LoadingMessage';
 import FormTop from '@/components/FormTop';
 import TabList from '@/components/TabList';
@@ -10,25 +11,6 @@ import TabAttributes from '@/components/TabAttributes';
 import TabCharacterClass from '@/components/TabCharacterClass';
 import TabSpells from '@/components/TabSpells';
 import TabItems from '@/components/TabItems';
-
-export const GET_DATA = gql`
-  query GetData {
-    races {
-      id
-      name
-    }
-    characterClasses {
-      id
-      name
-    }
-    levels {
-      id
-      level
-      minExperience
-      maxExperience
-    }
-  }
-`;
 
 const tabs: TabsType = {
   personal: <TabPersonal />,
@@ -45,7 +27,7 @@ const initialCharacterData: CharacterDataType = {
   experience: 0,
 }
 
-export default () => {
+export default function Form() {
   const { loading, data } = useQuery<FetchedDataType>(GET_DATA);
   const methods = useForm({ defaultValues: initialCharacterData });
   const characterData = methods.watch();

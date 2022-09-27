@@ -5,7 +5,8 @@ import { MockedProvider } from '@apollo/client/testing';
 import { strict as assert } from 'node:assert';
 import type { OptionDataType } from '@/types';
 import fetchedDataMock from './fetchedDataMock.json';
-import Form, { GET_DATA } from '@/components/Form';
+import Form from '@/components/Form';
+import GET_DATA from '@/queries/get_data';
 
 describe('Form', () => {
   const mocks = [

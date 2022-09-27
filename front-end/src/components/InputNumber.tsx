@@ -7,7 +7,7 @@ type InputNumberProps = Readonly<{
   maxValue?: string,
 }>
 
-export default ({ name, minValue, maxValue }: InputNumberProps) => {
+export default function InputNumber({ name, minValue, maxValue }: InputNumberProps) {
   const { register } = useFormContext();
   const i18nName = i18next.t(name);
 

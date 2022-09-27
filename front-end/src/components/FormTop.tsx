@@ -8,7 +8,7 @@ type FormTopProps = Readonly<{
   fetchedData: FetchedDataType,
 }>
 
-export default ({ fetchedData }: FormTopProps) => {
+export default function FormTop({ fetchedData }: FormTopProps) {
   const { races, characterClasses, levels } = fetchedData;
   const { getValues } = useFormContext();
   const characterExperience: number = getValues('experience');

@@ -1,6 +1,6 @@
 import i18next from "i18next";
 
-export default () => {
+export default function TabItems() {
   const i18nName = i18next.t('items');
 
   return (
