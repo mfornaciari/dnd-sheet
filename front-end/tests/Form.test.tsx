@@ -180,20 +180,22 @@ describe('Form', () => {
     };
     expect(storedData).toEqual(expectedData);
   });
+
+  function createOptionRegex(data: OptionDataType[], option: HTMLOptionElement) {
+    const value = getOptionValue(option);
+    const name = getOptionName(data, value);
+    return new RegExp(`^${name}$`);
+  }
+
+  function getOptionName(data: OptionDataType[], value: number) {
+    const foundEntry = data.find(item => item.id === value);
+    assert(foundEntry);
+    return foundEntry.name;
+  }
+
+  function getOptionValue(option: HTMLOptionElement) {
+    return Number(option.getAttribute('value'));
+  }
 });
 
-function createOptionRegex(data: OptionDataType[], option: HTMLOptionElement) {
-  const value = getOptionValue(option);
-  const name = getOptionName(data, value);
-  return new RegExp(`^${name}$`);
-}
 
-function getOptionName(data: OptionDataType[], value: number) {
-  const foundEntry = data.find(item => item.id === value);
-  assert(foundEntry);
-  return foundEntry.name;
-}
-
-function getOptionValue(option: HTMLOptionElement) {
-  return Number(option.getAttribute('value'));
-}

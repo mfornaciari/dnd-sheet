@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
