@@ -66,11 +66,13 @@ export default () => {
 
   return (
       <FormProvider {...methods}>
+        {data &&
           <form>
-            <FormTop fetchedData={data!} />
+            <FormTop fetchedData={data} />
             {tabs[activeTab]}
             <TabList activeTab={activeTab} handleTabClick={handleTabClick} />
           </form>
+        }
       </FormProvider>
   );
 }

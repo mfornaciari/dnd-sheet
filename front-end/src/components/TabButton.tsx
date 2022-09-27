@@ -19,7 +19,7 @@ export default ({ tabName, isSelected, handleTabClick }: TabButtonProps) => {
       onClick={handleTabClick}
       className='tab-button'
     >
-      {i18nTabName}
+      <strong>{i18nTabName}</strong>
     </button>
   );
 }
