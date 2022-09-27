@@ -1,6 +1,7 @@
 {
   "ptbr": {
     "translation": {
+      "loading": "Carregando...",
       "name": "Nome",
       "race": "Raça",
       "class": "Classe",

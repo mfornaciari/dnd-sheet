@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FetchedDataType, CharacterDataType, TabsType, TabNameType } from '@/types';
+import LoadingMessage from '@/components/LoadingMessage';
 import FormTop from '@/components/FormTop';
 import TabList from '@/components/TabList';
 import TabPersonal from '@/components/TabPersonal';
@@ -61,23 +62,15 @@ export default () => {
     setActiveTab(prevActiveTab => clickedTabName);
   }
 
-  if (loading) {
-    return (
-      <div role='status' aria-labelledby='loading-text' className='loading-div'>
-        <p id='loading-text' className='loading-text'><strong>Carregando...</strong></p>
-      </div>
-    );
-  }
+  if (loading) return <LoadingMessage />;
 
   return (
       <FormProvider {...methods}>
-        { data &&
           <form>
-            <FormTop fetchedData={data} />
+            <FormTop fetchedData={data!} />
             {tabs[activeTab]}
             <TabList activeTab={activeTab} handleTabClick={handleTabClick} />
           </form>
-        }
       </FormProvider>
   );
 }
