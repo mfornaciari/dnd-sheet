@@ -1,3 +1,4 @@
+import type { TabNameType } from '@/types';
 import TabButton from '@/components/TabButton';
 
 type TabListProps = {
@@ -5,7 +6,7 @@ type TabListProps = {
 }
 
 export default function TabList({ handleTabClick }: TabListProps) {
-  const tabNames = [
+  const tabNames: TabNameType[] = [
     'personal',
     'attributes',
     'characterClass',

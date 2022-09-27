@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
-import { FetchedDataType, CharacterDataType } from '@/types';
+import { FetchedDataType, CharacterDataType, TabsType, TabNameType } from '@/types';
 import FormTop from "@/components/FormTop";
 import TabList from "@/components/TabList";
 import TabPersonal from "@/components/TabPersonal";
@@ -25,15 +25,13 @@ export const GET_DATA = gql`
   }
 `;
 
-const tabs = {
+const tabs: TabsType = {
   personal: <TabPersonal />,
   attributes: <TabPersonal />,
   characterClass: <TabPersonal />,
   spells: <TabPersonal />,
   items: <TabPersonal />,
 }
-
-type TabsType = Readonly<typeof tabs>;
 
 const initialCharacterData: CharacterDataType = {
   name: '',
@@ -46,7 +44,7 @@ export default () => {
   const { loading, data } = useQuery<FetchedDataType>(GET_DATA);
   const methods = useForm({ defaultValues: initialCharacterData });
   const characterData = methods.watch();
-  const [activeTab, setActiveTab] = useState<keyof TabsType>('personal');
+  const [activeTab, setActiveTab] = useState<TabNameType>('personal');
 
   useEffect(() => {
     const stringifiedData = JSON.stringify(characterData);
@@ -66,8 +64,7 @@ export default () => {
 
   function handleTabClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-    const clickedTabName = event.currentTarget.id as keyof TabsType;
-    console.log(clickedTabName)
+    const clickedTabName = event.currentTarget.id as TabNameType;
     setActiveTab(prevActiveTab => clickedTabName);
   }
 

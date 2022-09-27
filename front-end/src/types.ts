@@ -1,6 +1,3 @@
-import { JSX_TYPES } from "@babel/types"
-import React from "react"
-
 export type CharacterDataType = Readonly<{
   name: string,
   class: number,
@@ -35,3 +32,13 @@ export type OptionDataType = Readonly<{
   id: number,
   name: string,
 }>
+
+export type TabsType = Readonly<{
+  personal: JSX.Element,
+  attributes: JSX.Element,
+  characterClass: JSX.Element,
+  spells: JSX.Element,
+  items: JSX.Element,
+}>
+
+export type TabNameType = Readonly<keyof TabsType>
