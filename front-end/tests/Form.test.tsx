@@ -37,9 +37,13 @@ describe('Form', () => {
     const classOptions: HTMLOptionElement[] = within(classInput).getAllByRole('option');
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
-    const selectedTab: HTMLDivElement = screen.getByRole('tabpanel', { name: 'Aba de detalhes pessoais' });
+    const selectedTab: HTMLDivElement = screen.getByRole('tabpanel', { name: 'Pessoal' });
     const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
-    const tabButtons: HTMLButtonElement[] = within(tabList).getAllByRole('tab');
+    const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Pessoal'});
+    const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Atributos'});
+    const tabCharacterClass: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Classe'});
+    const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Magias'});
+    const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Itens'});
 
     expect(nameInput).toHaveAttribute('placeholder', 'Nome do personagem');
     for (const raceOption of raceOptions) {
@@ -53,11 +57,16 @@ describe('Form', () => {
     expect(xpInput).toHaveAttribute('min', '0');
     expect(levelDiv).toHaveTextContent(/^Nível 1$/);
     expect
-    expect(tabButtons[0]).toHaveTextContent(/^Pessoal$/);
-    expect(tabButtons[1]).toHaveTextContent(/^Atributos$/);
-    expect(tabButtons[2]).toHaveTextContent(/^Classe$/);
-    expect(tabButtons[3]).toHaveTextContent(/^Magias$/);
-    expect(tabButtons[4]).toHaveTextContent(/^Itens$/);
+    expect(tabPersonal).toHaveTextContent(/^Pessoal$/);
+    expect(tabPersonal).toHaveAttribute('aria-selected', 'true');
+    expect(tabAttributes).toHaveTextContent(/^Atributos$/);
+    expect(tabAttributes).toHaveAttribute('aria-selected', 'false');
+    expect(tabCharacterClass).toHaveTextContent(/^Classe$/);
+    expect(tabCharacterClass).toHaveAttribute('aria-selected', 'false');
+    expect(tabSpells).toHaveTextContent(/^Magias$/);
+    expect(tabSpells).toHaveAttribute('aria-selected', 'false');
+    expect(tabItems).toHaveTextContent(/^Itens$/);
+    expect(tabItems).toHaveAttribute('aria-selected', 'false');
     expect(selectedTab).toHaveTextContent(/^Pessoal$/);
   });
 
@@ -95,6 +104,51 @@ describe('Form', () => {
     await userEvent.type(xpInput, '1000000');
 
     expect(levelDiv).toHaveTextContent(/^Nível 20$/);
+  });
+
+  it('changes active panel when clicking on tab buttons', async () => {
+    render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Form />
+      </MockedProvider>
+    );
+    await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
+    const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
+    const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Pessoal'});
+    const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Atributos'});
+    const tabCharacterClass: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Classe'});
+    const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Magias'});
+    const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Itens'});
+
+    await userEvent.click(tabPersonal);
+
+    let activeTabPanel = screen.getByRole('tabpanel', {name: 'Pessoal'});
+    expect(activeTabPanel).toHaveTextContent(/^Pessoal$/);
+
+    await userEvent.click(tabAttributes);
+
+    activeTabPanel = screen.getByRole('tabpanel', {name: 'Atributos'});
+    expect(activeTabPanel).toHaveTextContent(/^Atributos$/);
+
+    await userEvent.click(tabCharacterClass);
+
+    activeTabPanel = screen.getByRole('tabpanel', {name: 'Classe'});
+    expect(activeTabPanel).toHaveTextContent(/^Classe$/);
+
+    await userEvent.click(tabSpells);
+
+    activeTabPanel = screen.getByRole('tabpanel', {name: 'Magias'});
+    expect(activeTabPanel).toHaveTextContent(/^Magias$/);
+
+    await userEvent.click(tabItems);
+
+    activeTabPanel = screen.getByRole('tabpanel', {name: 'Itens'});
+    expect(activeTabPanel).toHaveTextContent(/^Itens$/);
+    expect(tabPersonal).toHaveAttribute('aria-selected', 'false');
+    expect(tabAttributes).toHaveAttribute('aria-selected', 'false');
+    expect(tabCharacterClass).toHaveAttribute('aria-selected', 'false');
+    expect(tabSpells).toHaveAttribute('aria-selected', 'false');
+    expect(tabItems).toHaveAttribute('aria-selected', 'true');
   });
 
   it('saves character data to local storage', async () => {

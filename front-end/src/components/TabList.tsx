@@ -2,10 +2,11 @@ import type { TabNameType } from '@/types';
 import TabButton from '@/components/TabButton';
 
 type TabListProps = {
+  activeTab: TabNameType,
   handleTabClick: React.MouseEventHandler<HTMLButtonElement>,
 }
 
-export default function TabList({ handleTabClick }: TabListProps) {
+export default function TabList({ activeTab, handleTabClick }: TabListProps) {
   const tabNames: TabNameType[] = [
     'personal',
     'attributes',
@@ -21,6 +22,7 @@ export default function TabList({ handleTabClick }: TabListProps) {
             key={tabName}
             tabName={tabName}
             handleTabClick={handleTabClick}
+            isSelected={activeTab === tabName}
           />
       )}
     </ul>

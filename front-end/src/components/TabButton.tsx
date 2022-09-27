@@ -3,18 +3,21 @@ import i18next from 'i18next';
 
 type TabButtonProps = {
   tabName: TabNameType,
+  isSelected: boolean,
   handleTabClick: React.MouseEventHandler<HTMLButtonElement>,
 }
 
-export default ({ tabName, handleTabClick }: TabButtonProps) => {
+export default ({ tabName, isSelected, handleTabClick }: TabButtonProps) => {
   const i18nTabName = i18next.t(tabName);
 
   return (
     <button
       role='tab'
-      id={tabName}
-      className='tab-button'
+      id={i18nTabName}
+      name={tabName}
+      aria-selected={isSelected}
       onClick={handleTabClick}
+      className='tab-button'
     >
       {i18nTabName}
     </button>

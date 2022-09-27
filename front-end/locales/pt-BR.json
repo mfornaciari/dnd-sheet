@@ -9,10 +9,7 @@
       "attributes": "Atributos",
       "characterClass": "Classe",
       "spells": "Magias",
-      "items": "Itens",
-      "tabpanels": {
-        "personal": "Aba de detalhes pessoais"
-      }
+      "items": "Itens"
     }
   }
 }

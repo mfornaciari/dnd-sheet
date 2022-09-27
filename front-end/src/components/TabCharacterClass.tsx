@@ -1,7 +1,7 @@
-import i18next from 'i18next';
+import i18next from "i18next";
 
-export default() => {
-  const i18nName = i18next.t('personal');
+export default () => {
+  const i18nName = i18next.t('characterClass');
 
   return (
     <div
@@ -13,4 +13,4 @@ export default() => {
       {i18nName}
     </div>
   );
-}
+};

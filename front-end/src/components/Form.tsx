@@ -2,9 +2,13 @@ import { useState, useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FetchedDataType, CharacterDataType, TabsType, TabNameType } from '@/types';
-import FormTop from "@/components/FormTop";
-import TabList from "@/components/TabList";
-import TabPersonal from "@/components/TabPersonal";
+import FormTop from '@/components/FormTop';
+import TabList from '@/components/TabList';
+import TabPersonal from '@/components/TabPersonal';
+import TabAttributes from '@/components/TabAttributes';
+import TabCharacterClass from '@/components/TabCharacterClass';
+import TabSpells from '@/components/TabSpells';
+import TabItems from '@/components/TabItems';
 
 export const GET_DATA = gql`
   query GetData {
@@ -27,10 +31,10 @@ export const GET_DATA = gql`
 
 const tabs: TabsType = {
   personal: <TabPersonal />,
-  attributes: <TabPersonal />,
-  characterClass: <TabPersonal />,
-  spells: <TabPersonal />,
-  items: <TabPersonal />,
+  attributes: <TabAttributes />,
+  characterClass: <TabCharacterClass />,
+  spells: <TabSpells />,
+  items: <TabItems />,
 }
 
 const initialCharacterData: CharacterDataType = {
@@ -51,20 +55,9 @@ export default () => {
     localStorage.setItem('characterData', stringifiedData);
   }, [characterData]);
 
-  useEffect(() => {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    for (const tabButton of tabButtons) {
-      if (tabButton.id !== activeTab) {
-        tabButton.setAttribute('aria-selected', 'false');
-      } else {
-        tabButton.setAttribute('aria-selected', 'true');
-      }
-    }
-  }, [activeTab]);
-
   function handleTabClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-    const clickedTabName = event.currentTarget.id as TabNameType;
+    const clickedTabName = event.currentTarget.name as TabNameType;
     setActiveTab(prevActiveTab => clickedTabName);
   }
 
@@ -82,7 +75,7 @@ export default () => {
           <form>
             <FormTop fetchedData={data} />
             {tabs[activeTab]}
-            <TabList handleTabClick={handleTabClick} />
+            <TabList activeTab={activeTab} handleTabClick={handleTabClick} />
           </form>
         }
       </FormProvider>
