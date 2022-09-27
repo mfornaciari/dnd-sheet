@@ -1,8 +1,7 @@
 import { render, screen, waitForElementToBeRemoved, within } from '@testing-library/react';
-import '@/services/i18n.ts';
 import userEvent from '@testing-library/user-event';
-import { MockedProvider } from '@apollo/client/testing';
 import { strict as assert } from 'node:assert';
+import { MockedProvider } from '@apollo/client/testing';
 import type { OptionDataType } from '@/types';
 import fetchedDataMock from './fetchedDataMock.json';
 import Form from '@/components/Form';
