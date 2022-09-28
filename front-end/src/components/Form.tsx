@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FetchedDataType, CharacterDataType, TabsType, TabNameType } from '@/types';
@@ -30,13 +30,7 @@ const initialCharacterData: CharacterDataType = {
 export default function Form() {
   const { loading, data } = useQuery<FetchedDataType>(GET_DATA);
   const methods = useForm({ defaultValues: initialCharacterData });
-  const characterData = methods.watch();
   const [activeTab, setActiveTab] = useState<TabNameType>('personal');
-
-  useEffect(() => {
-    const stringifiedData = JSON.stringify(characterData);
-    localStorage.setItem('characterData', stringifiedData);
-  }, [characterData]);
 
   function handleTabClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();

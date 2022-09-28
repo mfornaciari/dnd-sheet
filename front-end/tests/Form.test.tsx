@@ -97,33 +97,6 @@ describe('Form', () => {
     expect(tabCharacterClass).toHaveAttribute('aria-selected', 'false');
     expect(tabSpells).toHaveAttribute('aria-selected', 'false');
   });
-
-  it('saves character data to local storage', async () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Form />
-      </MockedProvider>
-    );
-    await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
-    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
-    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
-    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
-    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-
-    await userEvent.type(nameInput, 'José da Silva');
-    await userEvent.selectOptions(raceInput, within(raceInput).getByRole('option', { name: 'Anão' }));
-    await userEvent.selectOptions(classInput, within(classInput).getByRole('option', { name: 'Bárbaro' }));
-    await userEvent.type(xpInput, '300');
-
-    const storedData = JSON.parse(localStorage.characterData);
-    const expectedData = {
-      'name': 'José da Silva',
-      'race': '1',
-      'class': '1',
-      'experience': '300',
-    };
-    expect(storedData).toEqual(expectedData);
-  });
 });
 
 
