@@ -4,13 +4,14 @@ import TabButton from '@/components/TabButton';
 type TabListProps = {
   activeTab: TabNameType,
   handleTabClick: React.MouseEventHandler<HTMLButtonElement>,
+  selectedClassName: TabNameType,
 }
 
-export default function TabList({ activeTab, handleTabClick }: TabListProps) {
+export default function TabList({ activeTab, handleTabClick, selectedClassName }: TabListProps) {
   const tabNames: TabNameType[] = [
     'personal',
     'attributes',
-    'characterClass',
+    selectedClassName,
     'spells',
     'items',
   ];

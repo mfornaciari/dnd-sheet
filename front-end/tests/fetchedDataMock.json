@@ -16,15 +16,15 @@
   "characterClasses": [
     {
       "id": 1,
-      "name": "Bárbaro"
+      "name": "barbarian"
     },
     {
       "id": 2,
-      "name": "Bardo"
+      "name": "bard"
     },
     {
       "id": 3,
-      "name": "Bruxo"
+      "name": "warlock"
     }
   ],
   "levels": [

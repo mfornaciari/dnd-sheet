@@ -1,7 +1,7 @@
 export type CharacterDataType = Readonly<{
   name: string,
-  class: number,
   race: number,
+  characterClass: number,
   experience: number,
 }>
 
@@ -37,6 +37,18 @@ export type TabsType = Readonly<{
   personal: JSX.Element,
   attributes: JSX.Element,
   characterClass: JSX.Element,
+  barbarian: JSX.Element,
+  bard: JSX.Element,
+  cleric: JSX.Element,
+  druid: JSX.Element,
+  fighter: JSX.Element,
+  monk: JSX.Element,
+  paladin: JSX.Element,
+  ranger: JSX.Element,
+  rogue: JSX.Element,
+  sorcerer: JSX.Element,
+  warlock: JSX.Element,
+  wizard: JSX.Element,
   spells: JSX.Element,
   items: JSX.Element,
 }>

@@ -97,6 +97,20 @@ describe('Form', () => {
     expect(tabCharacterClass).toHaveAttribute('aria-selected', 'false');
     expect(tabSpells).toHaveAttribute('aria-selected', 'false');
   });
+
+  it('changes class tab name when user selects new class', async () => {
+    render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Form />
+      </MockedProvider>
+    );
+    await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
+    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
+
+    await userEvent.selectOptions(classInput, 'Bardo');
+
+    expect(screen.getByRole('tab', { name: 'Bardo' })).toBeInTheDocument();
+  });
 });
 
 

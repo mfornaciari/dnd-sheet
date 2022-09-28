@@ -1,5 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import i18next from 'i18next';
 import { useForm, FormProvider } from 'react-hook-form';
 import { strict as assert } from 'node:assert';
 import { CharacterDataType, OptionDataType } from '@/types';
@@ -10,7 +11,7 @@ describe('FormTop', () => {
   const initialCharacterData: CharacterDataType = {
     name: '',
     race: 0,
-    class: 0,
+    characterClass: 0,
     experience: 0,
   }
 
@@ -33,7 +34,7 @@ describe('FormTop', () => {
   function getOptionName(data: OptionDataType[], value: number) {
     const foundEntry = data.find(item => item.id === value);
     assert(foundEntry);
-    return foundEntry.name;
+    return i18next.t(foundEntry.name);
   }
 
   function getOptionValue(option: HTMLOptionElement) {

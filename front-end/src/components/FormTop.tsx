@@ -36,7 +36,7 @@ export default function FormTop({ fetchedData }: FormTopProps) {
       />
 
       <Select
-        name='class'
+        name='characterClass'
         optionData={characterClasses}
       />
 
