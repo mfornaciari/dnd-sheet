@@ -2,20 +2,12 @@ import type { TabNameType } from '@/types';
 import TabButton from '@/components/TabButton';
 
 type TabListProps = {
+  tabNames: string[],
   activeTab: TabNameType,
   handleTabClick: React.MouseEventHandler<HTMLButtonElement>,
-  selectedClassName: TabNameType,
 }
 
-export default function TabList({ activeTab, handleTabClick, selectedClassName }: TabListProps) {
-  const tabNames: TabNameType[] = [
-    'personal',
-    'attributes',
-    selectedClassName,
-    'spells',
-    'items',
-  ];
-
+export default function TabList({ tabNames, activeTab, handleTabClick }: TabListProps) {
   return (
     <ul role='tablist' aria-label='Abas' className='tab-list'>
       {tabNames.map(tabName =>

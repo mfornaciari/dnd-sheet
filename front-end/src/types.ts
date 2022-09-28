@@ -1,7 +1,7 @@
-export type CharacterDataType = Readonly<{
+export type CharacterValuesType = Readonly<{
   name: string,
-  race: number,
-  characterClass: number,
+  race: string,
+  characterClass: string,
   experience: number,
 }>
 
@@ -12,24 +12,24 @@ export type FetchedDataType = Readonly<{
 }>
 
 export type CharacterClassType = Readonly<{
-  id: number,
+  id: string,
   name: string,
 }>
 
 export type RaceType = Readonly<{
-  id: number,
+  id: string,
   name: string,
 }>
 
 export type LevelType = Readonly<{
-  id: number,
+  id: string,
   level: number,
   minExperience: number,
   maxExperience: number,
 }>
 
 export type OptionDataType = Readonly<{
-  id: number,
+  id: string,
   name: string,
 }>
 
@@ -37,18 +37,6 @@ export type TabsType = Readonly<{
   personal: JSX.Element,
   attributes: JSX.Element,
   characterClass: JSX.Element,
-  barbarian: JSX.Element,
-  bard: JSX.Element,
-  cleric: JSX.Element,
-  druid: JSX.Element,
-  fighter: JSX.Element,
-  monk: JSX.Element,
-  paladin: JSX.Element,
-  ranger: JSX.Element,
-  rogue: JSX.Element,
-  sorcerer: JSX.Element,
-  warlock: JSX.Element,
-  wizard: JSX.Element,
   spells: JSX.Element,
   items: JSX.Element,
 }>

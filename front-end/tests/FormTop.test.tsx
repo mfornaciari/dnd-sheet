@@ -3,15 +3,15 @@ import userEvent from '@testing-library/user-event';
 import i18next from 'i18next';
 import { useForm, FormProvider } from 'react-hook-form';
 import { strict as assert } from 'node:assert';
-import { CharacterDataType, OptionDataType } from '@/types';
+import { CharacterValuesType, OptionDataType } from '@/types';
 import fetchedDataMock from './fetchedDataMock.json';
 import FormTop from '@/components/FormTop';
 
 describe('FormTop', () => {
-  const initialCharacterData: CharacterDataType = {
+  const initialCharacterData: CharacterValuesType = {
     name: '',
-    race: 0,
-    characterClass: 0,
+    race: '0',
+    characterClass: '0',
     experience: 0,
   }
 
@@ -25,20 +25,20 @@ describe('FormTop', () => {
     );
   }
 
-  function createOptionRegex(data: OptionDataType[], option: HTMLOptionElement) {
+  function createOptionRegex(data: OptionDataType[], option: HTMLOptionElement): RegExp {
     const value = getOptionValue(option);
     const name = getOptionName(data, value);
     return new RegExp(`^${name}$`);
   }
 
-  function getOptionName(data: OptionDataType[], value: number) {
+  function getOptionName(data: OptionDataType[], value: string): string {
     const foundEntry = data.find(item => item.id === value);
     assert(foundEntry);
     return i18next.t(foundEntry.name);
   }
 
-  function getOptionValue(option: HTMLOptionElement) {
-    return Number(option.getAttribute('value'));
+  function getOptionValue(option: HTMLOptionElement): string {
+    return String(option.getAttribute('value'));
   }
 
   it('renders correctly', () => {

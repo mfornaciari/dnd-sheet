@@ -1,8 +1,7 @@
-import type { TabNameType } from '@/types';
 import i18next from 'i18next';
 
 type TabButtonProps = {
-  tabName: TabNameType,
+  tabName: string,
   isSelected: boolean,
   handleTabClick: React.MouseEventHandler<HTMLButtonElement>,
 }
