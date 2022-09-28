@@ -39,11 +39,11 @@ describe('Form', () => {
     const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
     const selectedTab: HTMLDivElement = screen.getByRole('tabpanel', { name: 'Pessoal' });
     const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
-    const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Pessoal'});
-    const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Atributos'});
-    const tabCharacterClass: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Classe'});
-    const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Magias'});
-    const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Itens'});
+    const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Pessoal' });
+    const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Atributos' });
+    const tabCharacterClass: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Classe' });
+    const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Magias' });
+    const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Itens' });
 
     expect(nameInput).toHaveAttribute('placeholder', 'Nome do personagem');
     for (const raceOption of raceOptions) {
@@ -113,39 +113,39 @@ describe('Form', () => {
     );
     await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
     const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
-    const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Pessoal'});
-    const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Atributos'});
-    const tabCharacterClass: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Classe'});
-    const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Magias'});
-    const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', {name: 'Itens'});
+    const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Pessoal' });
+    const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Atributos' });
+    const tabCharacterClass: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Classe' });
+    const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Magias' });
+    const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Itens' });
 
     await userEvent.click(tabPersonal);
 
-    let activeTabPanel = screen.getByRole('tabpanel', {name: 'Pessoal'});
+    let activeTabPanel = screen.getByRole('tabpanel', { name: 'Pessoal' });
     expect(activeTabPanel).toBeInTheDocument();
     expect(tabPersonal).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabAttributes);
 
-    activeTabPanel = screen.getByRole('tabpanel', {name: 'Atributos'});
+    activeTabPanel = screen.getByRole('tabpanel', { name: 'Atributos' });
     expect(activeTabPanel).toBeInTheDocument();
     expect(tabAttributes).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabCharacterClass);
 
-    activeTabPanel = screen.getByRole('tabpanel', {name: 'Classe'});
+    activeTabPanel = screen.getByRole('tabpanel', { name: 'Classe' });
     expect(activeTabPanel).toBeInTheDocument();
     expect(tabCharacterClass).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabSpells);
 
-    activeTabPanel = screen.getByRole('tabpanel', {name: 'Magias'});
+    activeTabPanel = screen.getByRole('tabpanel', { name: 'Magias' });
     expect(activeTabPanel).toBeInTheDocument();
     expect(tabSpells).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabItems);
 
-    activeTabPanel = screen.getByRole('tabpanel', {name: 'Itens'});
+    activeTabPanel = screen.getByRole('tabpanel', { name: 'Itens' });
     expect(activeTabPanel).toHaveTextContent(/^Itens$/);
     expect(tabItems).toHaveAttribute('aria-selected', 'true');
     expect(tabPersonal).toHaveAttribute('aria-selected', 'false');
