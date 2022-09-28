@@ -36,5 +36,5 @@ export default function InputNumber({ name, minValue, maxValue }: InputNumberPro
         {...register(name)}
       />
     </div>
-  )
+  );
 }

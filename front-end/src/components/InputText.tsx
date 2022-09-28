@@ -22,5 +22,5 @@ export default function InputText({ name, placeholderText }: InputTextProps) {
         {...register(name)}
       />
     </div>
-  )
+  );
 }

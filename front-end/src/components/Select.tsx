@@ -23,5 +23,5 @@ export default function Select ({ name, optionData }: SelectProps) {
         )}
       </select>
     </div>
-  )
+  );
 }

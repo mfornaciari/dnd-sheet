@@ -16,13 +16,13 @@ export default function TabList({ tabKinds, selectedClassName, activeTab, handle
   return (
     <ul role='tablist' aria-label='Abas' className='tab-list'>
       {tabKinds.map(tabKind =>
-          <TabButton
-            key={tabKind}
-            tabKind={tabKind}
-            handleTabClick={handleTabClick}
-            isSelected={activeTab === tabKind}
-            selectedClassName={isClassTab(tabKind) ? selectedClassName : ''}
-          />
+        <TabButton
+          key={tabKind}
+          tabKind={tabKind}
+          handleTabClick={handleTabClick}
+          isSelected={activeTab === tabKind}
+          selectedClassName={isClassTab(tabKind) ? selectedClassName : ''}
+        />
       )}
     </ul>
   );

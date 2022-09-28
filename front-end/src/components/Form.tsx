@@ -64,13 +64,10 @@ export default function Form() {
 
 function findClassName(data: FetchedDataType | undefined, selectedClassId: string): string {
   if (data) {
-
     const foundClass = data.characterClasses.find(characterClass => {
       return characterClass.id === selectedClassId
     });
-    if (foundClass) {
-      return foundClass.name;
-    }
+    if (foundClass) return foundClass.name;
   }
 
   return 'characterClass';
