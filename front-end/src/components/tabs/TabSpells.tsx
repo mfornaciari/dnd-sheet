@@ -6,7 +6,7 @@ export default function TabSpells() {
   return (
     <div
       role='tabpanel'
-      aria-labelledby={i18nName}
+      aria-labelledby='spells'
       aria-expanded='true'
       className='tab-panel'
     >

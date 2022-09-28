@@ -108,8 +108,10 @@ describe('Form', () => {
     const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
 
     await userEvent.selectOptions(classInput, 'Bardo');
+    const tabCharacterClass: HTMLButtonElement = screen.getByRole('tab', { name: 'Bardo' });
+    await userEvent.click(tabCharacterClass);
 
-    expect(screen.getByRole('tab', { name: 'Bardo' })).toBeInTheDocument();
+    expect(screen.getByRole('tabpanel', { name: 'Classe' })).toHaveTextContent(/^Bardo$/);
   });
 });
 

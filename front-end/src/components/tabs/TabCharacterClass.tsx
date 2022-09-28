@@ -1,16 +1,20 @@
 import i18next from "i18next";
 
-export default function TabCharacterClass() {
-  const i18nName = i18next.t('characterClass');
+type TabCharacterClassProps = {
+  selectedClassName: string,
+}
+
+export default function TabCharacterClass({ selectedClassName }: TabCharacterClassProps) {
+  const i18nName = i18next.t(selectedClassName);
 
   return (
-    <div
+    <section
       role='tabpanel'
-      aria-labelledby={i18nName}
+      aria-labelledby='characterClass'
       aria-expanded='true'
       className='tab-panel'
     >
       {i18nName}
-    </div>
+    </section>
   );
 };

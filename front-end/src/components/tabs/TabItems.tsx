@@ -6,7 +6,7 @@ export default function TabItems() {
   return (
     <div
       role='tabpanel'
-      aria-labelledby={i18nName}
+      aria-labelledby='items'
       aria-expanded='true'
       className='tab-panel'
     >

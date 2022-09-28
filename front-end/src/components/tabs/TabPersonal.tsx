@@ -6,7 +6,7 @@ export default function TabPersonal() {
   return (
     <div
       role='tabpanel'
-      aria-labelledby={i18nName}
+      aria-labelledby='personal'
       aria-expanded='true'
       className='tab-panel'
     >

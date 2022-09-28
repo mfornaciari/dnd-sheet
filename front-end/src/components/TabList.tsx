@@ -1,21 +1,27 @@
-import type { TabNameType } from '@/types';
+import type { TabKindType } from '@/types';
 import TabButton from '@/components/TabButton';
 
 type TabListProps = {
-  tabNames: string[],
-  activeTab: TabNameType,
+  tabKinds: TabKindType[],
+  activeTab: TabKindType,
   handleTabClick: React.MouseEventHandler<HTMLButtonElement>,
+  selectedClassName: string,
 }
 
-export default function TabList({ tabNames, activeTab, handleTabClick }: TabListProps) {
+export default function TabList({ tabKinds, selectedClassName, activeTab, handleTabClick }: TabListProps) {
+  function isClassTab(tabKind: TabKindType): boolean {
+    return tabKind === 'characterClass';
+  }
+
   return (
     <ul role='tablist' aria-label='Abas' className='tab-list'>
-      {tabNames.map(tabName =>
+      {tabKinds.map(tabKind =>
           <TabButton
-            key={tabName}
-            tabName={tabName}
+            key={tabKind}
+            tabKind={tabKind}
             handleTabClick={handleTabClick}
-            isSelected={activeTab === tabName}
+            isSelected={activeTab === tabKind}
+            selectedClassName={isClassTab(tabKind) ? selectedClassName : ''}
           />
       )}
     </ul>

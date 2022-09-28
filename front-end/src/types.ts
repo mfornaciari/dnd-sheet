@@ -41,4 +41,4 @@ export type TabsType = Readonly<{
   items: JSX.Element,
 }>
 
-export type TabNameType = Readonly<keyof TabsType>
+export type TabKindType = Readonly<keyof TabsType>
