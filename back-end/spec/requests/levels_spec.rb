@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 describe 'POST /graphql' do
-  it 'returns all levels' do
-    levels = [
+  let(:levels) do
+    [
       {
         level: 1,
         min_experience: 0,
@@ -16,6 +16,13 @@ describe 'POST /graphql' do
         max_experience: 999_999
       }
     ]
+  end
+
+  def create_levels(level_hashes)
+    level_hashes.each { |hash| create :level, hash }
+  end
+
+  it 'returns all levels' do
     create_levels(levels)
     level1, level2 = Level.all
     expected_response = {
@@ -33,18 +40,6 @@ describe 'POST /graphql' do
   end
 
   it 'finds a single level by ID and returns it' do
-    levels = [
-      {
-        level: 1,
-        min_experience: 0,
-        max_experience: 1
-      },
-      {
-        level: 2,
-        min_experience: 2,
-        max_experience: 999_999
-      }
-    ]
     create_levels(levels)
     level1 = Level.find_by(level: 1)
     expected_response = {
@@ -58,9 +53,5 @@ describe 'POST /graphql' do
     post '/graphql', params: { query: "query { level(id: #{level1.id}) { id level minExperience maxExperience } }" }
 
     expect(format(response.body)).to eq(expected_response)
-  end
-
-  def create_levels(level_hashes)
-    level_hashes.each { |hash| create :level, hash }
   end
 end
