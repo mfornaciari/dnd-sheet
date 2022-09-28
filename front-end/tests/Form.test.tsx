@@ -1,8 +1,6 @@
 import { render, screen, waitForElementToBeRemoved, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { strict as assert } from 'node:assert';
 import { MockedProvider } from '@apollo/client/testing';
-import type { OptionDataType } from '@/types';
 import fetchedDataMock from './fetchedDataMock.json';
 import Form from '@/components/Form';
 import GET_DATA from '@/queries/get_data';
@@ -30,13 +28,6 @@ describe('Form', () => {
       </MockedProvider>
     );
     await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
-    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
-    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
-    const raceOptions: HTMLOptionElement[] = within(raceInput).getAllByRole('option');
-    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
-    const classOptions: HTMLOptionElement[] = within(classInput).getAllByRole('option');
-    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
     const selectedTab: HTMLDivElement = screen.getByRole('tabpanel', { name: 'Pessoal' });
     const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
     const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Pessoal' });
@@ -45,17 +36,6 @@ describe('Form', () => {
     const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Magias' });
     const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Itens' });
 
-    expect(nameInput).toHaveAttribute('placeholder', 'Nome do personagem');
-    for (const raceOption of raceOptions) {
-      const raceRegex = createOptionRegex(mocks[0].result.data.races, raceOption);
-      expect(raceOption).toHaveTextContent(raceRegex);
-    }
-    for (const classOption of classOptions) {
-      const classRegex = createOptionRegex(mocks[0].result.data.characterClasses, classOption);
-      expect(classOption).toHaveTextContent(classRegex);
-    }
-    expect(xpInput).toHaveAttribute('min', '0');
-    expect(levelDiv).toHaveTextContent(/^Nível 1$/);
     expect(tabPersonal).toHaveTextContent(/^Pessoal$/);
     expect(tabPersonal).toHaveAttribute('aria-selected', 'true');
     expect(tabAttributes).toHaveTextContent(/^Atributos$/);
@@ -144,22 +124,6 @@ describe('Form', () => {
     };
     expect(storedData).toEqual(expectedData);
   });
-
-  function createOptionRegex(data: OptionDataType[], option: HTMLOptionElement) {
-    const value = getOptionValue(option);
-    const name = getOptionName(data, value);
-    return new RegExp(`^${name}$`);
-  }
-
-  function getOptionName(data: OptionDataType[], value: number) {
-    const foundEntry = data.find(item => item.id === value);
-    assert(foundEntry);
-    return foundEntry.name;
-  }
-
-  function getOptionValue(option: HTMLOptionElement) {
-    return Number(option.getAttribute('value'));
-  }
 });
 
 

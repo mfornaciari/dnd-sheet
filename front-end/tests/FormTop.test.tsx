@@ -1,10 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useForm, FormProvider } from 'react-hook-form';
-import { CharacterDataType } from '@/types';
+import { strict as assert } from 'node:assert';
+import { CharacterDataType, OptionDataType } from '@/types';
 import fetchedDataMock from './fetchedDataMock.json';
 import FormTop from '@/components/FormTop';
-import { useEffect } from 'react';
 
 describe('FormTop', () => {
   const initialCharacterData: CharacterDataType = {
@@ -23,6 +23,45 @@ describe('FormTop', () => {
       </FormProvider>
     );
   }
+
+  function createOptionRegex(data: OptionDataType[], option: HTMLOptionElement) {
+    const value = getOptionValue(option);
+    const name = getOptionName(data, value);
+    return new RegExp(`^${name}$`);
+  }
+
+  function getOptionName(data: OptionDataType[], value: number) {
+    const foundEntry = data.find(item => item.id === value);
+    assert(foundEntry);
+    return foundEntry.name;
+  }
+
+  function getOptionValue(option: HTMLOptionElement) {
+    return Number(option.getAttribute('value'));
+  }
+
+  it('renders correctly', () => {
+    render(<TestFormTop />);
+    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});
+    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
+    const raceOptions: HTMLOptionElement[] = within(raceInput).getAllByRole('option');
+    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
+    const classOptions: HTMLOptionElement[] = within(classInput).getAllByRole('option');
+    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
+    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
+
+    expect(nameInput).toHaveAttribute('placeholder', 'Nome do personagem');
+    for (const raceOption of raceOptions) {
+      const raceRegex = createOptionRegex(fetchedDataMock.races, raceOption);
+      expect(raceOption).toHaveTextContent(raceRegex);
+    }
+    for (const classOption of classOptions) {
+      const classRegex = createOptionRegex(fetchedDataMock.characterClasses, classOption);
+      expect(classOption).toHaveTextContent(classRegex);
+    }
+    expect(xpInput).toHaveAttribute('min', '0');
+    expect(levelDiv).toHaveTextContent(/^Nível 1$/);
+  });
 
   it('increases level based on character experience', async () => {
     render(<TestFormTop />);
