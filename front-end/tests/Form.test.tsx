@@ -56,22 +56,15 @@ describe('Form', () => {
       </MockedProvider>
     );
     await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
-    const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
-    const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Pessoal' });
-    const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Atributos' });
-    const tabCharacterClass: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Classe' });
-    const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Magias' });
-    const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Itens' });
-
-    await userEvent.click(tabPersonal);
-
-    let activeTabPanel = screen.getByRole('tabpanel', { name: 'Pessoal' });
-    expect(activeTabPanel).toBeInTheDocument();
-    expect(tabPersonal).toHaveAttribute('aria-selected', 'true');
+    const tabPersonal: HTMLButtonElement = screen.getByRole('tab', { name: 'Pessoal' });
+    const tabAttributes: HTMLButtonElement = screen.getByRole('tab', { name: 'Atributos' });
+    const tabCharacterClass: HTMLButtonElement = screen.getByRole('tab', { name: 'Classe' });
+    const tabSpells: HTMLButtonElement = screen.getByRole('tab', { name: 'Magias' });
+    const tabItems: HTMLButtonElement = screen.getByRole('tab', { name: 'Itens' });
 
     await userEvent.click(tabAttributes);
 
-    activeTabPanel = screen.getByRole('tabpanel', { name: 'Atributos' });
+    let activeTabPanel = screen.getByRole('tabpanel', { name: 'Atributos' });
     expect(activeTabPanel).toBeInTheDocument();
     expect(tabAttributes).toHaveAttribute('aria-selected', 'true');
 
