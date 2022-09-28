@@ -21,34 +21,6 @@ describe('Form', () => {
     }
   ];
 
-  it('renders correctly', async () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Form />
-      </MockedProvider>
-    );
-    await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
-    const selectedTab: HTMLDivElement = screen.getByRole('tabpanel', { name: 'Pessoal' });
-    const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
-    const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Pessoal' });
-    const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Atributos' });
-    const tabCharacterClass: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Classe' });
-    const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Magias' });
-    const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Itens' });
-
-    expect(tabPersonal).toHaveTextContent(/^Pessoal$/);
-    expect(tabPersonal).toHaveAttribute('aria-selected', 'true');
-    expect(tabAttributes).toHaveTextContent(/^Atributos$/);
-    expect(tabAttributes).toHaveAttribute('aria-selected', 'false');
-    expect(tabCharacterClass).toHaveTextContent(/^Classe$/);
-    expect(tabCharacterClass).toHaveAttribute('aria-selected', 'false');
-    expect(tabSpells).toHaveTextContent(/^Magias$/);
-    expect(tabSpells).toHaveAttribute('aria-selected', 'false');
-    expect(tabItems).toHaveTextContent(/^Itens$/);
-    expect(tabItems).toHaveAttribute('aria-selected', 'false');
-    expect(selectedTab).toHaveTextContent(/^Pessoal$/);
-  });
-
   it('changes active panel when clicking on tab buttons', async () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
@@ -56,28 +28,33 @@ describe('Form', () => {
       </MockedProvider>
     );
     await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
-    const tabPersonal: HTMLButtonElement = screen.getByRole('tab', { name: 'Pessoal' });
-    const tabAttributes: HTMLButtonElement = screen.getByRole('tab', { name: 'Atributos' });
-    const tabCharacterClass: HTMLButtonElement = screen.getByRole('tab', { name: 'Classe' });
-    const tabSpells: HTMLButtonElement = screen.getByRole('tab', { name: 'Magias' });
-    const tabItems: HTMLButtonElement = screen.getByRole('tab', { name: 'Itens' });
+    const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
+    const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Pessoal' });
+    const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Atributos' });
+    const tabCharacterClass: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Classe' });
+    const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Magias' });
+    const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Itens' });
+
+    let activeTabPanel = screen.getByRole('tabpanel', { name: 'Pessoal' });
+    expect(activeTabPanel).toHaveTextContent(/^Pessoal$/);
+    expect(tabPersonal).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabAttributes);
 
-    let activeTabPanel = screen.getByRole('tabpanel', { name: 'Atributos' });
-    expect(activeTabPanel).toBeInTheDocument();
+    activeTabPanel = screen.getByRole('tabpanel', { name: 'Atributos' });
+    expect(activeTabPanel).toHaveTextContent(/^Atributos$/);
     expect(tabAttributes).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabCharacterClass);
 
     activeTabPanel = screen.getByRole('tabpanel', { name: 'Classe' });
-    expect(activeTabPanel).toBeInTheDocument();
+    expect(activeTabPanel).toHaveTextContent(/^Classe$/);
     expect(tabCharacterClass).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabSpells);
 
     activeTabPanel = screen.getByRole('tabpanel', { name: 'Magias' });
-    expect(activeTabPanel).toBeInTheDocument();
+    expect(activeTabPanel).toHaveTextContent(/^Magias$/);
     expect(tabSpells).toHaveAttribute('aria-selected', 'true');
 
     await userEvent.click(tabItems);
@@ -107,5 +84,3 @@ describe('Form', () => {
     expect(screen.getByRole('tabpanel', { name: 'Classe' })).toHaveTextContent(/^Bardo$/);
   });
 });
-
-
