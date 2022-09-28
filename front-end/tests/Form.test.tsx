@@ -69,42 +69,6 @@ describe('Form', () => {
     expect(selectedTab).toHaveTextContent(/^Pessoal$/);
   });
 
-  it('increases level based on character experience', async () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Form />
-      </MockedProvider>
-    );
-    await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
-    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
-    for (const levelInfo of fetchedDataMock.levels) {
-      const maxExperience = String(levelInfo.maxExperience);
-      const level = String(levelInfo.level);
-      const levelRegex = new RegExp(`^Nível ${level}$`);
-
-      await userEvent.clear(xpInput);
-      await userEvent.type(xpInput, maxExperience);
-
-      expect(levelDiv).toHaveTextContent(levelRegex);
-    }
-  });
-
-  it('shows level as 20 if experience value over 999.999 is set', async () => {
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Form />
-      </MockedProvider>
-    );
-    await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
-    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
-
-    await userEvent.type(xpInput, '1000000');
-
-    expect(levelDiv).toHaveTextContent(/^Nível 20$/);
-  });
-
   it('changes active panel when clicking on tab buttons', async () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>

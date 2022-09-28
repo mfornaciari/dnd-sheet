@@ -33,4 +33,14 @@ describe('FormTop', () => {
 
     expect(levelDiv).toHaveTextContent(/^Nível 2$/);
   });
+
+  it('shows level as 20 if experience value over 999.999 is set', async () => {
+    render(<TestFormTop />);
+    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
+    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
+
+    await userEvent.type(xpInput, '1000000');
+
+    expect(levelDiv).toHaveTextContent(/^Nível 20$/);
+  });
 });

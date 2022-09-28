@@ -10,8 +10,8 @@ type FormTopProps = Readonly<{
 
 export default function FormTop({ fetchedData }: FormTopProps) {
   const { races, characterClasses, levels } = fetchedData;
-  const { getValues } = useFormContext();
-  const characterExperience: number = getValues('experience');
+  const { watch } = useFormContext();
+  const characterExperience: number = watch('experience');
   const currentLevel: number = calculateLevel(levels, characterExperience);
 
   function calculateLevel(levels: LevelType[], currentXp: number): number {
