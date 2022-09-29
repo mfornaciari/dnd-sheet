@@ -2,7 +2,7 @@
   --light-gray: hsl(0, 0%, 60%);
   --dark-gray: hsl(0, 0%, 40%);
   --white: hsl(0, 0%, 100%);
-  --text-size: 1.5vw;
+  --text-size: min(3vw, 1.5rem);
 }
 
 input[type=number] {
@@ -20,6 +20,25 @@ body {
   flex-direction: column;
   margin: 0;
   background-color: var(--dark-gray);
+}
+
+#status-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  border-style: solid;
+  border-width: 0.15rem;
+  border-radius: 0.5rem;
+  border-color: var(--dark-gray);
+  background-color: var(--white);
+}
+
+#status-text{
+  margin: 0;
+  font: unset;
+  font-size: var(--text-size);
 }
 
 form {
@@ -83,6 +102,19 @@ form {
   font-size: var(--text-size);
 }
 
+#tab-panel {
+  flex-grow: 1;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border-style: solid solid none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  border-color: var(--dark-gray);
+  background-color: var(--white);
+  font: unset;
+  font-size: var(--text-size);
+}
+
 .tab-list {
   display: flex;
   flex-flow: row nowrap;
@@ -110,36 +142,4 @@ form {
 
 .tab-button[aria-selected="true"] {
   box-shadow: none;
-}
-
-.tab-panel {
-  flex-grow: 1;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  border-style: solid solid none;
-  border-radius: 0.5rem 0.5rem 0 0;
-  border-color: var(--dark-gray);
-  background-color: var(--white);
-  font: unset;
-  font-size: var(--text-size);
-}
-
-.status-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  border-style: solid;
-  border-width: 0.15rem;
-  border-radius: 0.5rem;
-  border-color: var(--dark-gray);
-  background-color: var(--white);
-}
-
-#status-text{
-  margin: 0;
-  font: unset;
-  font-size: var(--text-size);
 }
