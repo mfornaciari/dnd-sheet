@@ -4,6 +4,13 @@ export type FetchedDataType = Readonly<{
   levels: LevelType[],
 }>
 
+export type CharacterValuesType = Readonly<{
+  name: string,
+  race: string,
+  characterClass: string,
+  experience: string,
+}>
+
 export type CharacterClassType = Readonly<{
   id: string,
   name: string,

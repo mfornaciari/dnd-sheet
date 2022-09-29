@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
 import assert from 'assert';
 import i18next from 'i18next';
-import { OptionDataType } from '@/types';
+import { CharacterValuesType, OptionDataType } from '@/types';
 import fetchedDataMock from './fetchedDataMock.json';
 import Form from '@/components/Form';
 import GET_DATA from '@/queries/get_data';
@@ -154,6 +154,28 @@ describe('Form', () => {
     await userEvent.type(xpInput, '1000000');
 
     expect(levelDiv).toHaveTextContent(/^Nível 20$/);
+  });
+
+  it('changes form values and saves them on localStorage', async () => {
+    render(<TestForm />);
+    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
+    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});
+    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
+    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
+    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
+    const expectedValues: CharacterValuesType = {
+      name: 'Bruenor',
+      race: '1',
+      characterClass: '1',
+      experience: '300',
+    }
+
+    await userEvent.type(nameInput, 'Bruenor');
+    await userEvent.selectOptions(raceInput, 'Anão');
+    await userEvent.selectOptions(classInput, 'Bárbaro');
+    await userEvent.type(xpInput, '300');
+
+    expect(localStorage.characterValues).toEqual(JSON.stringify(expectedValues));
   });
 });
 

@@ -1,7 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
-import { FetchedDataType, TabsType, TabKindType, LevelType, CharacterClassType } from '@/types';
+import {
+  FetchedDataType,
+  CharacterValuesType,
+  TabsType,
+  TabKindType,
+  LevelType,
+  CharacterClassType,
+} from '@/types';
 import GET_DATA from '@/queries/get_data';
 import StatusMessage from '@/components/StatusMessage';
 import TabPersonal from '@/components/tabs/TabPersonal';
@@ -14,17 +21,22 @@ import Select from './Select';
 import InputNumber from './InputNumber';
 import InputText from './InputText';
 
-const initialCharacterValues = {
+const initialCharacterValues: CharacterValuesType = {
   name: '',
   race: '0',
   characterClass: '0',
-  experience: 0,
+  experience: '0',
 }
 
 export default function Form() {
   const { loading, error, data } = useQuery<FetchedDataType>(GET_DATA);
   const methods = useForm({ defaultValues: initialCharacterValues });
   const [activeTab, setActiveTab] = useState<TabKindType>('personal');
+  const characterValues = methods.watch();
+
+  useEffect(() => {
+    localStorage.setItem('characterValues', JSON.stringify(characterValues));
+  }, [characterValues]);
 
   if (loading) return <StatusMessage message='loading' />;
   if (error || !data) return <StatusMessage message='error' />;
@@ -91,9 +103,10 @@ export default function Form() {
   );
 }
 
-function calculateLevel(levels: LevelType[], currentXp: number): number {
+function calculateLevel(levels: LevelType[], currentXp: string): number {
+  const xpAsNumber = Number(currentXp);
   const foundLevelInfo = levels.find(level =>
-    level.minExperience <= currentXp && level.maxExperience >= currentXp
+    level.minExperience <= xpAsNumber && level.maxExperience >= xpAsNumber
   );
   if (!foundLevelInfo) return 20; // XP over 999.999
 
