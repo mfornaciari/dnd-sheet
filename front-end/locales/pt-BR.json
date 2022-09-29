@@ -2,6 +2,7 @@
   "ptbr": {
     "translation": {
       "loading": "Carregando...",
+      "error": "Erro",
       "name": "Nome",
       "race": "Raça",
       "characterClass": "Classe",

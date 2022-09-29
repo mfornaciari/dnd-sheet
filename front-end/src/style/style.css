@@ -106,7 +106,7 @@ form {
   background-color: var(--white);
 }
 
-.loading-div {
+.status-div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -119,6 +119,6 @@ form {
   background-color: var(--white);
 }
 
-.loading-text{
+.status-text{
   margin: 0;
 }

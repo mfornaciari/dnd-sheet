@@ -1,12 +1,12 @@
 import { render, screen, waitForElementToBeRemoved, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
-import fetchedDataMock from './fetchedDataMock.json';
-import Form from '@/components/Form';
-import GET_DATA from '@/queries/get_data';
 import assert from 'assert';
 import i18next from 'i18next';
 import { OptionDataType } from '@/types';
+import fetchedDataMock from './fetchedDataMock.json';
+import Form from '@/components/Form';
+import GET_DATA from '@/queries/get_data';
 
 describe('Form', () => {
   const mocks = [
@@ -23,6 +23,14 @@ describe('Form', () => {
       }
     }
   ];
+  const failedMocks = [
+    {
+      request: {
+        query: GET_DATA,
+      },
+      error: new Error('An error occurred'),
+    }
+  ]
 
   function TestForm() {
     return (
@@ -32,9 +40,24 @@ describe('Form', () => {
     );
   }
 
+  function ErrorTestForm() {
+    return(
+      <MockedProvider mocks={failedMocks} addTypename={false}>
+        <Form />
+      </MockedProvider>
+    );
+  }
+
+  it('shows error message when data was not fetched', async () => {
+    render(<ErrorTestForm />);
+    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
+
+    expect(screen.getByRole('status', { name: 'Erro' })).toBeInTheDocument();
+  });
+
   it('changes active panel when clicking on tab buttons', async () => {
     render(<TestForm />);
-    await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
+    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
     const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Pessoal' });
     const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Atributos' });
@@ -77,7 +100,7 @@ describe('Form', () => {
 
   it('changes class tab name when user selects new class', async () => {
     render(<TestForm />);
-    await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
+    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
 
     await userEvent.selectOptions(classInput, 'Bardo');
@@ -87,8 +110,9 @@ describe('Form', () => {
     expect(screen.getByRole('tabpanel', { name: 'Classe' })).toHaveTextContent(/^Bardo$/);
   });
 
-  it('renders top correctly', () => {
+  it('renders top correctly', async () => {
     render(<TestForm />);
+    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});
     const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
     const raceOptions: HTMLOptionElement[] = within(raceInput).getAllByRole('option');
@@ -112,7 +136,7 @@ describe('Form', () => {
 
   it('increases level based on character experience', async () => {
     render(<TestForm />);
-    await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
+    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
 
@@ -123,7 +147,7 @@ describe('Form', () => {
 
   it('shows level as 20 if experience value over 999.999 is set', async () => {
     render(<TestForm />);
-    await waitForElementToBeRemoved(screen.getByRole('status', { name: 'Carregando...' }));
+    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
     const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
 
