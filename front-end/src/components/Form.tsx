@@ -27,9 +27,9 @@ export default function Form() {
   const [activeTab, setActiveTab] = useState<TabKindType>('personal');
 
   if (loading) return <StatusMessage message='loading' />;
-  if (error) return <StatusMessage message='error' />;
+  if (error || !data) return <StatusMessage message='error' />;
 
-  const { races, characterClasses, levels } = data!;
+  const { races, characterClasses, levels } = data;
   const selectedClassId = methods.watch('characterClass');
   const characterExperience = methods.watch('experience');
   const currentLevel = calculateLevel(levels, characterExperience);
