@@ -62,7 +62,7 @@ export default function Form() {
           <InputNumber name='experience' minValue='0' maxValue='999999' />
 
           <p id='levelParagraph' role='region' aria-labelledby='levelText'>
-            <strong id='levelText'>Nível {currentLevel} </strong>
+            <strong id='levelText'>Nível </strong><strong>{currentLevel}</strong>
           </p>
         </section>
 
