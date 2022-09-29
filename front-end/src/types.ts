@@ -1,10 +1,3 @@
-export type CharacterValuesType = Readonly<{
-  name: string,
-  race: string,
-  characterClass: string,
-  experience: number,
-}>
-
 export type FetchedDataType = Readonly<{
   races: RaceType[],
   characterClasses: CharacterClassType[],
