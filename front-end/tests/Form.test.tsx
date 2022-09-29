@@ -1,4 +1,4 @@
-import { render, screen, waitForElementToBeRemoved, within } from '@testing-library/react';
+import { render, screen, waitFor, waitForElementToBeRemoved, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
 import assert from 'assert';
@@ -50,9 +50,9 @@ describe('Form', () => {
 
   it('shows error message when data was not fetched', async () => {
     render(<ErrorTestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
+    const statusMessage = screen.getByRole('status');
 
-    expect(screen.getByRole('status', { name: 'Erro' })).toBeInTheDocument();
+    await waitFor(() => expect(statusMessage).toHaveTextContent(/^Erro$/));
   });
 
   it('changes active panel when clicking on tab buttons', async () => {
