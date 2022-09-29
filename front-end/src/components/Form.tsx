@@ -66,7 +66,14 @@ export default function Form() {
           </p>
         </section>
 
-        {tabPanels[activeTab]}
+        <section
+          id='tab-panel'
+          role='tabpanel'
+          aria-labelledby={activeTab}
+          aria-expanded='true'
+        >
+          {tabPanels[activeTab]}
+        </section>
 
         <ul role='tablist' aria-label='Abas' className='tab-list'>
           {tabKinds.map(tabKind =>

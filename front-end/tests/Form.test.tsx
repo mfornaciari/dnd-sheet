@@ -23,14 +23,14 @@ describe('Form', () => {
       }
     }
   ];
-  const failedMocks = [
+  const errorMocks = [
     {
       request: {
         query: GET_DATA,
       },
       error: new Error('An error occurred'),
     }
-  ]
+  ];
 
   function TestForm() {
     return (
@@ -42,7 +42,7 @@ describe('Form', () => {
 
   function ErrorTestForm() {
     return(
-      <MockedProvider mocks={failedMocks} addTypename={false}>
+      <MockedProvider mocks={errorMocks} addTypename={false}>
         <Form />
       </MockedProvider>
     );
