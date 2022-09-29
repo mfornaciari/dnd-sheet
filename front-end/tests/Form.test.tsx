@@ -1,12 +1,16 @@
-import { render, screen, waitFor, waitForElementToBeRemoved, within } from '@testing-library/react';
+import {
+  render,
+  screen,
+  within,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
-import assert from 'assert';
-import i18next from 'i18next';
-import { CharacterValuesType, OptionDataType } from '@/types';
+import type { CharacterValuesType } from '@/types';
 import fetchedDataMock from './fetchedDataMock.json';
-import Form from '@/components/Form';
 import GET_DATA from '@/queries/get_data';
+import Form from '@/components/Form';
 
 describe('Form', () => {
   const mocks = [
@@ -110,30 +114,6 @@ describe('Form', () => {
     expect(screen.getByRole('tabpanel', { name: 'Classe' })).toHaveTextContent(/^Bardo$/);
   });
 
-  it('renders top correctly', async () => {
-    render(<TestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});
-    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
-    const raceOptions: HTMLOptionElement[] = within(raceInput).getAllByRole('option');
-    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
-    const classOptions: HTMLOptionElement[] = within(classInput).getAllByRole('option');
-    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
-
-    expect(nameInput).toHaveAttribute('placeholder', 'Nome do personagem');
-    for (const raceOption of raceOptions) {
-      const raceRegex = createOptionRegex(fetchedDataMock.races, raceOption);
-      expect(raceOption).toHaveTextContent(raceRegex);
-    }
-    for (const classOption of classOptions) {
-      const classRegex = createOptionRegex(fetchedDataMock.characterClasses, classOption);
-      expect(classOption).toHaveTextContent(classRegex);
-    }
-    expect(xpInput).toHaveAttribute('min', '0');
-    expect(levelDiv).toHaveTextContent(/^Nível 1$/);
-  });
-
   it('increases level based on character experience', async () => {
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
@@ -178,19 +158,3 @@ describe('Form', () => {
     expect(localStorage.characterValues).toEqual(JSON.stringify(expectedValues));
   });
 });
-
-function createOptionRegex(data: OptionDataType[], option: HTMLOptionElement): RegExp {
-  const value = getOptionValue(option);
-  const name = getOptionName(data, value);
-  return new RegExp(`^${name}$`);
-}
-
-function getOptionName(data: OptionDataType[], value: string): string {
-  const foundEntry = data.find(item => item.id === value);
-  assert(foundEntry);
-  return i18next.t(foundEntry.name);
-}
-
-function getOptionValue(option: HTMLOptionElement): string {
-  return String(option.getAttribute('value'));
-}
