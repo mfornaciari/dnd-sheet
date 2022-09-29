@@ -5,12 +5,12 @@ import { FetchedDataType, CharacterValuesType, TabsType, TabKindType } from '@/t
 import GET_DATA from '@/queries/get_data';
 import LoadingMessage from '@/components/LoadingMessage';
 import FormTop from '@/components/FormTop';
-import TabList from '@/components/TabList';
 import TabPersonal from '@/components/tabs/TabPersonal';
 import TabAttributes from '@/components/tabs/TabAttributes';
 import TabCharacterClass from '@/components/tabs/TabCharacterClass';
 import TabSpells from '@/components/tabs/TabSpells';
 import TabItems from '@/components/tabs/TabItems';
+import TabButton from './TabButton';
 
 const initialCharacterData: CharacterValuesType = {
   name: '',
@@ -25,19 +25,19 @@ export default function Form() {
   const [activeTab, setActiveTab] = useState<TabKindType>('personal');
   const selectedClassId = methods.watch('characterClass');
   const selectedClassName = findClassName(data, selectedClassId);
-  const tabs: TabsType = {
+  const tabPanels: TabsType = {
     personal: <TabPersonal />,
     attributes: <TabAttributes />,
     characterClass: <TabCharacterClass selectedClassName={selectedClassName} />,
     spells: <TabSpells />,
     items: <TabItems />,
   }
-  const tabKinds = Object.keys(tabs) as TabKindType[];
+  const tabKinds = Object.keys(tabPanels) as TabKindType[];
 
   function handleTabClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     const clickedTabKind = event.currentTarget.id as TabKindType;
-    setActiveTab(prevActiveTab => clickedTabKind);
+    setActiveTab(_prevActiveTab => clickedTabKind);
   }
 
   if (loading) return <LoadingMessage />;
@@ -48,14 +48,19 @@ export default function Form() {
         <form>
           <FormTop fetchedData={data} />
 
-          {tabs[activeTab]}
+          {tabPanels[activeTab]}
 
-          <TabList
-            tabKinds={tabKinds}
-            activeTab={activeTab}
-            handleTabClick={handleTabClick}
-            selectedClassName={selectedClassName}
-          />
+          <ul role='tablist' aria-label='Abas' className='tab-list'>
+            {tabKinds.map(tabKind =>
+              <TabButton
+                key={tabKind}
+                tabKind={tabKind}
+                handleTabClick={handleTabClick}
+                isSelected={activeTab === tabKind}
+                selectedClassName={isClassTab(tabKind) ? selectedClassName : ''}
+              />
+            )}
+          </ul>
         </form>
       }
     </FormProvider>
@@ -71,4 +76,8 @@ function findClassName(data: FetchedDataType | undefined, selectedClassId: strin
   }
 
   return 'characterClass';
+}
+
+function isClassTab(tabKind: TabKindType): boolean {
+  return tabKind === 'characterClass';
 }
