@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
-import {
+import type {
   FetchedDataType,
   CharacterValuesType,
   TabsType,
@@ -10,16 +10,17 @@ import {
   CharacterClassType,
 } from '@/types';
 import GET_DATA from '@/queries/get_data';
+import generateURL from '@/services/generateURL';
 import StatusMessage from '@/components/StatusMessage';
 import TabPersonal from '@/components/tabs/TabPersonal';
 import TabAttributes from '@/components/tabs/TabAttributes';
 import TabCharacterClass from '@/components/tabs/TabCharacterClass';
 import TabSpells from '@/components/tabs/TabSpells';
 import TabItems from '@/components/tabs/TabItems';
-import TabButton from './TabButton';
-import Select from './Select';
-import InputNumber from './InputNumber';
-import InputText from './InputText';
+import TabButton from '@/components/TabButton';
+import Select from '@/components/Select';
+import InputNumber from '@/components/InputNumber';
+import InputText from '@/components/InputText';
 
 const initialCharacterValues: CharacterValuesType = {
   name: '',
@@ -44,6 +45,7 @@ export default function Form() {
   const { races, characterClasses, levels } = data;
   const selectedClassId = methods.watch('characterClass');
   const characterExperience = methods.watch('experience');
+  const downloadURL = generateURL(methods.getValues());
   const currentLevel = calculateLevel(levels, characterExperience);
   const selectedClassName = findClassName(characterClasses, selectedClassId);
   const tabPanels: TabsType = {
@@ -76,6 +78,8 @@ export default function Form() {
           <p id='levelParagraph' role='region' aria-labelledby='levelText'>
             <strong id='levelText'>Nível </strong><strong>{currentLevel}</strong>
           </p>
+
+          <a href={downloadURL} download={methods.getValues('name')}>Salvar</a>
         </section>
 
         <section
