@@ -23,8 +23,8 @@ export default function InputNumber({ name, minValue, maxValue }: InputNumberPro
   }
 
   return (
-    <div>
-      <label htmlFor={name}><strong>{i18nName}</strong></label>
+    <div className='field-div' >
+      <label htmlFor={name} className='field-label'><strong>{i18nName}</strong></label>
 
       <input
         type='number'

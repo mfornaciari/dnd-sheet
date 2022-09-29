@@ -2,6 +2,7 @@
   --light-gray: hsl(0, 0%, 60%);
   --dark-gray: hsl(0, 0%, 40%);
   --white: hsl(0, 0%, 100%);
+  --text-size: 1.5vw;
 }
 
 input[type=number] {
@@ -31,39 +32,54 @@ form {
 #form-top {
   display: flex;
   flex-flow: row nowrap;
-  gap: 2%;
+  column-gap: 1%;
   padding: 0.5rem;
   border-style: solid;
   border-width: 0.15rem;
   border-radius: 0.5rem;
   border-color: var(--dark-gray);
-  margin: 0;
   background-color: var(--white);
 }
 
-#form-top>div {
-  flex-basis: 100%;
-  min-width: fit-content;
+.field-div {
+  flex: auto;
   display: flex;
   flex-flow: column nowrap;
-  overflow: hidden;
-  padding: 0.1rem;
   row-gap: 0.1rem;
+  font: unset;
+  font-size: var(--text-size);
 }
 
 .field {
+  box-sizing: border-box;
+  width: 100%;
   padding: 0.1rem 0.3rem;
   border-style: solid;
   border-width: 0.1rem;
-  border-radius: 0.3rem;
+  border-radius: 0.4rem;
   border-color: var(--dark-gray);
   background: none;
   font: unset;
-  font-size: medium;
+  font-size: var(--text-size);
 }
 
 .field::placeholder {
   color: var(--light-gray);
+}
+
+#levelParagraph {
+  margin: 0;
+  height: min-content;
+  align-self: flex-end;
+  white-space: nowrap;
+  flex: auto;
+  padding: 0.1rem 0.3rem;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-radius: 0.4rem;
+  border-color: var(--dark-gray);
+  font: unset;
+  font-size: var(--text-size);
 }
 
 .tab-list {
@@ -78,7 +94,7 @@ form {
   padding: 0.2rem;
   flex-basis: 100%;
   font: unset;
-  font-size: medium;
+  font-size: var(--text-size);
   background: var(--white);
   border-style: none solid solid;
   border-width: 0;
@@ -104,6 +120,8 @@ form {
   border-radius: 0.5rem 0.5rem 0 0;
   border-color: var(--dark-gray);
   background-color: var(--white);
+  font: unset;
+  font-size: var(--text-size);
 }
 
 .status-div {
@@ -119,6 +137,8 @@ form {
   background-color: var(--white);
 }
 
-.status-text{
+#status-text{
   margin: 0;
+  font: unset;
+  font-size: var(--text-size);
 }

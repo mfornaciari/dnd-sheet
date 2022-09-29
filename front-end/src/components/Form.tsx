@@ -61,9 +61,9 @@ export default function Form() {
 
           <InputNumber name='experience' minValue='0' maxValue='999999' />
 
-          <div role='region' aria-labelledby='levelLabel'>
-            <span id='levelLabel'><strong>Nível</strong></span> <span className='field'>{currentLevel}</span>
-          </div>
+          <p id='levelParagraph' role='region' aria-labelledby='levelText'>
+            <strong id='levelText'>Nível {currentLevel} </strong>
+          </p>
         </section>
 
         {tabPanels[activeTab]}

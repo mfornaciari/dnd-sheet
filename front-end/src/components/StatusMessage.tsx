@@ -9,7 +9,7 @@ export default function StatusMessage({ message }: StatusMessageProps) {
 
   return (
     <div role='status' aria-labelledby='status-text' className='status-div'>
-      <p id='status-text' className='status-text'>
+      <p id='status-text'>
         <strong>{i18nMessage}</strong>
       </p>
     </div>
