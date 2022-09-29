@@ -31,7 +31,7 @@ form {
 
 #form-top {
   display: flex;
-  flex-flow: row nowrap;
+  flex-direction: row;
   column-gap: 1%;
   padding: 0.5rem;
   border-style: solid;
@@ -42,7 +42,7 @@ form {
 }
 
 .field-div {
-  flex: auto;
+  flex-basis: 100%;
   display: flex;
   flex-flow: column nowrap;
   row-gap: 0.1rem;
@@ -70,9 +70,10 @@ form {
 #levelParagraph {
   margin: 0;
   height: min-content;
+  flex-basis: 100%;
   align-self: flex-end;
   white-space: nowrap;
-  flex: auto;
+  width: 100%;
   padding: 0.1rem 0.3rem;
   border-style: solid;
   border-width: 0.1rem;
