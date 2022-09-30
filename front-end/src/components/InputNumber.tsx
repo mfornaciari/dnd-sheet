@@ -23,7 +23,7 @@ export default function InputNumber({ name, minValue, maxValue }: InputNumberPro
   }
 
   return (
-    <div className='field-div' >
+    <>
       <label htmlFor={name} className='field-label'><strong>{i18nName}</strong></label>
 
       <input
@@ -35,6 +35,6 @@ export default function InputNumber({ name, minValue, maxValue }: InputNumberPro
         className='field'
         {...register(name)}
       />
-    </div>
+    </>
   );
 }

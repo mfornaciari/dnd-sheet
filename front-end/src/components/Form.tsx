@@ -67,19 +67,33 @@ export default function Form() {
     <FormProvider { ...methods }>
       <form>
         <section id='form-top'>
-          <InputText name='name' placeholderText='Nome do personagem' />
+          <div className='top-div'>
+            <InputText name='name' placeholderText='Nome do personagem' />
+          </div>
 
-          <Select name='race' optionData={races} />
+          <div className='top-div'>
+            <Select name='race' optionData={races} />
+          </div>
 
-          <Select name='characterClass' optionData={characterClasses} />
+          <div className='top-div'>
+            <Select name='characterClass' optionData={characterClasses} />
+          </div>
 
-          <InputNumber name='experience' minValue='0' maxValue='999999' />
+          <div className='top-div'>
+            <InputNumber name='experience' minValue='0' maxValue='999999' />
+          </div>
 
-          <p id='levelParagraph' role='region' aria-labelledby='levelText'>
-            <strong id='levelText'>Nível </strong><strong>{currentLevel}</strong>
-          </p>
+          <div id ='level-div' role='region' aria-labelledby='levelText' className='top-div'>
+            <p className='field'>
+              <strong id='levelText' >Nível </strong><strong>{currentLevel}</strong>
+            </p>
+          </div>
 
-          <a href={downloadURL} download={methods.getValues('name')}>Salvar</a>
+          <div id='save-div' className='top-div'>
+            <a id='save-link' href={downloadURL} download={methods.getValues('name')} className='field'>
+              <strong>Salvar</strong>
+            </a>
+          </div>
         </section>
 
         <section
