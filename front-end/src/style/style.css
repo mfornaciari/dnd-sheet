@@ -113,7 +113,7 @@ form {
 
 #save-link:active {
   box-shadow: 0 0.1rem var(--light-gray);
-  transform: translateY(0.25rem);
+  transform: translateY(0.1rem);
 }
 
 #tab-panel {
