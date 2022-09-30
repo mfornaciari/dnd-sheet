@@ -158,7 +158,7 @@ describe('Form', () => {
     expect(localStorage.characterValues).toEqual(JSON.stringify(expectedValues));
   });
 
-  it('exports data to JSON file upon clicking the save button', async () => {
+  it('has a button to download character info as a JSON file', async () => {
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});

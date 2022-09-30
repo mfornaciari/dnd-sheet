@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import i18next from 'i18next';
+import Field from '@/components/Field';
 
 type InputTextProps = Readonly<{
   name: string,
@@ -8,12 +8,9 @@ type InputTextProps = Readonly<{
 
 export default function InputText({ name, placeholderText }: InputTextProps) {
   const { register } = useFormContext();
-  const i18nName = i18next.t(name);
 
   return (
-    <>
-      <label htmlFor={name} className='field-label'><strong>{i18nName}</strong></label>
-
+    <Field label={name}>
       <input
         type='text'
         id={name}
@@ -21,6 +18,6 @@ export default function InputText({ name, placeholderText }: InputTextProps) {
         className='field'
         {...register(name)}
       />
-    </>
+    </Field>
   );
 }

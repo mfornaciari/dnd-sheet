@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import i18next from 'i18next';
+import Field from '@/components/Field';
 
 type InputNumberProps = Readonly<{
   name: string,
@@ -9,7 +9,6 @@ type InputNumberProps = Readonly<{
 
 export default function InputNumber({ name, minValue, maxValue }: InputNumberProps) {
   const { register } = useFormContext();
-  const i18nName = i18next.t(name);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (!isAllowed(event.key)) event.preventDefault();
@@ -23,9 +22,7 @@ export default function InputNumber({ name, minValue, maxValue }: InputNumberPro
   }
 
   return (
-    <>
-      <label htmlFor={name} className='field-label'><strong>{i18nName}</strong></label>
-
+    <Field label={name}>
       <input
         type='number'
         id={name}
@@ -35,6 +32,6 @@ export default function InputNumber({ name, minValue, maxValue }: InputNumberPro
         className='field'
         {...register(name)}
       />
-    </>
+    </Field>
   );
 }

@@ -12,15 +12,16 @@ import type {
 import GET_DATA from '@/queries/get_data';
 import generateURL from '@/services/generateURL';
 import StatusMessage from '@/components/StatusMessage';
+import Field from '@/components/Field';
+import Select from '@/components/Select';
+import InputNumber from '@/components/InputNumber';
+import InputText from '@/components/InputText';
 import TabPersonal from '@/components/tabs/TabPersonal';
 import TabAttributes from '@/components/tabs/TabAttributes';
 import TabCharacterClass from '@/components/tabs/TabCharacterClass';
 import TabSpells from '@/components/tabs/TabSpells';
 import TabItems from '@/components/tabs/TabItems';
 import TabButton from '@/components/TabButton';
-import Select from '@/components/Select';
-import InputNumber from '@/components/InputNumber';
-import InputText from '@/components/InputText';
 
 const initialCharacterValues: CharacterValuesType = {
   name: '',
@@ -67,21 +68,13 @@ export default function Form() {
     <FormProvider { ...methods }>
       <form>
         <section id='form-top'>
-          <div className='top-div'>
-            <InputText name='name' placeholderText='Nome do personagem' />
-          </div>
+          <InputText name='name' placeholderText='Nome do personagem' />
 
-          <div className='top-div'>
-            <Select name='race' optionData={races} />
-          </div>
+          <Select name='race' optionData={races} />
 
-          <div className='top-div'>
-            <Select name='characterClass' optionData={characterClasses} />
-          </div>
+          <Select name='characterClass' optionData={characterClasses} />
 
-          <div className='top-div'>
-            <InputNumber name='experience' minValue='0' maxValue='999999' />
-          </div>
+          <InputNumber name='experience' minValue='0' maxValue='999999' />
 
           <div id ='level-div' role='region' aria-labelledby='levelText' className='top-div'>
             <p className='field'>
