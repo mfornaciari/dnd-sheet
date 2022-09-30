@@ -1,0 +1,42 @@
+:root{
+  --light-gray: hsl(0, 0%, 60%);
+  --dark-gray: hsl(0, 0%, 40%);
+  --white: hsl(0, 0%, 100%);
+  --text-size: min(3vw, 1.5rem);
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  background-color: var(--dark-gray);
+}
+
+.field {
+  box-sizing: border-box;
+  margin: 0;
+  width: 100%;
+  white-space: nowrap;
+  padding: 0.1rem 0.3rem;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-radius: 0.4rem;
+  border-color: var(--dark-gray);
+  background: none;
+  font: unset;
+  font-size: var(--text-size);
+}
+
+.field::placeholder {
+  color: var(--light-gray);
+}

@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import '@/style/StatusMessage.css';
 
 type StatusMessageProps = {
   message: string,

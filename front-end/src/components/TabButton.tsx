@@ -1,5 +1,6 @@
-import { TabKindType } from '@/types';
 import i18next from 'i18next';
+import '@/style/TabButton.css';
+import { TabKindType } from '@/types';
 
 type TabButtonProps = {
   tabKind: TabKindType,

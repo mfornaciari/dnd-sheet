@@ -1,4 +1,6 @@
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import '@/services/i18n.ts';
+import '@/style/App.css';
 import Form from '@/components/Form';
 
 const client = new ApolloClient({

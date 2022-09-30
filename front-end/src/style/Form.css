@@ -1,0 +1,66 @@
+form {
+  display: flex;
+  flex-direction: column;
+  height: 99vh;
+  padding: 0.1rem;
+}
+
+#form-top {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1%;
+  padding: 0.5rem;
+  border-style: solid;
+  border-width: 0.15rem;
+  border-radius: 0.5rem;
+  border-color: var(--dark-gray);
+  background-color: var(--white);
+}
+
+#level-div {
+  flex-basis: 50%;
+  text-align: center;
+}
+
+#save-div {
+  flex-basis: 50%;
+  text-align: center;
+}
+
+#save-link {
+  margin-bottom: 0.2rem;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  box-shadow: 0 0.2rem var(--light-gray);
+}
+
+#save-link:hover {
+  background: var(--light-gray);
+}
+
+#save-link:active {
+  box-shadow: 0 0.1rem var(--light-gray);
+  transform: translateY(0.1rem);
+}
+
+#tab-panel {
+  flex-grow: 1;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border-style: solid solid none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  border-color: var(--dark-gray);
+  background-color: var(--white);
+  font: unset;
+  font-size: var(--text-size);
+}
+
+.tab-list {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.1rem;
+  padding: 0 0.15rem 0;
+  margin: 0;
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
+import '@/style/Form.css';
 import type {
   FetchedDataType,
   CharacterValuesType,
@@ -12,7 +13,6 @@ import type {
 import GET_DATA from '@/queries/get_data';
 import generateURL from '@/services/generateURL';
 import StatusMessage from '@/components/StatusMessage';
-import Field from '@/components/Field';
 import Select from '@/components/Select';
 import InputNumber from '@/components/InputNumber';
 import InputText from '@/components/InputText';

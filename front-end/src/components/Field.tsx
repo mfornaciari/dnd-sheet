@@ -1,5 +1,6 @@
 import i18next from "i18next";
-import { PropsWithChildren } from "react";
+import '@/style/Field.css';
+import type { PropsWithChildren } from "react";
 
 type FieldProps = {
   label: string,
