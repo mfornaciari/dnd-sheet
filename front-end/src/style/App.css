@@ -22,7 +22,7 @@ body {
   background-color: var(--dark-gray);
 }
 
-.field {
+.field-input {
   box-sizing: border-box;
   margin: 0;
   width: 100%;

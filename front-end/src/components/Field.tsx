@@ -1,5 +1,4 @@
 import i18next from "i18next";
-import '@/style/Field.css';
 import type { PropsWithChildren } from "react";
 
 type FieldProps = {

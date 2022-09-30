@@ -17,17 +17,27 @@ form {
   background-color: var(--white);
 }
 
+.top-div {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-basis: 100%;
+  row-gap: 0.1rem;
+  justify-content: flex-end;
+  font: unset;
+  font-size: var(--text-size);
+}
+
 #level-div {
   flex-basis: 50%;
   text-align: center;
 }
 
-#save-div {
+#button-div {
   flex-basis: 50%;
   text-align: center;
 }
 
-#save-link {
+.top-button {
   margin-bottom: 0.2rem;
   cursor: pointer;
   color: black;
@@ -35,11 +45,11 @@ form {
   box-shadow: 0 0.2rem var(--light-gray);
 }
 
-#save-link:hover {
+.top-button:hover {
   background: var(--light-gray);
 }
 
-#save-link:active {
+.top-button:active {
   box-shadow: 0 0.1rem var(--light-gray);
   transform: translateY(0.1rem);
 }

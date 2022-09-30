@@ -59,7 +59,6 @@ export default function Form() {
   const tabKinds = Object.keys(tabPanels) as TabKindType[];
 
   function handleTabClick(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
     const clickedTabKind = event.currentTarget.id as TabKindType;
     setActiveTab(_prevActiveTab => clickedTabKind);
   }
@@ -77,15 +76,30 @@ export default function Form() {
           <InputNumber name='experience' minValue='0' maxValue='999999' />
 
           <div id ='level-div' role='region' aria-labelledby='levelText' className='top-div'>
-            <p className='field'>
+            <p className='field-input'>
               <strong id='levelText' >Nível </strong><strong>{currentLevel}</strong>
             </p>
           </div>
 
-          <div id='save-div' className='top-div'>
-            <a id='save-link' href={downloadURL} download={methods.getValues('name')} className='field'>
-              <strong>Salvar</strong>
-            </a>
+          <div id='button-div' className='top-div'>
+              <a
+                role='button'
+                id='save-button'
+                href={downloadURL}
+                download={methods.getValues('name')}
+                className='field-input top-button'
+              >
+                <strong>Salvar</strong>
+              </a>
+
+              <label
+                role='button'
+                htmlFor='loading-button'
+                className='field-input top-button'
+              >
+                <strong>Carregar</strong>
+              </label>
+              <input type='file' id='loading-button' accept='.json' hidden />
           </div>
         </section>
 

@@ -136,6 +136,28 @@ describe('Form', () => {
     expect(levelDiv).toHaveTextContent(/^Nível 20$/);
   });
 
+  it.only('has a button to download character info as a JSON file', async () => {
+    render(<TestForm />);
+    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
+    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});
+    const saveButton: HTMLAnchorElement = screen.getByRole('button', { name: 'Salvar' });
+
+    await userEvent.type(nameInput, 'teste');
+
+    expect(saveButton).toHaveAttribute('href', 'http://localhost:3000/mockURL');
+    expect(saveButton).toHaveAttribute('download', 'teste');
+  });
+
+  it('has a button to upload character info from JSON file', async () => {
+    render(<TestForm />);
+    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
+    const loadButton = screen.getByRole('button', { name: 'Carregar' });
+
+    userEvent.click(loadButton);
+
+
+  });
+
   it('changes form values and saves them on localStorage', async () => {
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
@@ -156,17 +178,5 @@ describe('Form', () => {
     await userEvent.type(xpInput, '300');
 
     expect(localStorage.characterValues).toEqual(JSON.stringify(expectedValues));
-  });
-
-  it('has a button to download character info as a JSON file', async () => {
-    render(<TestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});
-    const saveButton: HTMLAnchorElement = screen.getByRole('link', { name: 'Salvar' });
-
-    await userEvent.type(nameInput, 'teste');
-
-    expect(saveButton).toHaveAttribute('href', 'http://localhost:3000/mockURL');
-    expect(saveButton).toHaveAttribute('download', 'teste');
   });
 });

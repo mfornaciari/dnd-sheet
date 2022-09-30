@@ -1,9 +1,0 @@
-.top-div {
-  display: flex;
-  flex-flow: column nowrap;
-  flex-basis: 100%;
-  row-gap: 0.1rem;
-  justify-content: flex-end;
-  font: unset;
-  font-size: var(--text-size);
-}

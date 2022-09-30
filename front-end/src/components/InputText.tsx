@@ -15,7 +15,7 @@ export default function InputText({ name, placeholderText }: InputTextProps) {
         type='text'
         id={name}
         placeholder={placeholderText}
-        className='field'
+        className='field-input'
         {...register(name)}
       />
     </Field>

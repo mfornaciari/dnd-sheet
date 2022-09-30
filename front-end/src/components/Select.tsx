@@ -13,7 +13,7 @@ export default function Select ({ name, optionData }: SelectProps) {
 
   return (
     <Field label={name}>
-      <select id={name} className='field' {...register(name)}>
+      <select id={name} className='field-input' {...register(name)}>
         {optionData.map(({ id, name }) =>
           <option key={id} value={id}>
             {i18next.t(name) as string}

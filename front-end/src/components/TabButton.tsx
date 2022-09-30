@@ -15,6 +15,7 @@ export default function TabButton({ tabKind, isSelected, handleTabClick, selecte
 
   return (
     <button
+      type='button'
       role='tab'
       id={tabKind}
       aria-selected={isSelected}

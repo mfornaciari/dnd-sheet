@@ -29,7 +29,7 @@ export default function InputNumber({ name, minValue, maxValue }: InputNumberPro
         min={minValue}
         max={maxValue}
         onKeyDown={handleKeyDown}
-        className='field'
+        className='field-input'
         {...register(name)}
       />
     </Field>
