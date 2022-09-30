@@ -158,29 +158,15 @@ describe('Form', () => {
     expect(localStorage.characterValues).toEqual(JSON.stringify(expectedValues));
   });
 
-  it.only('exports data to JSON file upon clicking the save button', async () => {
-    const mockURL = 'http://localhost:3000/mockURL';
-    const mockGenerateURL = () => mockURL;
-    jest.mock('@/services/generateURL', () => {
-      return {
-        __esModule: true,
-        default: jest.fn().mockImplementation(() => {
-          return {
-            generateURL: mockGenerateURL
-          }
-        })
-      }
-    });
-
+  it('exports data to JSON file upon clicking the save button', async () => {
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});
     const saveButton: HTMLAnchorElement = screen.getByRole('link', { name: 'Salvar' });
 
     await userEvent.type(nameInput, 'teste');
-    await userEvent.click(saveButton);
 
-    expect(saveButton).toHaveAttribute('href', mockURL);
+    expect(saveButton).toHaveAttribute('href', 'http://localhost:3000/mockURL');
     expect(saveButton).toHaveAttribute('download', 'teste');
   });
 });
