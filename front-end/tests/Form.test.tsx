@@ -7,6 +7,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
+import fs from 'fs';
 import type { CharacterValuesType } from '@/types';
 import fetchedDataMock from './fetchedDataMock.json';
 import GET_DATA from '@/queries/get_data';
@@ -136,7 +137,7 @@ describe('Form', () => {
     expect(levelDiv).toHaveTextContent(/^Nível 20$/);
   });
 
-  it.only('has a button to download character info as a JSON file', async () => {
+  it('has a button to download character info as a JSON file', async () => {
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});
@@ -148,14 +149,32 @@ describe('Form', () => {
     expect(saveButton).toHaveAttribute('download', 'teste');
   });
 
-  it('has a button to upload character info from JSON file', async () => {
+  it('loads character info from uploaded JSON file', async () => {
+    const mockData = JSON.stringify({
+      name: 'Zé',
+      race: fetchedDataMock.races[0].id, // 1 - Anão
+      characterClass: fetchedDataMock.characterClasses[0].id, // 1 - barbarian
+      experience: 300,
+    });
+    const mockFile = new File([mockData], 'mock.json', { type: 'application/json' });
+    File.prototype.text = jest.fn().mockResolvedValue(mockData);
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const loadButton = screen.getByRole('button', { name: 'Carregar' });
+    const loadButton: HTMLLabelElement = screen.getByRole('button', { name: 'Carregar' });
+    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
+    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
+    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
+    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
+    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
 
-    userEvent.click(loadButton);
+    await userEvent.upload(loadButton, mockFile);
 
-
+    expect(nameInput).toHaveDisplayValue('Zé');
+    expect(raceInput).toHaveDisplayValue('Anão');
+    expect(classInput).toHaveDisplayValue('Bárbaro');
+    expect(xpInput).toHaveDisplayValue('300');
+    expect(levelDiv).toHaveTextContent(/^Nível 2$/);
+    expect(screen.getByRole('tab', { name: 'Bárbaro' })).toBeInTheDocument();
   });
 
   it('changes form values and saves them on localStorage', async () => {

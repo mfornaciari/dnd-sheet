@@ -27,12 +27,7 @@ form {
   font-size: var(--text-size);
 }
 
-#level-div {
-  flex-basis: 50%;
-  text-align: center;
-}
-
-#button-div {
+.small-top-div {
   flex-basis: 50%;
   text-align: center;
 }

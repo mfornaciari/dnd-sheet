@@ -63,6 +63,16 @@ export default function Form() {
     setActiveTab(_prevActiveTab => clickedTabKind);
   }
 
+  async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const files = event.currentTarget.files;
+    if (files) {
+      const currentFile = files[0];
+      const text = await currentFile.text();
+      const json = JSON.parse(text);
+      methods.reset(json);
+    }
+  }
+
   return (
     <FormProvider { ...methods }>
       <form>
@@ -75,13 +85,13 @@ export default function Form() {
 
           <InputNumber name='experience' minValue='0' maxValue='999999' />
 
-          <div id ='level-div' role='region' aria-labelledby='levelText' className='top-div'>
+          <div role='region' aria-labelledby='levelText' className='top-div small-top-div'>
             <p className='field-input'>
-              <strong id='levelText' >Nível </strong><strong>{currentLevel}</strong>
+              <strong id='levelText'>Nível</strong> <strong>{currentLevel}</strong>
             </p>
           </div>
 
-          <div id='button-div' className='top-div'>
+          <div className='top-div small-top-div'>
               <a
                 role='button'
                 id='save-button'
@@ -94,12 +104,18 @@ export default function Form() {
 
               <label
                 role='button'
-                htmlFor='loading-button'
+                htmlFor='loading-input'
                 className='field-input top-button'
               >
                 <strong>Carregar</strong>
               </label>
-              <input type='file' id='loading-button' accept='.json' hidden />
+              <input
+                type='file'
+                id='loading-input'
+                accept='.json'
+                onChange={handleFileChange}
+                hidden
+              />
           </div>
         </section>
 
