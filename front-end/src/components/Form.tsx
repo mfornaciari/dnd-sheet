@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import '@/style/Form.css';
-import type { FetchedData, CharacterValues, Tabs, TabKind, Level, CharacterClass } from '@/types';
+import type {
+  FetchedData,
+  CharacterValues,
+  Tabs,
+  TabKind,
+  Level,
+  CharacterClass,
+} from '@/types';
 import GET_DATA from '@/queries/get_data';
 import generateURL from '@/services/generateURL';
 import StatusMessage from '@/components/StatusMessage';
@@ -79,30 +86,30 @@ export default function Form() {
           </div>
 
           <div className='top-div small-top-div'>
-              <a
-                role='button'
-                id='save-button'
-                href={downloadURL}
-                download={methods.getValues('name')}
-                className='field-input top-button'
-              >
-                <strong>Salvar</strong>
-              </a>
+            <a
+              role='button'
+              id='save-button'
+              href={downloadURL}
+              download={methods.getValues('name')}
+              className='field-input top-button'
+            >
+              <strong>Salvar</strong>
+            </a>
 
-              <label
-                role='button'
-                htmlFor='loading-input'
-                className='field-input top-button'
-              >
-                <strong>Carregar</strong>
-              </label>
-              <input
-                type='file'
-                id='loading-input'
-                accept='.json'
-                onChange={event => handleFileChange(event.currentTarget.files)}
-                hidden
-              />
+            <label
+              role='button'
+              htmlFor='loading-input'
+              className='field-input top-button'
+            >
+              <strong>Carregar</strong>
+            </label>
+            <input
+              type='file'
+              id='loading-input'
+              accept='.json'
+              onChange={event => handleFileChange(event.currentTarget.files)}
+              hidden
+            />
           </div>
         </section>
 
