@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import assert from 'assert';
 import i18next from 'i18next';
-import type { OptionDataType } from '@/types';
+import type { OptionData } from '@/types';
 import TestWrapper from './TestWrapper';
 import fetchedDataMock from './fetchedDataMock.json';
 import Select from '@/components/Select';
@@ -24,13 +24,13 @@ describe('Select', () => {
   });
 });
 
-function createOptionRegex(data: OptionDataType[], option: HTMLOptionElement): RegExp {
+function createOptionRegex(data: OptionData[], option: HTMLOptionElement): RegExp {
   const value = getOptionValue(option);
   const name = getOptionName(data, value);
   return new RegExp(`^${name}$`);
 }
 
-function getOptionName(data: OptionDataType[], value: string): string {
+function getOptionName(data: OptionData[], value: string): string {
   const foundEntry = data.find(item => item.id === value);
   assert(foundEntry);
   return i18next.t(foundEntry.name);

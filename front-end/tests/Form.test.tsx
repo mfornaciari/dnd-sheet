@@ -7,8 +7,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
-import fs from 'fs';
-import type { CharacterValuesType } from '@/types';
+import type { CharacterValues } from '@/types';
 import fetchedDataMock from './fetchedDataMock.json';
 import GET_DATA from '@/queries/get_data';
 import Form from '@/components/Form';
@@ -184,7 +183,7 @@ describe('Form', () => {
     const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
     const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-    const expectedValues: CharacterValuesType = {
+    const expectedValues: CharacterValues = {
       name: 'Bruenor',
       race: '1',
       characterClass: '1',

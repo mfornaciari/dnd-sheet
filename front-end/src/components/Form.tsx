@@ -2,14 +2,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import '@/style/Form.css';
-import type {
-  FetchedDataType,
-  CharacterValuesType,
-  TabsType,
-  TabKindType,
-  LevelType,
-  CharacterClassType,
-} from '@/types';
+import type { FetchedData, CharacterValues, Tabs, TabKind, Level, CharacterClass } from '@/types';
 import GET_DATA from '@/queries/get_data';
 import generateURL from '@/services/generateURL';
 import StatusMessage from '@/components/StatusMessage';
@@ -23,7 +16,7 @@ import TabSpells from '@/components/tabs/TabSpells';
 import TabItems from '@/components/tabs/TabItems';
 import TabButton from '@/components/TabButton';
 
-const initialCharacterValues: CharacterValuesType = {
+const initialCharacterValues: CharacterValues = {
   name: '',
   race: '0',
   characterClass: '0',
@@ -31,9 +24,9 @@ const initialCharacterValues: CharacterValuesType = {
 }
 
 export default function Form() {
-  const { loading, error, data } = useQuery<FetchedDataType>(GET_DATA);
+  const { loading, error, data } = useQuery<FetchedData>(GET_DATA);
   const methods = useForm({ defaultValues: initialCharacterValues });
-  const [activeTab, setActiveTab] = useState<TabKindType>('personal');
+  const [activeTab, setActiveTab] = useState<TabKind>('personal');
   const characterValues = methods.watch();
 
   useEffect(() => {
@@ -45,31 +38,25 @@ export default function Form() {
 
   const { races, characterClasses, levels } = data;
   const selectedClassId = methods.watch('characterClass');
-  const characterExperience = methods.watch('experience');
-  const downloadURL = generateURL(methods.getValues());
-  const currentLevel = calculateLevel(levels, characterExperience);
   const selectedClassName = findClassName(characterClasses, selectedClassId);
-  const tabPanels: TabsType = {
+  const characterExperience = methods.watch('experience');
+  const currentLevel = calculateLevel(levels, characterExperience);
+  const downloadURL = generateURL(methods.getValues());
+  const tabPanels: Tabs = {
     personal: <TabPersonal />,
     attributes: <TabAttributes />,
     characterClass: <TabCharacterClass selectedClassName={selectedClassName} />,
     spells: <TabSpells />,
     items: <TabItems />,
   }
-  const tabKinds = Object.keys(tabPanels) as TabKindType[];
+  const tabKinds = Object.keys(tabPanels) as TabKind[];
 
-  function handleTabClick(event: React.MouseEvent<HTMLButtonElement>) {
-    const clickedTabKind = event.currentTarget.id as TabKindType;
-    setActiveTab(_prevActiveTab => clickedTabKind);
-  }
-
-  async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const files = event.currentTarget.files;
+  async function handleFileChange(files: FileList | null) {
     if (files) {
       const currentFile = files[0];
-      const text = await currentFile.text();
-      const json = JSON.parse(text);
-      methods.reset(json);
+      const valuesText = await currentFile.text();
+      const valuesJson: CharacterValues = JSON.parse(valuesText);
+      methods.reset(valuesJson);
     }
   }
 
@@ -113,7 +100,7 @@ export default function Form() {
                 type='file'
                 id='loading-input'
                 accept='.json'
-                onChange={handleFileChange}
+                onChange={event => handleFileChange(event.currentTarget.files)}
                 hidden
               />
           </div>
@@ -133,9 +120,9 @@ export default function Form() {
             <TabButton
               key={tabKind}
               tabKind={tabKind}
-              handleTabClick={handleTabClick}
+              handleClick={() => setActiveTab(tabKind)}
               isSelected={activeTab === tabKind}
-              selectedClassName={isClassTab(tabKind) ? selectedClassName : ''}
+              selectedClassName={tabKind === 'characterClass' ? selectedClassName : ''}
             />
           )}
         </ul>
@@ -144,7 +131,7 @@ export default function Form() {
   );
 }
 
-function calculateLevel(levels: LevelType[], currentXp: string): number {
+function calculateLevel(levels: Level[], currentXp: string): number {
   const xpAsNumber = Number(currentXp);
   const foundLevelInfo = levels.find(level =>
     level.minExperience <= xpAsNumber && level.maxExperience >= xpAsNumber
@@ -154,15 +141,11 @@ function calculateLevel(levels: LevelType[], currentXp: string): number {
   return foundLevelInfo.level;
 }
 
-function findClassName(characterClasses: CharacterClassType[], selectedClassId: string): string {
+function findClassName(characterClasses: CharacterClass[], selectedClassId: string): string {
   const foundClass = characterClasses.find(characterClass =>
       characterClass.id === selectedClassId
     );
   if (foundClass) return foundClass.name;
 
   return 'characterClass';
-}
-
-function isClassTab(tabKind: TabKindType): boolean {
-  return tabKind === 'characterClass';
 }

@@ -1,39 +1,39 @@
-export type FetchedDataType = Readonly<{
-  races: RaceType[],
-  characterClasses: CharacterClassType[],
-  levels: LevelType[],
-}>
-
-export type CharacterValuesType = Readonly<{
-  name: string,
-  race: string,
-  characterClass: string,
-  experience: string,
-}>
-
-export type CharacterClassType = Readonly<{
+export type Race = Readonly<{
   id: string,
   name: string,
 }>
 
-export type RaceType = Readonly<{
+export type CharacterClass = Readonly<{
   id: string,
   name: string,
 }>
 
-export type LevelType = Readonly<{
+export type Level = Readonly<{
   id: string,
   level: number,
   minExperience: number,
   maxExperience: number,
 }>
 
-export type OptionDataType = Readonly<{
+export type FetchedData = Readonly<{
+  races: Race[],
+  characterClasses: CharacterClass[],
+  levels: Level[],
+}>
+
+export type CharacterValues = Readonly<{
+  name: string,
+  race: string,
+  characterClass: string,
+  experience: string,
+}>
+
+export type OptionData = Readonly<{
   id: string,
   name: string,
 }>
 
-export type TabsType = Readonly<{
+export type Tabs = Readonly<{
   personal: JSX.Element,
   attributes: JSX.Element,
   characterClass: JSX.Element,
@@ -41,4 +41,4 @@ export type TabsType = Readonly<{
   items: JSX.Element,
 }>
 
-export type TabKindType = Readonly<keyof TabsType>
+export type TabKind = keyof Tabs;

@@ -1,11 +1,11 @@
 import { useFormContext } from 'react-hook-form';
 import i18next from 'i18next';
-import type { OptionDataType } from '@/types';
+import type { OptionData } from '@/types';
 import Field from '@/components/Field';
 
 type SelectProps = Readonly<{
   name: string,
-  optionData: OptionDataType[],
+  optionData: OptionData[],
 }>
 
 export default function Select ({ name, optionData }: SelectProps) {
