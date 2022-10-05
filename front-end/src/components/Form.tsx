@@ -2,14 +2,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import '@/style/Form.css';
-import type {
-  FetchedData,
-  CharacterValues,
-  Tabs,
-  TabKind,
-  Level,
-  CharacterClass,
-} from '@/types';
+import type { FetchedData, CharacterValues, Tabs, TabKind, Level, CharacterClass } from '@/types';
 import GET_DATA from '@/queries/get_data';
 import generateURL from '@/services/generateURL';
 import StatusMessage from '@/components/StatusMessage';
@@ -23,14 +16,16 @@ import TabSpells from '@/components/tabs/TabSpells';
 import TabItems from '@/components/tabs/TabItems';
 import TabButton from '@/components/TabButton';
 
-const initialCharacterValues: CharacterValues = {
-  name: '',
-  race: '0',
-  characterClass: '0',
-  experience: '0',
-}
-
 export default function Form() {
+  const emptyValues = {
+    name: '',
+    race: '0',
+    characterClass: '0',
+    experience: '0',
+  };
+  const storedValues = localStorage.getItem('characterValues');
+  const initialCharacterValues: CharacterValues = storedValues ? JSON.parse(storedValues) : emptyValues;
+
   const { loading, error, data } = useQuery<FetchedData>(GET_DATA);
   const methods = useForm({ defaultValues: initialCharacterValues });
   const [activeTab, setActiveTab] = useState<TabKind>('personal');
@@ -55,7 +50,7 @@ export default function Form() {
     characterClass: <TabCharacterClass selectedClassName={selectedClassName} />,
     spells: <TabSpells />,
     items: <TabItems />,
-  }
+  };
   const tabKinds = Object.keys(tabPanels) as TabKind[];
 
   async function handleFileChange(files: FileList | null) {
@@ -68,7 +63,7 @@ export default function Form() {
   }
 
   return (
-    <FormProvider { ...methods }>
+    <FormProvider {...methods}>
       <form>
         <section id='form-top'>
           <InputText name='name' placeholderText='Nome do personagem' />
@@ -96,11 +91,7 @@ export default function Form() {
               <strong>Salvar</strong>
             </a>
 
-            <label
-              role='button'
-              htmlFor='loading-input'
-              className='field-input top-button'
-            >
+            <label role='button' htmlFor='loading-input' className='field-input top-button'>
               <strong>Carregar</strong>
             </label>
             <input
@@ -113,17 +104,12 @@ export default function Form() {
           </div>
         </section>
 
-        <section
-          id='tab-panel'
-          role='tabpanel'
-          aria-labelledby={activeTab}
-          aria-expanded='true'
-        >
+        <section id='tab-panel' role='tabpanel' aria-labelledby={activeTab} aria-expanded='true'>
           {tabPanels[activeTab]}
         </section>
 
         <ul role='tablist' aria-label='Abas' className='tab-list'>
-          {tabKinds.map(tabKind =>
+          {tabKinds.map(tabKind => (
             <TabButton
               key={tabKind}
               tabKind={tabKind}
@@ -131,7 +117,7 @@ export default function Form() {
               isSelected={activeTab === tabKind}
               selectedClassName={tabKind === 'characterClass' ? selectedClassName : ''}
             />
-          )}
+          ))}
         </ul>
       </form>
     </FormProvider>
@@ -140,18 +126,14 @@ export default function Form() {
 
 function calculateLevel(levels: Level[], currentXp: string): number {
   const xpAsNumber = Number(currentXp);
-  const foundLevelInfo = levels.find(level =>
-    level.minExperience <= xpAsNumber && level.maxExperience >= xpAsNumber
-  );
+  const foundLevelInfo = levels.find(level => level.minExperience <= xpAsNumber && level.maxExperience >= xpAsNumber);
   if (!foundLevelInfo) return 20; // XP over 999.999
 
   return foundLevelInfo.level;
 }
 
 function findClassName(characterClasses: CharacterClass[], selectedClassId: string): string {
-  const foundClass = characterClasses.find(characterClass =>
-      characterClass.id === selectedClassId
-    );
+  const foundClass = characterClasses.find(characterClass => characterClass.id === selectedClassId);
   if (foundClass) return foundClass.name;
 
   return 'characterClass';

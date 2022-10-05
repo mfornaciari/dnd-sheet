@@ -1,10 +1,4 @@
-import {
-  render,
-  screen,
-  within,
-  waitFor,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { render, screen, within, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
 import type { CharacterValues } from '@/types';
@@ -23,9 +17,9 @@ describe('Form', () => {
           races: fetchedDataMock.races,
           characterClasses: fetchedDataMock.characterClasses,
           levels: fetchedDataMock.levels,
-        }
-      }
-    }
+        },
+      },
+    },
   ];
   const errorMocks = [
     {
@@ -33,7 +27,7 @@ describe('Form', () => {
         query: GET_DATA,
       },
       error: new Error('An error occurred'),
-    }
+    },
   ];
 
   function TestForm() {
@@ -45,12 +39,16 @@ describe('Form', () => {
   }
 
   function ErrorTestForm() {
-    return(
+    return (
       <MockedProvider mocks={errorMocks} addTypename={false}>
         <Form />
       </MockedProvider>
     );
   }
+
+  afterEach(() => {
+    localStorage.removeItem('characterValues');
+  });
 
   it('shows error message when data was not fetched', async () => {
     render(<ErrorTestForm />);
@@ -139,7 +137,7 @@ describe('Form', () => {
   it('has a button to download character info as a JSON file', async () => {
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});
+    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
     const saveButton: HTMLAnchorElement = screen.getByRole('button', { name: 'Salvar' });
 
     await userEvent.type(nameInput, 'teste');
@@ -176,10 +174,10 @@ describe('Form', () => {
     expect(screen.getByRole('tab', { name: 'Bárbaro' })).toBeInTheDocument();
   });
 
-  it('changes form values and saves them on localStorage', async () => {
+  it('changes character info and saves it on localStorage', async () => {
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome'});
+    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
     const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
     const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
     const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
@@ -188,7 +186,7 @@ describe('Form', () => {
       race: '1',
       characterClass: '1',
       experience: '300',
-    }
+    };
 
     await userEvent.type(nameInput, 'Bruenor');
     await userEvent.selectOptions(raceInput, 'Anão');
@@ -196,5 +194,29 @@ describe('Form', () => {
     await userEvent.type(xpInput, '300');
 
     expect(localStorage.characterValues).toEqual(JSON.stringify(expectedValues));
+  });
+
+  it('loads character info when opening app', async () => {
+    const storedValues = JSON.stringify({
+      name: 'Bruenor',
+      race: '1',
+      characterClass: '1',
+      experience: '300',
+    });
+    localStorage.setItem('characterValues', storedValues);
+    render(<TestForm />);
+    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
+    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
+    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
+    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
+    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
+    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
+
+    expect(nameInput).toHaveDisplayValue('Bruenor');
+    expect(raceInput).toHaveDisplayValue('Anão');
+    expect(classInput).toHaveDisplayValue('Bárbaro');
+    expect(xpInput).toHaveDisplayValue('300');
+    expect(levelDiv).toHaveTextContent(/^Nível 2$/);
+    expect(screen.getByRole('tab', { name: 'Bárbaro' })).toBeInTheDocument();
   });
 });
