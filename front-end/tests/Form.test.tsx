@@ -1,13 +1,20 @@
 import { render, screen, within, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
-import type { CharacterValues } from '@/types';
 import fetchedDataMock from './fetchedDataMock.json';
 import GET_DATA from '@/queries/get_data';
 import Form from '@/components/Form';
 
 describe('Form', () => {
-  const mocks = [
+  const mockCharacterValues = JSON.stringify({
+    name: 'Bruenor',
+    race: fetchedDataMock.races[0].id, // 1 - Anão
+    characterClass: fetchedDataMock.characterClasses[0].id, // 1 - barbarian
+    experience: 300,
+  });
+  const mockFile = new File([mockCharacterValues], 'mock.json', { type: 'application/json' });
+  File.prototype.text = jest.fn().mockResolvedValue(mockCharacterValues);
+  const queryMocks = [
     {
       request: {
         query: GET_DATA,
@@ -21,7 +28,7 @@ describe('Form', () => {
       },
     },
   ];
-  const errorMocks = [
+  const errorQueryMocks = [
     {
       request: {
         query: GET_DATA,
@@ -32,7 +39,7 @@ describe('Form', () => {
 
   function TestForm() {
     return (
-      <MockedProvider mocks={mocks} addTypename={false}>
+      <MockedProvider mocks={queryMocks} addTypename={false}>
         <Form />
       </MockedProvider>
     );
@@ -40,14 +47,14 @@ describe('Form', () => {
 
   function ErrorTestForm() {
     return (
-      <MockedProvider mocks={errorMocks} addTypename={false}>
+      <MockedProvider mocks={errorQueryMocks} addTypename={false}>
         <Form />
       </MockedProvider>
     );
   }
 
   afterEach(() => {
-    localStorage.removeItem('characterValues');
+    localStorage.clear();
   });
 
   it('shows error message when data was not fetched', async () => {
@@ -57,9 +64,16 @@ describe('Form', () => {
     await waitFor(() => expect(statusMessage).toHaveTextContent(/^Erro$/));
   });
 
-  it('changes active panel when clicking on tab buttons', async () => {
+  it('renders correctly, allows filling in values, saves them to localStorage and exports/imports JSON', async () => {
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
+    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
+    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
+    const characterClassInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
+    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
+    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
+    const saveButton: HTMLAnchorElement = screen.getByRole('button', { name: 'Salvar' });
+    const loadButton: HTMLLabelElement = screen.getByRole('button', { name: 'Carregar' });
     const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
     const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Pessoal' });
     const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Atributos' });
@@ -67,10 +81,12 @@ describe('Form', () => {
     const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Magias' });
     const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Itens' });
 
+    // Personal tab is active when opening app
     let activeTabPanel = screen.getByRole('tabpanel', { name: 'Pessoal' });
     expect(activeTabPanel).toHaveTextContent(/^Pessoal$/);
     expect(tabPersonal).toHaveAttribute('aria-selected', 'true');
 
+    // Active tab should change when user clicks on tab buttons
     await userEvent.click(tabAttributes);
 
     activeTabPanel = screen.getByRole('tabpanel', { name: 'Atributos' });
@@ -94,116 +110,55 @@ describe('Form', () => {
     activeTabPanel = screen.getByRole('tabpanel', { name: 'Itens' });
     expect(activeTabPanel).toHaveTextContent(/^Itens$/);
     expect(tabItems).toHaveAttribute('aria-selected', 'true');
+
+    // Tabs other than the currently selected one should have aria-selected be false
     expect(tabPersonal).toHaveAttribute('aria-selected', 'false');
     expect(tabAttributes).toHaveAttribute('aria-selected', 'false');
     expect(tabCharacterClass).toHaveAttribute('aria-selected', 'false');
     expect(tabSpells).toHaveAttribute('aria-selected', 'false');
-  });
 
-  it('changes class tab name when user selects new class', async () => {
-    render(<TestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
-
-    await userEvent.selectOptions(classInput, 'Bardo');
-    const tabCharacterClass: HTMLButtonElement = screen.getByRole('tab', { name: 'Bardo' });
-    await userEvent.click(tabCharacterClass);
-
-    expect(screen.getByRole('tabpanel', { name: 'Classe' })).toHaveTextContent(/^Bardo$/);
-  });
-
-  it('increases level based on character experience', async () => {
-    render(<TestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
-
+    // Values should be saved to localStorage
+    await userEvent.type(nameInput, 'Bruenor');
+    await userEvent.selectOptions(raceInput, 'Anão');
+    await userEvent.selectOptions(characterClassInput, 'Bárbaro');
     await userEvent.type(xpInput, '300');
 
+    const expectedValues = JSON.stringify({
+      name: 'Bruenor',
+      race: '1',
+      characterClass: '1',
+      experience: '300',
+    });
+    expect(localStorage.characterValues).toEqual(expectedValues);
+
+    // Class tab button should change name to the currently selected class
+    const changedTabCharacterClass: HTMLButtonElement = screen.getByRole('tab', { name: 'Bárbaro' });
+    expect(changedTabCharacterClass).toHaveTextContent(/^Bárbaro$/);
+
+    // Level should be calculated based on current experience
     expect(levelDiv).toHaveTextContent(/^Nível 2$/);
-  });
 
-  it('shows level as 20 if experience value over 999.999 is set', async () => {
-    render(<TestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
-
-    await userEvent.type(xpInput, '1000000');
+    // Level should be 20 when current experience > 999.999
+    await userEvent.type(xpInput, '0000'); // Total 3.000.000
 
     expect(levelDiv).toHaveTextContent(/^Nível 20$/);
-  });
 
-  it('has a button to download character info as a JSON file', async () => {
-    render(<TestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
-    const saveButton: HTMLAnchorElement = screen.getByRole('button', { name: 'Salvar' });
-
-    await userEvent.type(nameInput, 'teste');
-
+    // Save button should allow downloading JSON file and name it according to the current character name
     expect(saveButton).toHaveAttribute('href', 'http://localhost:3000/mockURL');
-    expect(saveButton).toHaveAttribute('download', 'teste');
-  });
+    expect(saveButton).toHaveAttribute('download', 'Bruenor');
 
-  it('loads character info from uploaded JSON file', async () => {
-    const mockData = JSON.stringify({
-      name: 'Zé',
-      race: fetchedDataMock.races[0].id, // 1 - Anão
-      characterClass: fetchedDataMock.characterClasses[0].id, // 1 - barbarian
-      experience: 300,
-    });
-    const mockFile = new File([mockData], 'mock.json', { type: 'application/json' });
-    File.prototype.text = jest.fn().mockResolvedValue(mockData);
-    render(<TestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const loadButton: HTMLLabelElement = screen.getByRole('button', { name: 'Carregar' });
-    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
-    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
-    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
-    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-    const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
-
+    // Load button should get character info from an uploaded JSON file and update the form
     await userEvent.upload(loadButton, mockFile);
-
-    expect(nameInput).toHaveDisplayValue('Zé');
+    expect(nameInput).toHaveDisplayValue('Bruenor');
     expect(raceInput).toHaveDisplayValue('Anão');
-    expect(classInput).toHaveDisplayValue('Bárbaro');
+    expect(characterClassInput).toHaveDisplayValue('Bárbaro');
     expect(xpInput).toHaveDisplayValue('300');
     expect(levelDiv).toHaveTextContent(/^Nível 2$/);
     expect(screen.getByRole('tab', { name: 'Bárbaro' })).toBeInTheDocument();
   });
 
-  it('changes character info and saves it on localStorage', async () => {
-    render(<TestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
-    const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
-    const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
-    const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
-    const xpInput: HTMLInputElement = screen.getByRole('spinbutton', { name: 'Experiência' });
-    const expectedValues: CharacterValues = {
-      name: 'Bruenor',
-      race: '1',
-      characterClass: '1',
-      experience: '300',
-    };
-
-    await userEvent.type(nameInput, 'Bruenor');
-    await userEvent.selectOptions(raceInput, 'Anão');
-    await userEvent.selectOptions(classInput, 'Bárbaro');
-    await userEvent.type(xpInput, '300');
-
-    expect(localStorage.characterValues).toEqual(JSON.stringify(expectedValues));
-  });
-
-  it('loads character info when opening app', async () => {
-    const storedValues = JSON.stringify({
-      name: 'Bruenor',
-      race: '1',
-      characterClass: '1',
-      experience: '300',
-    });
-    localStorage.setItem('characterValues', storedValues);
+  it('loads character info from localStorage when opening app', async () => {
+    localStorage.setItem('characterValues', mockCharacterValues);
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
@@ -217,6 +172,6 @@ describe('Form', () => {
     expect(classInput).toHaveDisplayValue('Bárbaro');
     expect(xpInput).toHaveDisplayValue('300');
     expect(levelDiv).toHaveTextContent(/^Nível 2$/);
-    expect(screen.getByRole('tab', { name: 'Bárbaro' })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: 'Bárbaro' })).toHaveTextContent(/^Bárbaro$/);
   });
 });
