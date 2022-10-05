@@ -3,6 +3,20 @@
 export default {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
+  transform: {
+    '^.+\\.(t|j)sx?$': [
+      '@swc/jest',
+      {
+        jsc: {
+          transform: {
+            react: {
+              runtime: 'automatic',
+            }
+          }
+        }
+      }
+    ],
+  },
   collectCoverage: true,
   coverageProvider: 'v8',
   setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
