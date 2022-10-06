@@ -16,20 +16,35 @@ import TabSpells from '@/components/tabs/TabSpells';
 import TabItems from '@/components/tabs/TabItems';
 import TabButton from '@/components/TabButton';
 
-export default function Form() {
-  const emptyValues = {
-    name: '',
-    race: '0',
-    characterClass: '0',
-    experience: '0',
-  };
-  const storedValues = localStorage.getItem('characterValues');
-  const initialCharacterValues: CharacterValues = storedValues ? JSON.parse(storedValues) : emptyValues;
+const emptyValues = JSON.stringify({
+  name: '',
+  race: '0',
+  characterClass: '0',
+  experience: '0',
+});
 
+function calculateLevel(levels: Level[], currentXp: string): number {
+  const xpAsNumber = Number(currentXp);
+  const foundLevelInfo = levels.find(level => level.minExperience <= xpAsNumber && level.maxExperience >= xpAsNumber);
+  if (!foundLevelInfo) return 20; // XP over 999.999
+
+  return foundLevelInfo.level;
+}
+
+function findClassName(characterClasses: CharacterClass[], selectedClassId: string): string {
+  const foundClass = characterClasses.find(characterClass => characterClass.id === selectedClassId);
+  if (foundClass) return foundClass.name;
+
+  return 'characterClass';
+}
+
+export default function Form() {
   const { loading, error, data } = useQuery<FetchedData>(GET_DATA);
-  const methods = useForm({ defaultValues: initialCharacterValues });
+  const formMethods = useForm<CharacterValues>({
+    defaultValues: JSON.parse(localStorage.getItem('characterValues') || emptyValues),
+  });
   const [activeTab, setActiveTab] = useState<TabKind>('personal');
-  const characterValues = methods.watch();
+  const characterValues = formMethods.watch();
 
   useEffect(() => {
     localStorage.setItem('characterValues', JSON.stringify(characterValues));
@@ -39,11 +54,11 @@ export default function Form() {
   if (error || !data) return <StatusMessage message='error' />;
 
   const { races, characterClasses, levels } = data;
-  const selectedClassId = methods.watch('characterClass');
+  const selectedClassId = formMethods.watch('characterClass');
   const selectedClassName = findClassName(characterClasses, selectedClassId);
-  const characterExperience = methods.watch('experience');
+  const characterExperience = formMethods.watch('experience');
   const currentLevel = calculateLevel(levels, characterExperience);
-  const downloadURL = generateURL(methods.getValues());
+  const downloadURL = generateURL(formMethods.getValues());
   const tabPanels: Tabs = {
     personal: <TabPersonal />,
     attributes: <TabAttributes />,
@@ -56,14 +71,14 @@ export default function Form() {
   async function handleFileChange(files: FileList | null) {
     if (files) {
       const currentFile = files[0];
-      const valuesText = await currentFile.text();
-      const valuesJson: CharacterValues = JSON.parse(valuesText);
-      methods.reset(valuesJson);
+      const textValues = await currentFile.text();
+      const jsonValues: CharacterValues = JSON.parse(textValues);
+      formMethods.reset(jsonValues);
     }
   }
 
   return (
-    <FormProvider {...methods}>
+    <FormProvider {...formMethods}>
       <form>
         <section id='form-top'>
           <InputText name='name' placeholderText='Nome do personagem' />
@@ -85,7 +100,7 @@ export default function Form() {
               role='button'
               id='save-button'
               href={downloadURL}
-              download={methods.getValues('name')}
+              download={formMethods.getValues('name')}
               className='field-input top-button'
             >
               <strong>Salvar</strong>
@@ -122,19 +137,4 @@ export default function Form() {
       </form>
     </FormProvider>
   );
-}
-
-function calculateLevel(levels: Level[], currentXp: string): number {
-  const xpAsNumber = Number(currentXp);
-  const foundLevelInfo = levels.find(level => level.minExperience <= xpAsNumber && level.maxExperience >= xpAsNumber);
-  if (!foundLevelInfo) return 20; // XP over 999.999
-
-  return foundLevelInfo.level;
-}
-
-function findClassName(characterClasses: CharacterClass[], selectedClassId: string): string {
-  const foundClass = characterClasses.find(characterClass => characterClass.id === selectedClassId);
-  if (foundClass) return foundClass.name;
-
-  return 'characterClass';
 }
