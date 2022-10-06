@@ -2,7 +2,7 @@ form {
   display: flex;
   flex-direction: column;
   height: 99vh;
-  padding: 0.1rem;
+  padding: 0.3rem;
 }
 
 #form-top {
@@ -10,10 +10,7 @@ form {
   flex-direction: row;
   column-gap: 1%;
   padding: 0.5rem;
-  border-style: solid;
-  border-width: 0.15rem;
-  border-radius: 0.5rem;
-  border-color: var(--dark-gray);
+  border-radius: 0.5rem 0.5rem 0 0;
   background-color: var(--white);
 }
 
@@ -23,7 +20,6 @@ form {
   flex-basis: 100%;
   row-gap: 0.1rem;
   justify-content: flex-end;
-  font: unset;
   font-size: var(--text-size);
 }
 
@@ -52,13 +48,10 @@ form {
 #tab-panel {
   flex-grow: 1;
   display: grid;
+  padding: 0.5rem;
   justify-content: center;
   align-items: center;
-  border-style: solid solid none;
-  border-radius: 0.5rem 0.5rem 0 0;
-  border-color: var(--dark-gray);
   background-color: var(--white);
-  font: unset;
   font-size: var(--text-size);
 }
 
@@ -66,6 +59,6 @@ form {
   display: flex;
   flex-flow: row nowrap;
   gap: 0.1rem;
-  padding: 0 0.15rem 0;
+  padding: 0;
   margin: 0;
 }
