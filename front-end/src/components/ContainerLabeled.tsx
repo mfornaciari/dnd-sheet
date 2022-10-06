@@ -3,13 +3,11 @@ import type { PropsWithChildren } from 'react';
 
 type FieldProps = {
   label: string;
-  small?: boolean;
 };
 
-export default function ContainerLabeled({ label, small, children }: PropsWithChildren<FieldProps>) {
+export default function ContainerLabeled({ label, children }: PropsWithChildren<FieldProps>) {
   const styles = {
     padding: '0.7rem 0.3rem 0.1rem',
-    flexBasis: small ? '50%' : '100%',
   };
 
   return (

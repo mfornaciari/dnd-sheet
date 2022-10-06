@@ -3,13 +3,11 @@ import type { PropsWithChildren } from 'react';
 
 type FieldProps = {
   name: string;
-  small?: boolean;
 };
 
-export default function ContainerUnlabeled({ name, small, children }: PropsWithChildren<FieldProps>) {
+export default function ContainerUnlabeled({ name, children }: PropsWithChildren<FieldProps>) {
   const styles = {
     padding: '0.1rem 0.3rem',
-    flexBasis: small ? '50%' : '100%',
   };
   const i18nName = i18next.t(name);
 

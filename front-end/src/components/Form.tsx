@@ -90,7 +90,7 @@ export default function Form() {
 
           <InputNumber name='experience' minValue='0' maxValue='999999' />
 
-          <ContainerUnlabeled name='level' small>
+          <ContainerUnlabeled name='level'>
             <strong className='input'>Nível {currentLevel}</strong>
           </ContainerUnlabeled>
 
