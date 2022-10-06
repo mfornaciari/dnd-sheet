@@ -15,6 +15,7 @@ import TabCharacterClass from '@/components/tabs/TabCharacterClass';
 import TabSpells from '@/components/tabs/TabSpells';
 import TabItems from '@/components/tabs/TabItems';
 import TabButton from '@/components/TabButton';
+import ContainerUnlabeled from '@/components/ContainerUnlabeled';
 
 const emptyValues = JSON.stringify({
   name: '',
@@ -89,34 +90,30 @@ export default function Form() {
 
           <InputNumber name='experience' minValue='0' maxValue='999999' />
 
-          <div role='region' aria-labelledby='levelText' className='top-div small-top-div'>
-            <p className='field-input'>
-              <strong id='levelText'>Nível</strong> <strong>{currentLevel}</strong>
-            </p>
-          </div>
+          <ContainerUnlabeled name='level' small>
+            <strong className='input'>Nível {currentLevel}</strong>
+          </ContainerUnlabeled>
 
-          <div className='top-div small-top-div'>
-            <a
-              role='button'
-              id='save-button'
-              href={downloadURL}
-              download={formMethods.getValues('name')}
-              className='field-input top-button'
-            >
-              <strong>Salvar</strong>
-            </a>
+          <a
+            role='button'
+            id='save-button'
+            href={downloadURL}
+            download={formMethods.getValues('name')}
+            className='top-button'
+          >
+            <strong>Salvar</strong>
+          </a>
 
-            <label role='button' htmlFor='loading-input' className='field-input top-button'>
-              <strong>Carregar</strong>
-            </label>
-            <input
-              type='file'
-              id='loading-input'
-              accept='.json'
-              onChange={event => handleFileChange(event.currentTarget.files)}
-              hidden
-            />
-          </div>
+          <label role='button' htmlFor='loading-input' className='top-button'>
+            <strong>Carregar</strong>
+          </label>
+          <input
+            type='file'
+            id='loading-input'
+            accept='.json'
+            onChange={event => handleFileChange(event.currentTarget.files)}
+            hidden
+          />
         </section>
 
         <section id='tab-panel' role='tabpanel' aria-labelledby={activeTab} aria-expanded='true'>

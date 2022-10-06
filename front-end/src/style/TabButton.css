@@ -11,6 +11,10 @@
   box-shadow: inset 0 0.5rem 0.5rem -0.3rem var(--dark-gray);
 }
 
+.tab-button:focus {
+  outline: var(--focus-outline);
+}
+
 .tab-button[aria-selected="false"]:hover {
   background: var(--light-gray);
 }
