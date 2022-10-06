@@ -43,7 +43,7 @@ export default function Form() {
   const formMethods = useForm<CharacterValues>({
     defaultValues: JSON.parse(localStorage.getItem('characterValues') || emptyValues),
   });
-  const [activeTab, setActiveTab] = useState<TabKind>('personal');
+  const [activeTab, setActiveTab] = useState<TabKind>(() => 'personal');
   const characterValues = formMethods.watch();
 
   useEffect(() => {
