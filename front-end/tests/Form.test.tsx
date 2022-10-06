@@ -81,6 +81,13 @@ describe('Form', () => {
     const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Magias' });
     const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Itens' });
 
+    // Fields are empty when opening app
+    expect(nameInput).toHaveDisplayValue('');
+    expect(raceInput).toHaveDisplayValue([]);
+    expect(characterClassInput).toHaveDisplayValue([]);
+    expect(xpInput).toHaveDisplayValue('0');
+    expect(levelDiv).toHaveTextContent(/^Nível 1$/);
+
     // Personal tab is active when opening app
     let activeTabPanel = screen.getByRole('tabpanel', { name: 'Pessoal' });
     expect(activeTabPanel).toHaveTextContent(/^Pessoal$/);
