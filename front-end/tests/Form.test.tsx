@@ -64,7 +64,7 @@ describe('Form', () => {
     await waitFor(() => expect(statusMessage).toHaveTextContent(/^Erro$/));
   });
 
-  it('renders correctly, allows filling in values, saves them to localStorage and exports/imports JSON', async () => {
+  it.only('renders correctly, allows filling in values, saves them to localStorage and exports/imports JSON', async () => {
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
@@ -153,6 +153,12 @@ describe('Form', () => {
     // Save button should allow downloading JSON file and name it according to the current character name
     expect(saveButton).toHaveAttribute('href', 'http://localhost:3000/mockURL');
     expect(saveButton).toHaveAttribute('download', 'Bruenor');
+
+    // Save button should be disabled if there is a invalid field
+    await userEvent.clear(nameInput);
+    await userEvent.click(document.body);
+
+    expect(saveButton).toHaveAttribute('href', '#');
 
     // Load button should get character info from an uploaded JSON file and update the form
     await userEvent.upload(loadButton, mockFile);

@@ -60,7 +60,6 @@ export default function Form() {
   const selectedClassName = findClassName(characterClasses, selectedClassId);
   const characterExperience = formMethods.watch('experience');
   const currentLevel = calculateLevel(levels, characterExperience);
-  const downloadURL = generateURL(formMethods.getValues());
   const tabPanels: Tabs = {
     personal: <TabPersonal />,
     attributes: <TabAttributes />,
@@ -69,6 +68,8 @@ export default function Form() {
     items: <TabItems />,
   };
   const tabKinds = Object.keys(tabPanels) as TabKind[];
+  const formValid = formMethods.formState.isValid;
+  const downloadURL = generateURL(formMethods.getValues());
 
   async function handleFileChange(files: FileList | null) {
     if (files) {
@@ -98,8 +99,8 @@ export default function Form() {
           <a
             role='button'
             id='save-button'
-            href={downloadURL}
-            download={formMethods.getValues('name')}
+            href={formValid ? downloadURL : '#'}
+            download={formValid ? formMethods.getValues('name') : undefined}
             className='top-button'
           >
             <strong>Salvar</strong>
