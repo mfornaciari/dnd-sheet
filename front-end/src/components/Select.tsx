@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import i18next from 'i18next';
 import type { OptionData } from '@/types';
-import ContainerTitled from '@/components/ContainerTitled';
+import Container from '@/components/Container';
 
 type SelectProps = Readonly<{
   name: string;
@@ -10,16 +10,21 @@ type SelectProps = Readonly<{
 
 export default function Select({ name, optionData }: SelectProps) {
   const { register } = useFormContext();
+  const optionElements = optionData.map(({ id, name }) => {
+    const i18nName = i18next.t(name);
+    const optionElement = (
+      <option key={id} value={id}>
+        {i18nName}
+      </option>
+    );
+    return optionElement;
+  });
 
   return (
-    <ContainerTitled name={name} nameIsLabel>
+    <Container name={name} titled labeled>
       <select id={name} className='input' {...register(name)}>
-        {optionData.map(({ id, name }) => (
-          <option key={id} value={id}>
-            {i18next.t(name) as string}
-          </option>
-        ))}
+        {optionElements}
       </select>
-    </ContainerTitled>
+    </Container>
   );
 }

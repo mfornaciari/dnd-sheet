@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import ContainerTitled from '@/components/ContainerTitled';
+import Container from '@/components/Container';
 
 type InputNumberProps = Readonly<{
   name: string;
@@ -36,7 +36,7 @@ export default function InputNumber({ name, minValue, maxValue }: InputNumberPro
   }
 
   return (
-    <ContainerTitled name={name} nameIsLabel>
+    <Container name={name} titled labeled>
       <input
         type='number'
         id={name}
@@ -46,6 +46,6 @@ export default function InputNumber({ name, minValue, maxValue }: InputNumberPro
         className='input'
         {...register(name)}
       />
-    </ContainerTitled>
+    </Container>
   );
 }
