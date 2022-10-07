@@ -4,6 +4,7 @@
   --white: hsl(0, 0%, 100%);
   --text-size: min(3vw, 1.5rem);
   --focus-outline: 0.15rem solid blue;
+  --error-outline: 0.15rem solid red;
 }
 
 body {

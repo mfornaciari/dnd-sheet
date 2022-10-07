@@ -6,11 +6,13 @@ type ContainerProps = {
   name: string;
   titled?: boolean;
   labeled?: boolean;
+  error?: boolean;
 };
 
-export default function Container({ name, titled, labeled, children }: PropsWithChildren<ContainerProps>) {
+export default function Container({ name, titled, labeled, error, children }: PropsWithChildren<ContainerProps>) {
   const i18nName = i18next.t(name);
-  const className = titled ? 'container titled' : 'container untitled';
+  let className = titled ? 'container titled' : 'container untitled';
+  if (error) className += ' error';
   const role = titled ? undefined : 'region';
   const ariaLabel = titled ? undefined : i18nName;
 

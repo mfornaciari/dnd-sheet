@@ -23,6 +23,11 @@
   padding: 0.1rem 0.3rem;
 }
 
+.error {
+  outline: var(--error-outline);
+  color: red;
+}
+
 .container-name {
   position: absolute;
   background-color: white;

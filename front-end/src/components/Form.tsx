@@ -42,6 +42,7 @@ function findClassName(characterClasses: CharacterClass[], selectedClassId: stri
 export default function Form() {
   const { loading, error, data } = useQuery<FetchedData>(GET_DATA);
   const formMethods = useForm<CharacterValues>({
+    mode: 'onTouched',
     defaultValues: JSON.parse(localStorage.getItem('characterValues') || emptyValues),
   });
   const [activeTab, setActiveTab] = useState<TabKind>(() => 'personal');
@@ -82,7 +83,7 @@ export default function Form() {
     <FormProvider {...formMethods}>
       <form>
         <section id='form-top'>
-          <InputText name='name' />
+          <InputText name='name' required />
 
           <Select name='race' optionData={races} />
 
