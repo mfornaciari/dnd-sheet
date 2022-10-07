@@ -14,32 +14,6 @@ form {
   background-color: var(--white);
 }
 
-.container {
-  position: relative;
-  box-sizing: border-box;
-  margin: 0;
-  width: 100%;
-  white-space: nowrap;
-  border-style: solid;
-  border-width: 0.1rem;
-  border-radius: 0.4rem;
-  border-color: var(--dark-gray);
-  background: transparent;
-}
-
-.container:focus-within {
-  outline: var(--focus-outline);
-  color: blue;
-}
-
-.container-label {
-  position: absolute;
-  background-color: white;
-  top: -25%;
-  left: 3%;
-  font-size: min(0.9rem, 2vw);
-}
-
 .input {
   display: flex;
   align-items: center;
@@ -47,6 +21,7 @@ form {
   background-color: transparent;
   margin: 0;
   width: 100%;
+  height: 100%;
   border: none;
   font-size: var(--text-size);
   outline: none;

@@ -15,7 +15,7 @@ import TabCharacterClass from '@/components/tabs/TabCharacterClass';
 import TabSpells from '@/components/tabs/TabSpells';
 import TabItems from '@/components/tabs/TabItems';
 import TabButton from '@/components/TabButton';
-import ContainerUnlabeled from '@/components/ContainerUnlabeled';
+import ContainerUntitled from '@/components/ContainerUntitled';
 
 const emptyValues = JSON.stringify({
   name: '',
@@ -90,9 +90,9 @@ export default function Form() {
 
           <InputNumber name='experience' minValue='0' maxValue='999999' />
 
-          <ContainerUnlabeled name='level'>
+          <ContainerUntitled name='level'>
             <strong className='input'>Nível {currentLevel}</strong>
-          </ContainerUnlabeled>
+          </ContainerUntitled>
 
           <a
             role='button'

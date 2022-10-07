@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import ContainerLabeled from '@/components/ContainerLabeled';
+import ContainerTitled from '@/components/ContainerTitled';
 
 type InputTextProps = Readonly<{
   name: string;
@@ -10,8 +10,8 @@ export default function InputText({ name, placeholderText }: InputTextProps) {
   const { register } = useFormContext();
 
   return (
-    <ContainerLabeled label={name}>
+    <ContainerTitled name={name} nameIsLabel>
       <input type='text' id={name} placeholder={placeholderText} className='input' {...register(name)} />
-    </ContainerLabeled>
+    </ContainerTitled>
   );
 }
