@@ -15,12 +15,12 @@ describe('InputText', () => {
     // Has correct name, placeholder and container class
     expect(input).toHaveAccessibleName('test label');
     expect(input).toHaveAttribute('placeholder', 'placeholder text');
-    expect(input.parentElement).toHaveClass('container titled');
+    expect(input.parentElement).toHaveClass('container');
 
     // Gets a red outline around container when required and left empty
     await userEvent.click(input);
     await userEvent.click(document.body);
 
-    expect(input.parentElement).toHaveClass('container titled error');
+    expect(input.parentElement).toHaveClass('container invalid');
   });
 });

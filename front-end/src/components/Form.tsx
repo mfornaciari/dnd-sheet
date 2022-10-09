@@ -86,13 +86,13 @@ export default function Form() {
         <section id='form-top'>
           <InputText name='name' required />
 
-          <Select name='race' optionData={races} />
+          <Select name='race' optionData={races} required />
 
-          <Select name='characterClass' optionData={characterClasses} />
+          <Select name='characterClass' optionData={characterClasses} required />
 
           <InputNumber name='experience' minValue='0' maxValue='999999' />
 
-          <Container name='level'>
+          <Container hiddenTitle='Nível'>
             <strong className='text'>Nível {currentLevel}</strong>
           </Container>
 

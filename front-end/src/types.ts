@@ -28,7 +28,7 @@ export type CharacterValues = Readonly<{
   experience: string,
 }>
 
-export type OptionData = Readonly<{
+export type Option = Readonly<{
   id: string,
   name: string,
 }>

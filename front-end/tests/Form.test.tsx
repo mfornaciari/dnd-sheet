@@ -64,7 +64,7 @@ describe('Form', () => {
     await waitFor(() => expect(statusMessage).toHaveTextContent(/^Erro$/));
   });
 
-  it.only('renders correctly, allows filling in values, saves them to localStorage and exports/imports JSON', async () => {
+  it('renders and works correctly', async () => {
     render(<TestForm />);
     await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
