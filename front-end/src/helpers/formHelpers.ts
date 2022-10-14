@@ -1,10 +1,5 @@
 import { CharacterClass, CharacterValues, Level } from "@/types";
 
-export function generateURL(formValues: CharacterValues) {
-  const blob = new Blob([JSON.stringify(formValues)], { type: 'application/json' });
-  return URL.createObjectURL(blob);
-}
-
 export function calculateLevel(levels: Level[], currentXp: string): number {
   const numberXp = Number(currentXp);
   const foundLevelInfo = levels.find(level => level.minExperience <= numberXp && level.maxExperience >= numberXp);
@@ -18,4 +13,9 @@ export function findClassName(characterClasses: CharacterClass[], selectedClassI
   if (foundClass) return foundClass.name;
 
   return 'characterClass';
+}
+
+export function generateURL(formValues: CharacterValues) {
+  const blob = new Blob([JSON.stringify(formValues)], { type: 'application/json' });
+  return URL.createObjectURL(blob);
 }
