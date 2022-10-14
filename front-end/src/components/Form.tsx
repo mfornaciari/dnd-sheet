@@ -4,7 +4,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import '@/style/Form.css';
 import type { FetchedData, CharacterValues, Tabs, TabKind, Level, CharacterClass } from '@/types';
 import GET_DATA from '@/queries/get_data';
-import generateURL from '@/services/generateURL';
+import { generateURL } from '@/helpers/generateURL';
 import StatusMessage from '@/components/StatusMessage';
 import Select from '@/components/Select';
 import InputNumber from '@/components/InputNumber';

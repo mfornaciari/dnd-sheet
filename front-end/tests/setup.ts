@@ -8,6 +8,8 @@ i18next.init({
   resources: ptbr
 });
 
-const mockGenerateUrl = jest.fn();
-jest.mock('@/services/generateURL', () => mockGenerateUrl);
-mockGenerateUrl.mockReturnValue('http://localhost:3000/mockURL');
+const mockGenerateURL = jest.fn();
+jest.mock('@/helpers/generateURL', () => {
+  return { generateURL: mockGenerateURL };
+});
+mockGenerateURL.mockReturnValue('http://localhost:3000/mockURL');
