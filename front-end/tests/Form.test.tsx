@@ -2,7 +2,7 @@ import { render, screen, within, waitFor, waitForElementToBeRemoved } from '@tes
 import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
 import fetchedDataMock from './fetchedDataMock.json';
-import GET_DATA from '@/queries/get_data';
+import { GET_DATA } from '@/queries/getData';
 import Form from '@/components/Form';
 
 describe('Form', () => {

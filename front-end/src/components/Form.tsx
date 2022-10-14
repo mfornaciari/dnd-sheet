@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import '@/style/Form.css';
 import type { FetchedData, CharacterValues, Tabs, TabKind } from '@/types';
-import GET_DATA from '@/queries/get_data';
+import { GET_DATA } from '@/queries/getData';
 import { calculateLevel, findClassName, generateURL } from '@/helpers/formHelpers';
 import StatusMessage from '@/components/StatusMessage';
 import Select from '@/components/Select';
