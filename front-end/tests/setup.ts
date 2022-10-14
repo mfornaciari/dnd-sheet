@@ -9,7 +9,12 @@ i18next.init({
 });
 
 const mockGenerateURL = jest.fn();
-jest.mock('@/helpers/generateURL', () => {
-  return { generateURL: mockGenerateURL };
+jest.mock('@/helpers/formHelpers', () => {
+  const original = jest.requireActual('@/helpers/formHelpers');
+
+  return {
+    ...original,
+    generateURL: mockGenerateURL,
+  };
 });
 mockGenerateURL.mockReturnValue('http://localhost:3000/mockURL');

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import '@/style/Form.css';
-import type { FetchedData, CharacterValues, Tabs, TabKind, Level, CharacterClass } from '@/types';
+import type { FetchedData, CharacterValues, Tabs, TabKind } from '@/types';
 import GET_DATA from '@/queries/get_data';
-import { generateURL } from '@/helpers/generateURL';
+import { calculateLevel, generateURL, findClassName } from '@/helpers/formHelpers';
 import StatusMessage from '@/components/StatusMessage';
 import Select from '@/components/Select';
 import InputNumber from '@/components/InputNumber';
@@ -23,21 +23,6 @@ const emptyValues = JSON.stringify({
   characterClass: '0',
   experience: '0',
 });
-
-function calculateLevel(levels: Level[], currentXp: string): number {
-  const xpAsNumber = Number(currentXp);
-  const foundLevelInfo = levels.find(level => level.minExperience <= xpAsNumber && level.maxExperience >= xpAsNumber);
-  if (!foundLevelInfo) return 20; // XP over 999.999
-
-  return foundLevelInfo.level;
-}
-
-function findClassName(characterClasses: CharacterClass[], selectedClassId: string): string {
-  const foundClass = characterClasses.find(characterClass => characterClass.id === selectedClassId);
-  if (foundClass) return foundClass.name;
-
-  return 'characterClass';
-}
 
 export default function Form() {
   const { loading, error, data } = useQuery<FetchedData>(GET_DATA);
