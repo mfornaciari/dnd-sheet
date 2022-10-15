@@ -35,7 +35,7 @@ export function Form({ data }: FormProps) {
   const { races, characterClasses, levels } = data;
   const selectedClassId = formMethods.watch("characterClass");
   const selectedClassName = findClassName(characterClasses, selectedClassId);
-  const characterExperience = formMethods.watch("experience");
+  const characterExperience = parseInt(formMethods.watch("experience"));
   const currentLevel = calculateLevel(levels, characterExperience);
   const formValid = formMethods.formState.isValid;
   const downloadURL = generateURL(formMethods.getValues());
