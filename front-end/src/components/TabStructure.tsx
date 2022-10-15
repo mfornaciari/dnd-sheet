@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { CharacterClass, TabKind } from "@/types";
+import { CharacterClass, TabKind, Tabs } from "@/types";
 import { findClassName } from "@/helpers/formHelpers";
-import { TabPanel } from "./TabPanel";
 import { TabButton } from "./TabButton";
+import TabPersonal from "./tabs/TabPersonal";
+import TabAttributes from "./tabs/TabAttributes";
+import TabCharacterClass from "./tabs/TabCharacterClass";
+import TabSpells from "./tabs/TabSpells";
+import TabItems from "./tabs/TabItems";
 
 type TabStructureProps = {
   characterClasses: CharacterClass[],
@@ -15,6 +19,13 @@ export function TabStructure({ characterClasses, selectedClassId }: TabStructure
   const tabKinds: TabKind[] = ['personal', 'attributes', 'characterClass', 'spells', 'items'];
   const classTabTitle = findClassName(characterClasses, selectedClassId);
 
+  const tabPanels: Tabs = {
+    personal: <TabPersonal />,
+    attributes: <TabAttributes />,
+    characterClass: <TabCharacterClass title={classTabTitle} />,
+    spells: <TabSpells />,
+    items: <TabItems />,
+  };
   const tabButtons = tabKinds.map(tabKind => {
     const title = tabKind === 'characterClass' ? classTabTitle : tabKind;
 
@@ -31,7 +42,9 @@ export function TabStructure({ characterClasses, selectedClassId }: TabStructure
 
   return (
     <>
-      <TabPanel activeTab={activeTab} classTabTitle={classTabTitle} />
+      <section id='tab-panel' role='tabpanel' aria-labelledby={activeTab} aria-expanded='true'>
+        {tabPanels[activeTab]}
+      </section>
 
       <ul role='tablist' aria-label='Abas' className='tab-list'>
         {tabButtons}
