@@ -9,7 +9,7 @@ export function TabCharacterClass({ title }: TabCharacterClassProps) {
   const i18nName = i18next.t(title);
 
   return (
-    <TabPanel tabButtonName="characterClass">
+    <TabPanel tabButtonId="characterClass">
       {i18nName}
     </TabPanel>
   );

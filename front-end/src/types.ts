@@ -8,6 +8,21 @@ export type CharacterClass = Readonly<{
   name: string,
 }>
 
+export type CharacterClassName =
+  "barbarian"
+  | "bard"
+  | "cleric"
+  | "druid"
+  | "fighter"
+  | "monk"
+  | "paladin"
+  | "ranger"
+  | "rogue"
+  | "sorcerer"
+  | "warlock"
+  | "wizard"
+
+
 export type Level = Readonly<{
   id: string,
   level: number,

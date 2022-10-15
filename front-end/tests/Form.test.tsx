@@ -26,12 +26,6 @@ describe('Form', () => {
     const levelDiv: HTMLDivElement = screen.getByRole('region', { name: 'Nível' });
     const saveButton: HTMLAnchorElement = screen.getByRole('button', { name: 'Salvar' });
     const loadButton: HTMLLabelElement = screen.getByRole('button', { name: 'Carregar' });
-    const tabList: HTMLDivElement = screen.getByRole('tablist', { name: 'Abas' });
-    const tabPersonal: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Pessoal' });
-    const tabAttributes: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Atributos' });
-    const tabCharacterClass: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Classe' });
-    const tabSpells: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Magias' });
-    const tabItems: HTMLButtonElement = within(tabList).getByRole('tab', { name: 'Itens' });
 
     // Fields are empty when opening app
     expect(nameInput).toHaveDisplayValue('');
@@ -39,42 +33,6 @@ describe('Form', () => {
     expect(characterClassInput).toHaveDisplayValue([]);
     expect(xpInput).toHaveDisplayValue('0');
     expect(levelDiv).toHaveTextContent(/^Nível 1$/);
-
-    // Personal tab is active when opening app
-    let activeTabPanel = screen.getByRole('tabpanel', { name: 'Pessoal' });
-    expect(activeTabPanel).toHaveTextContent(/^Pessoal$/);
-    expect(tabPersonal).toHaveAttribute('aria-selected', 'true');
-
-    // Active tab should change when user clicks on tab buttons
-    await userEvent.click(tabAttributes);
-
-    activeTabPanel = screen.getByRole('tabpanel', { name: 'Atributos' });
-    expect(activeTabPanel).toHaveTextContent(/^Atributos$/);
-    expect(tabAttributes).toHaveAttribute('aria-selected', 'true');
-
-    await userEvent.click(tabCharacterClass);
-
-    activeTabPanel = screen.getByRole('tabpanel', { name: 'Classe' });
-    expect(activeTabPanel).toHaveTextContent(/^Classe$/);
-    expect(tabCharacterClass).toHaveAttribute('aria-selected', 'true');
-
-    await userEvent.click(tabSpells);
-
-    activeTabPanel = screen.getByRole('tabpanel', { name: 'Magias' });
-    expect(activeTabPanel).toHaveTextContent(/^Magias$/);
-    expect(tabSpells).toHaveAttribute('aria-selected', 'true');
-
-    await userEvent.click(tabItems);
-
-    activeTabPanel = screen.getByRole('tabpanel', { name: 'Itens' });
-    expect(activeTabPanel).toHaveTextContent(/^Itens$/);
-    expect(tabItems).toHaveAttribute('aria-selected', 'true');
-
-    // Tabs other than the currently selected one should have aria-selected be false
-    expect(tabPersonal).toHaveAttribute('aria-selected', 'false');
-    expect(tabAttributes).toHaveAttribute('aria-selected', 'false');
-    expect(tabCharacterClass).toHaveAttribute('aria-selected', 'false');
-    expect(tabSpells).toHaveAttribute('aria-selected', 'false');
 
     // Values should be saved to localStorage
     await userEvent.type(nameInput, 'Bruenor');

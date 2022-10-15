@@ -5,7 +5,7 @@ export function TabPersonal() {
   const i18nName = i18next.t("personal");
 
   return (
-    <TabPanel tabButtonName="personal">
+    <TabPanel tabButtonId="personal">
       {i18nName}
     </TabPanel>
   );

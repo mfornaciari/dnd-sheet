@@ -1,4 +1,4 @@
-import { CharacterClass, CharacterValues, Level } from "@/types";
+import { CharacterClass, CharacterClassName, CharacterValues, Level } from "@/types";
 
 export function calculateLevel(levels: Level[], currentXp: string): number {
   const numberXp = Number(currentXp);
@@ -8,9 +8,12 @@ export function calculateLevel(levels: Level[], currentXp: string): number {
   return foundLevelInfo.level;
 }
 
-export function findClassName(characterClasses: CharacterClass[], selectedClassId: string): string {
+export function findClassName(
+  characterClasses: CharacterClass[],
+  selectedClassId: string
+): CharacterClassName | 'characterClass' {
   const foundClass = characterClasses.find(characterClass => characterClass.id === selectedClassId);
-  if (foundClass) return foundClass.name;
+  if (foundClass) return foundClass.name as CharacterClassName;
 
   return 'characterClass';
 }

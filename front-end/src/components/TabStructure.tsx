@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TabKind, Tabs } from "@/types";
+import { CharacterClassName, TabKind, Tabs } from "@/types";
 import { TabButton } from "@/components/TabButton";
 import { TabPersonal } from "@/components/tabs/TabPersonal";
 import { TabAttributes } from "@/components/tabs/TabAttributes";
@@ -10,22 +10,22 @@ import { TabItems } from "@/components/tabs/TabItems";
 const tabKinds: TabKind[] = ["personal", "attributes", "characterClass", "spells", "items"];
 
 type TabStructureProps = {
-  classTabTitle: string,
+  selectedClassName: CharacterClassName | "characterClass",
 }
 
-export function TabStructure({ classTabTitle }: TabStructureProps) {
+export function TabStructure({ selectedClassName }: TabStructureProps) {
   const [activeTab, setActiveTab] = useState<TabKind>(() => "personal");
 
   const tabPanels: Tabs = {
     personal: <TabPersonal />,
     attributes: <TabAttributes />,
-    characterClass: <TabCharacterClass title={classTabTitle} />,
+    characterClass: <TabCharacterClass title={selectedClassName} />,
     spells: <TabSpells />,
     items: <TabItems />,
   };
 
   const tabButtons = tabKinds.map(tabKind => {
-    const title = tabKind === "characterClass" ? classTabTitle : tabKind;
+    const title = tabKind === "characterClass" ? selectedClassName : tabKind;
 
     return (
       <TabButton

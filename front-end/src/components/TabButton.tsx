@@ -1,12 +1,12 @@
 import i18next from 'i18next';
 import '@/style/TabButton.css';
-import { TabKind } from '@/types';
+import { CharacterClassName, TabKind } from '@/types';
 
 type TabButtonProps = {
   tabKind: TabKind,
   handleClick: React.MouseEventHandler<HTMLButtonElement>,
   isSelected: boolean,
-  title: string,
+  title: CharacterClassName | TabKind,
 }
 
 export function TabButton({ tabKind, isSelected, handleClick, title }: TabButtonProps) {

@@ -14,7 +14,7 @@ describe("TabButton", () => {
         title="barbarian"
       />
     );
-    const button = screen.getByRole("tab");
+    const button: HTMLButtonElement = screen.getByRole("tab");
 
     await user.click(button);
 

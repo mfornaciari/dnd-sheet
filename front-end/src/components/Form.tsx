@@ -34,7 +34,7 @@ export function Form({ data }: FormProps) {
 
   const { races, characterClasses, levels } = data;
   const selectedClassId = formMethods.watch("characterClass");
-  const classTabTitle = findClassName(characterClasses, selectedClassId);
+  const selectedClassName = findClassName(characterClasses, selectedClassId);
   const characterExperience = formMethods.watch("experience");
   const currentLevel = calculateLevel(levels, characterExperience);
   const formValid = formMethods.formState.isValid;
@@ -87,7 +87,7 @@ export function Form({ data }: FormProps) {
           />
         </section>
 
-        <TabStructure classTabTitle={classTabTitle} />
+        <TabStructure selectedClassName={selectedClassName} />
       </form>
     </FormProvider>
   );

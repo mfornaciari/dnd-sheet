@@ -5,7 +5,7 @@ export function TabItems() {
   const i18nName = i18next.t("items");
 
   return (
-    <TabPanel tabButtonName="items">
+    <TabPanel tabButtonId="items">
       {i18nName}
     </TabPanel>
   );

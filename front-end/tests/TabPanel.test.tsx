@@ -4,11 +4,11 @@ import { TabPanel } from "@/components/tabs/TabPanel";
 describe("TabPanel", () => {
   it("renders correctly with children", () => {
     render(
-      <TabPanel tabButtonName="personal">
+      <TabPanel tabButtonId="personal">
         test
       </TabPanel>
     );
-    const panel = screen.getByRole("tabpanel");
+    const panel: HTMLDivElement = screen.getByRole("tabpanel");
 
     expect(panel).toHaveAttribute("id", "tab-panel");
     expect(panel).toHaveAttribute("aria-labelledby", "personal");
