@@ -35,7 +35,7 @@ describe("TabButton", () => {
         title="barbarian"
       />
     );
-    const button = screen.getByRole("tab");
+    const button: HTMLButtonElement = screen.getByRole("tab");
 
     expect(button).toHaveAttribute("aria-selected", "false");
   });
