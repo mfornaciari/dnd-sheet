@@ -1,13 +1,16 @@
 import i18next from "i18next";
+import { TabPanel } from "@/components/tabs/TabPanel";
 
 type TabCharacterClassProps = {
   title: string,
 }
 
-export default function TabCharacterClass({ title }: TabCharacterClassProps) {
+export function TabCharacterClass({ title }: TabCharacterClassProps) {
   const i18nName = i18next.t(title);
 
   return (
-    <>{i18nName}</>
+    <TabPanel tabButtonName="characterClass">
+      {i18nName}
+    </TabPanel>
   );
 };

@@ -1,23 +1,20 @@
 import { useState } from "react";
-import { CharacterClass, TabKind, Tabs } from "@/types";
-import { findClassName } from "@/helpers/formHelpers";
-import { TabButton } from "./TabButton";
-import TabPersonal from "./tabs/TabPersonal";
-import TabAttributes from "./tabs/TabAttributes";
-import TabCharacterClass from "./tabs/TabCharacterClass";
-import TabSpells from "./tabs/TabSpells";
-import TabItems from "./tabs/TabItems";
+import { TabKind, Tabs } from "@/types";
+import { TabButton } from "@/components/TabButton";
+import { TabPersonal } from "@/components/tabs/TabPersonal";
+import { TabAttributes } from "@/components/tabs/TabAttributes";
+import { TabCharacterClass } from "@/components/tabs/TabCharacterClass";
+import { TabSpells } from "@/components/tabs/TabSpells";
+import { TabItems } from "@/components/tabs/TabItems";
+
+const tabKinds: TabKind[] = ["personal", "attributes", "characterClass", "spells", "items"];
 
 type TabStructureProps = {
-  characterClasses: CharacterClass[],
-  selectedClassId: string,
+  classTabTitle: string,
 }
 
-export function TabStructure({ characterClasses, selectedClassId }: TabStructureProps) {
-  const [activeTab, setActiveTab] = useState<TabKind>(() => 'personal');
-
-  const tabKinds: TabKind[] = ['personal', 'attributes', 'characterClass', 'spells', 'items'];
-  const classTabTitle = findClassName(characterClasses, selectedClassId);
+export function TabStructure({ classTabTitle }: TabStructureProps) {
+  const [activeTab, setActiveTab] = useState<TabKind>(() => "personal");
 
   const tabPanels: Tabs = {
     personal: <TabPersonal />,
@@ -26,8 +23,9 @@ export function TabStructure({ characterClasses, selectedClassId }: TabStructure
     spells: <TabSpells />,
     items: <TabItems />,
   };
+
   const tabButtons = tabKinds.map(tabKind => {
-    const title = tabKind === 'characterClass' ? classTabTitle : tabKind;
+    const title = tabKind === "characterClass" ? classTabTitle : tabKind;
 
     return (
       <TabButton
@@ -42,11 +40,9 @@ export function TabStructure({ characterClasses, selectedClassId }: TabStructure
 
   return (
     <>
-      <section id='tab-panel' role='tabpanel' aria-labelledby={activeTab} aria-expanded='true'>
-        {tabPanels[activeTab]}
-      </section>
+      {tabPanels[activeTab]}
 
-      <ul role='tablist' aria-label='Abas' className='tab-list'>
+      <ul role="tablist" aria-label="Abas" className="tab-list">
         {tabButtons}
       </ul>
     </>

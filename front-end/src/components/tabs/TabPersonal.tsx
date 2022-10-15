@@ -1,9 +1,12 @@
-import i18next from 'i18next';
+import i18next from "i18next";
+import { TabPanel } from "@/components/tabs/TabPanel";
 
-export default function TabPersonal() {
-  const i18nName = i18next.t('personal');
+export function TabPersonal() {
+  const i18nName = i18next.t("personal");
 
   return (
-    <>{i18nName}</>
+    <TabPanel tabButtonName="personal">
+      {i18nName}
+    </TabPanel>
   );
 }

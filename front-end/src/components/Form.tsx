@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import '@/style/Form.css';
 import type { FetchedData, CharacterValues } from '@/types';
-import { calculateLevel, generateURL } from '@/helpers/formHelpers';
+import { calculateLevel, findClassName, generateURL } from '@/helpers/formHelpers';
 import Select from '@/components/Select';
 import InputNumber from '@/components/InputNumber';
 import InputText from '@/components/InputText';
@@ -34,6 +34,7 @@ export function Form({ data }: FormProps) {
 
   const { races, characterClasses, levels } = data;
   const selectedClassId = formMethods.watch('characterClass');
+  const classTabTitle = findClassName(characterClasses, selectedClassId);
   const characterExperience = formMethods.watch('experience');
   const currentLevel = calculateLevel(levels, characterExperience);
   const formValid = formMethods.formState.isValid;
@@ -87,8 +88,7 @@ export function Form({ data }: FormProps) {
         </section>
 
         <TabStructure
-          characterClasses={characterClasses}
-          selectedClassId={selectedClassId}
+          classTabTitle={classTabTitle}
         />
       </form>
     </FormProvider>

@@ -1,9 +1,12 @@
 import i18next from "i18next";
+import { TabPanel } from "@/components/tabs/TabPanel";
 
-export default function TabAttributes() {
-  const i18nName = i18next.t('attributes');
+export function TabAttributes() {
+  const i18nName = i18next.t("attributes");
 
   return (
-    <>{i18nName}</>
+    <TabPanel tabButtonName="attributes">
+      {i18nName}
+    </TabPanel>
   );
 };

@@ -1,9 +1,12 @@
 import i18next from "i18next";
+import { TabPanel } from "@/components/tabs/TabPanel";
 
-export default function TabSpells() {
-  const i18nName = i18next.t('spells');
+export function TabSpells() {
+  const i18nName = i18next.t("spells");
 
   return (
-    <>{i18nName}</>
+    <TabPanel tabButtonName="spells">
+      {i18nName}
+    </TabPanel>
   );
 };
