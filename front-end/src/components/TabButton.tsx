@@ -6,12 +6,11 @@ type TabButtonProps = {
   tabKind: TabKind,
   handleClick: React.MouseEventHandler<HTMLButtonElement>,
   isSelected: boolean,
-  selectedClassName: string,
+  title: string,
 }
 
-export default function TabButton({ tabKind, isSelected, handleClick, selectedClassName }: TabButtonProps) {
-  const i18nTabKind = i18next.t(tabKind);
-  const i18nClassName = i18next.t(selectedClassName);
+export function TabButton({ tabKind, isSelected, handleClick, title }: TabButtonProps) {
+  const i18nTitle = i18next.t(title);
 
   return (
     <button
@@ -22,7 +21,7 @@ export default function TabButton({ tabKind, isSelected, handleClick, selectedCl
       onClick={handleClick}
       className='tab-button'
     >
-      <strong>{ i18nClassName || i18nTabKind }</strong>
+      <strong>{i18nTitle}</strong>
     </button>
   );
 }

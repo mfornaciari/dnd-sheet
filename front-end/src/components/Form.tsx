@@ -1,18 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import '@/style/Form.css';
-import type { FetchedData, CharacterValues, Tabs, TabKind } from '@/types';
-import { calculateLevel, findClassName, generateURL } from '@/helpers/formHelpers';
+import type { FetchedData, CharacterValues } from '@/types';
+import { calculateLevel, generateURL } from '@/helpers/formHelpers';
 import Select from '@/components/Select';
 import InputNumber from '@/components/InputNumber';
 import InputText from '@/components/InputText';
-import TabPersonal from '@/components/tabs/TabPersonal';
-import TabAttributes from '@/components/tabs/TabAttributes';
-import TabCharacterClass from '@/components/tabs/TabCharacterClass';
-import TabSpells from '@/components/tabs/TabSpells';
-import TabItems from '@/components/tabs/TabItems';
-import TabButton from '@/components/TabButton';
 import Container from '@/components/Container';
+import { TabStructure } from './TabStructure';
 
 type FormProps = {
   data: FetchedData,
@@ -30,7 +25,7 @@ export function Form({ data }: FormProps) {
     mode: 'onTouched',
     defaultValues: JSON.parse(localStorage.getItem('characterValues') || emptyValues),
   });
-  const [activeTab, setActiveTab] = useState<TabKind>(() => 'personal');
+
   const characterValues = formMethods.watch();
 
   useEffect(() => {
@@ -39,17 +34,8 @@ export function Form({ data }: FormProps) {
 
   const { races, characterClasses, levels } = data;
   const selectedClassId = formMethods.watch('characterClass');
-  const selectedClassName = findClassName(characterClasses, selectedClassId);
   const characterExperience = formMethods.watch('experience');
   const currentLevel = calculateLevel(levels, characterExperience);
-  const tabPanels: Tabs = {
-    personal: <TabPersonal />,
-    attributes: <TabAttributes />,
-    characterClass: <TabCharacterClass selectedClassName={selectedClassName} />,
-    spells: <TabSpells />,
-    items: <TabItems />,
-  };
-  const tabKinds = Object.keys(tabPanels) as TabKind[];
   const formValid = formMethods.formState.isValid;
   const downloadURL = generateURL(formMethods.getValues());
 
@@ -100,21 +86,10 @@ export function Form({ data }: FormProps) {
           />
         </section>
 
-        <section id='tab-panel' role='tabpanel' aria-labelledby={activeTab} aria-expanded='true'>
-          {tabPanels[activeTab]}
-        </section>
-
-        <ul role='tablist' aria-label='Abas' className='tab-list'>
-          {tabKinds.map(tabKind => (
-            <TabButton
-              key={tabKind}
-              tabKind={tabKind}
-              handleClick={() => setActiveTab(tabKind)}
-              isSelected={activeTab === tabKind}
-              selectedClassName={tabKind === 'characterClass' ? selectedClassName : ''}
-            />
-          ))}
-        </ul>
+        <TabStructure
+          characterClasses={characterClasses}
+          selectedClassId={selectedClassId}
+        />
       </form>
     </FormProvider>
   );
