@@ -20,3 +20,22 @@ describe("calculateLevel", () => {
     expect(result).toEqual(20);
   });
 });
+
+describe("findClassName", () => {
+  const characterClasses = fetchedDataMock.data.characterClasses;
+  it("returns matching class name if ID is found in the class data provided", () => {
+    const selectedClassId = "1";
+
+    const result = findClassName(characterClasses, selectedClassId);
+
+    expect(result).toEqual("barbarian");
+  });
+
+  it("returns 'characterClass' if ID is not found in the class data provided", () => {
+    const selectedClassId = "4";
+
+    const result = findClassName(characterClasses, selectedClassId);
+
+    expect(result).toEqual("characterClass");
+  });
+});
