@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
 import { useForm, FormProvider } from 'react-hook-form';
 import '@/style/Form.css';
 import type { FetchedData, CharacterValues, Tabs, TabKind } from '@/types';
-import { GET_DATA } from '@/queries/getData';
 import { calculateLevel, findClassName, generateURL } from '@/helpers/formHelpers';
-import StatusMessage from '@/components/StatusMessage';
 import Select from '@/components/Select';
 import InputNumber from '@/components/InputNumber';
 import InputText from '@/components/InputText';
@@ -17,6 +14,10 @@ import TabItems from '@/components/tabs/TabItems';
 import TabButton from '@/components/TabButton';
 import Container from '@/components/Container';
 
+type FormProps = {
+  data: FetchedData,
+}
+
 const emptyValues = JSON.stringify({
   name: '',
   race: '0',
@@ -24,8 +25,7 @@ const emptyValues = JSON.stringify({
   experience: '0',
 });
 
-export default function Form() {
-  const { loading, error, data } = useQuery<FetchedData>(GET_DATA);
+export function Form({ data }: FormProps) {
   const formMethods = useForm<CharacterValues>({
     mode: 'onTouched',
     defaultValues: JSON.parse(localStorage.getItem('characterValues') || emptyValues),
@@ -36,9 +36,6 @@ export default function Form() {
   useEffect(() => {
     localStorage.setItem('characterValues', JSON.stringify(characterValues));
   }, [characterValues]);
-
-  if (loading) return <StatusMessage message='loading' />;
-  if (error || !data) return <StatusMessage message='error' />;
 
   const { races, characterClasses, levels } = data;
   const selectedClassId = formMethods.watch('characterClass');

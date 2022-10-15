@@ -1,50 +1,52 @@
 {
-  "races": [
-    {
-      "id": "1",
-      "name": "Anão"
-    },
-    {
-      "id": "2",
-      "name": "Draconato"
-    },
-    {
-      "id": "3",
-      "name": "Elfo"
-    }
-  ],
-  "characterClasses": [
-    {
-      "id": "1",
-      "name": "barbarian"
-    },
-    {
-      "id": "2",
-      "name": "bard"
-    },
-    {
-      "id": "3",
-      "name": "warlock"
-    }
-  ],
-  "levels": [
-    {
-      "id": "1",
-      "level": 1,
-      "minExperience": 0,
-      "maxExperience": 299
-    },
-    {
-      "id": "2",
-      "level": 2,
-      "minExperience": 300,
-      "maxExperience": 899
-    },
-    {
-      "id": "3",
-      "level": 3,
-      "minExperience": 900,
-      "maxExperience": 2699
-    }
-  ]
+  "data": {
+    "races": [
+      {
+        "id": "1",
+        "name": "Anão"
+      },
+      {
+        "id": "2",
+        "name": "Draconato"
+      },
+      {
+        "id": "3",
+        "name": "Elfo"
+      }
+    ],
+    "characterClasses": [
+      {
+        "id": "1",
+        "name": "barbarian"
+      },
+      {
+        "id": "2",
+        "name": "bard"
+      },
+      {
+        "id": "3",
+        "name": "warlock"
+      }
+    ],
+    "levels": [
+      {
+        "id": "1",
+        "level": 1,
+        "minExperience": 0,
+        "maxExperience": 299
+      },
+      {
+        "id": "2",
+        "level": 2,
+        "minExperience": 300,
+        "maxExperience": 899
+      },
+      {
+        "id": "3",
+        "level": 3,
+        "minExperience": 900,
+        "maxExperience": 2699
+      }
+    ]
+  }
 }

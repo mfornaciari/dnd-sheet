@@ -1,72 +1,24 @@
-import { render, screen, within, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MockedProvider } from '@apollo/client/testing';
 import fetchedDataMock from './fetchedDataMock.json';
-import { GET_DATA } from '@/queries/getData';
-import Form from '@/components/Form';
+import { Form } from '@/components/Form';
 
 describe('Form', () => {
   const mockCharacterValues = JSON.stringify({
     name: 'Bruenor',
-    race: fetchedDataMock.races[0].id, // 1 - Anão
-    characterClass: fetchedDataMock.characterClasses[0].id, // 1 - barbarian
+    race: fetchedDataMock.data.races[0].id, // 1 - Anão
+    characterClass: fetchedDataMock.data.characterClasses[0].id, // 1 - barbarian
     experience: 300,
   });
   const mockFile = new File([mockCharacterValues], 'mock.json', { type: 'application/json' });
   File.prototype.text = jest.fn().mockResolvedValue(mockCharacterValues);
-  const queryMocks = [
-    {
-      request: {
-        query: GET_DATA,
-      },
-      result: {
-        data: {
-          races: fetchedDataMock.races,
-          characterClasses: fetchedDataMock.characterClasses,
-          levels: fetchedDataMock.levels,
-        },
-      },
-    },
-  ];
-  const errorQueryMocks = [
-    {
-      request: {
-        query: GET_DATA,
-      },
-      error: new Error('An error occurred'),
-    },
-  ];
-
-  function TestForm() {
-    return (
-      <MockedProvider mocks={queryMocks} addTypename={false}>
-        <Form />
-      </MockedProvider>
-    );
-  }
-
-  function ErrorTestForm() {
-    return (
-      <MockedProvider mocks={errorQueryMocks} addTypename={false}>
-        <Form />
-      </MockedProvider>
-    );
-  }
 
   afterEach(() => {
     localStorage.clear();
   });
 
-  it('shows error message when data was not fetched', async () => {
-    render(<ErrorTestForm />);
-    const statusMessage = screen.getByRole('status');
-
-    await waitFor(() => expect(statusMessage).toHaveTextContent(/^Erro$/));
-  });
-
   it('renders and works correctly', async () => {
-    render(<TestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
+    render(<Form data={fetchedDataMock.data} />);
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
     const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
     const characterClassInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
@@ -172,8 +124,7 @@ describe('Form', () => {
 
   it('loads character info from localStorage when opening app', async () => {
     localStorage.setItem('characterValues', mockCharacterValues);
-    render(<TestForm />);
-    await waitForElementToBeRemoved(() => screen.getByRole('status', { name: 'Carregando...' }));
+    render(<Form data={fetchedDataMock.data} />);
     const nameInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Nome' });
     const raceInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Raça' });
     const classInput: HTMLInputElement = screen.getByRole('combobox', { name: 'Classe' });
