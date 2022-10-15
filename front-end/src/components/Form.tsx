@@ -1,41 +1,41 @@
-import { useEffect } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import '@/style/Form.css';
-import type { FetchedData, CharacterValues } from '@/types';
-import { calculateLevel, findClassName, generateURL } from '@/helpers/formHelpers';
-import Select from '@/components/Select';
-import InputNumber from '@/components/InputNumber';
-import InputText from '@/components/InputText';
-import Container from '@/components/Container';
-import { TabStructure } from './TabStructure';
+import { useEffect } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import "@/style/Form.css";
+import type { FetchedData, CharacterValues } from "@/types";
+import { calculateLevel, findClassName, generateURL } from "@/helpers/formHelpers";
+import Select from "@/components/Select";
+import InputNumber from "@/components/InputNumber";
+import InputText from "@/components/InputText";
+import Container from "@/components/Container";
+import { TabStructure } from "@/components/TabStructure";
 
 type FormProps = {
   data: FetchedData,
 }
 
 const emptyValues = JSON.stringify({
-  name: '',
-  race: '0',
-  characterClass: '0',
-  experience: '0',
+  name: "",
+  race: "0",
+  characterClass: "0",
+  experience: "0",
 });
 
 export function Form({ data }: FormProps) {
   const formMethods = useForm<CharacterValues>({
-    mode: 'onTouched',
-    defaultValues: JSON.parse(localStorage.getItem('characterValues') || emptyValues),
+    mode: "onTouched",
+    defaultValues: JSON.parse(localStorage.getItem("characterValues") || emptyValues),
   });
 
   const characterValues = formMethods.watch();
 
   useEffect(() => {
-    localStorage.setItem('characterValues', JSON.stringify(characterValues));
+    localStorage.setItem("characterValues", JSON.stringify(characterValues));
   }, [characterValues]);
 
   const { races, characterClasses, levels } = data;
-  const selectedClassId = formMethods.watch('characterClass');
+  const selectedClassId = formMethods.watch("characterClass");
   const classTabTitle = findClassName(characterClasses, selectedClassId);
-  const characterExperience = formMethods.watch('experience');
+  const characterExperience = formMethods.watch("experience");
   const currentLevel = calculateLevel(levels, characterExperience);
   const formValid = formMethods.formState.isValid;
   const downloadURL = generateURL(formMethods.getValues());
@@ -52,44 +52,42 @@ export function Form({ data }: FormProps) {
   return (
     <FormProvider {...formMethods}>
       <form>
-        <section id='form-top'>
-          <InputText name='name' required />
+        <section id="form-top">
+          <InputText name="name" required />
 
-          <Select name='race' optionData={races} required />
+          <Select name="race" optionData={races} required />
 
-          <Select name='characterClass' optionData={characterClasses} required />
+          <Select name="characterClass" optionData={characterClasses} required />
 
-          <InputNumber name='experience' minValue='0' maxValue='999999' />
+          <InputNumber name="experience" minValue="0" maxValue="999999" />
 
-          <Container hiddenTitle='Nível'>
-            <strong className='text'>Nível {currentLevel}</strong>
+          <Container hiddenTitle="Nível">
+            <strong className="text">Nível {currentLevel}</strong>
           </Container>
 
           <a
-            role='button'
-            id='save-button'
-            href={formValid ? downloadURL : '#'}
-            download={formValid ? formMethods.getValues('name') : undefined}
-            className='top-button'
+            role="button"
+            id="save-button"
+            href={formValid ? downloadURL : "#"}
+            download={formValid ? formMethods.getValues("name") : undefined}
+            className="top-button"
           >
             <strong>Salvar</strong>
           </a>
 
-          <label role='button' htmlFor='loading-input' className='top-button'>
+          <label role="button" htmlFor="loading-input" className="top-button">
             <strong>Carregar</strong>
           </label>
           <input
-            type='file'
-            id='loading-input'
-            accept='.json'
+            type="file"
+            id="loading-input"
+            accept=".json"
             onChange={event => handleFileChange(event.currentTarget.files)}
             hidden
           />
         </section>
 
-        <TabStructure
-          classTabTitle={classTabTitle}
-        />
+        <TabStructure classTabTitle={classTabTitle} />
       </form>
     </FormProvider>
   );
