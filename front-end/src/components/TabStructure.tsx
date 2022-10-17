@@ -10,7 +10,7 @@ import { TabItems } from "@/components/tabs/TabItems";
 const tabKinds: TabKind[] = ["personal", "attributes", "characterClass", "spells", "items"];
 
 type TabStructureProps = {
-  selectedClassName: CharacterClassName | "characterClass",
+  selectedClassName: CharacterClassName | "characterClass";
 }
 
 export function TabStructure({ selectedClassName }: TabStructureProps) {

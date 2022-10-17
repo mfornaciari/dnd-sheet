@@ -2,7 +2,7 @@ import i18next from 'i18next';
 import '@/style/StatusMessage.css';
 
 type StatusMessageProps = {
-  message: string,
+  message: string;
 }
 
 export function StatusMessage({ message }: StatusMessageProps) {

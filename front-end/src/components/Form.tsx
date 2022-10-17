@@ -10,7 +10,7 @@ import Container from "@/components/Container";
 import { TabStructure } from "@/components/TabStructure";
 
 type FormProps = {
-  data: FetchedData,
+  data: FetchedData;
 }
 
 const emptyValues = JSON.stringify({

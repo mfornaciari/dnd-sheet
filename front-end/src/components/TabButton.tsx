@@ -3,10 +3,10 @@ import '@/style/TabButton.css';
 import { CharacterClassName, TabKind } from '@/types';
 
 type TabButtonProps = {
-  tabKind: TabKind,
-  handleClick: React.MouseEventHandler<HTMLButtonElement>,
-  isSelected: boolean,
-  title: CharacterClassName | TabKind,
+  tabKind: TabKind;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  isSelected: boolean;
+  title: CharacterClassName | TabKind;
 }
 
 export function TabButton({ tabKind, isSelected, handleClick, title }: TabButtonProps) {
