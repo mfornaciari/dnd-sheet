@@ -6,7 +6,7 @@ import { calculateLevel, findClassName, generateURL } from "@/helpers/formHelper
 import Select from "@/components/Select";
 import InputNumber from "@/components/InputNumber";
 import InputText from "@/components/InputText";
-import Container from "@/components/Container";
+import { Container } from "@/components/Container";
 import { TabStructure } from "@/components/TabStructure";
 
 type FormProps = {

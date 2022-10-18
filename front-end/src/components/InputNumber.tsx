@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import i18next from 'i18next';
-import Container from '@/components/Container';
+import { Container } from '@/components/Container';
 
 type InputNumberProps = Readonly<{
   name: string;

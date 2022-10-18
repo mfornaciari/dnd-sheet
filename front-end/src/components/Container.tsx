@@ -7,7 +7,7 @@ type ContainerProps = {
   invalid?: boolean;
 };
 
-export default function Container({ hiddenTitle, invalid, children }: PropsWithChildren<ContainerProps>) {
+export function Container({ hiddenTitle, invalid, children }: PropsWithChildren<ContainerProps>) {
   let className = 'container';
   if (hiddenTitle) className += ' hidden-titled';
   if (invalid) className += ' invalid';
