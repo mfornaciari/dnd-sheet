@@ -30,7 +30,7 @@ function isAllowed(key: string): boolean {
   return allowedKeys.includes(key);
 }
 
-export default function InputNumber({ name, minValue, maxValue, required }: InputNumberProps) {
+export function InputNumber({ name, minValue, maxValue, required }: InputNumberProps) {
   const { register, formState: { errors } } = useFormContext();
   const i18nName = i18next.t(name);
   const invalid = errors[name] ? true : false;

@@ -8,7 +8,7 @@ type InputTextProps = Readonly<{
   required?: boolean;
 }>;
 
-export default function InputText({ name, placeholderText, required }: InputTextProps) {
+export function InputText({ name, placeholderText, required }: InputTextProps) {
   const { register, formState: { errors } } = useFormContext();
   const i18nName = i18next.t(name);
   const invalid = errors[name] ? true : false;

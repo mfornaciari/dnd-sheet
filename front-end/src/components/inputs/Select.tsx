@@ -9,7 +9,7 @@ type SelectProps = Readonly<{
   required?: boolean;
 }>;
 
-export default function Select({ name, optionData, required }: SelectProps) {
+export function Select({ name, optionData, required }: SelectProps) {
   const { register, formState: { errors } } = useFormContext();
   const i18nName = i18next.t(name);
   const invalid = errors[name] ? true : false;

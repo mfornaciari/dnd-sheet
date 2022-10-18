@@ -3,11 +3,11 @@ import { useForm, FormProvider } from "react-hook-form";
 import "@/style/Form.css";
 import type { FetchedData, CharacterValues } from "@/types";
 import { calculateLevel, findClassName, generateURL } from "@/helpers/formHelpers";
-import Select from "@/components/Select";
-import InputNumber from "@/components/InputNumber";
-import InputText from "@/components/InputText";
 import { Container } from "@/components/Container";
 import { TabStructure } from "@/components/TabStructure";
+import { InputText } from "@/components/inputs/InputText";
+import { InputNumber } from "@/components/inputs/InputNumber";
+import { Select } from "@/components/inputs/Select";
 
 type FormProps = {
   data: FetchedData;
