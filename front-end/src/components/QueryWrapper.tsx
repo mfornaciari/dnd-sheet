@@ -4,6 +4,7 @@ import { StatusMessage } from '@/components/StatusMessage';
 
 type QueryWrapperProps = {
   query: DocumentNode;
+  // TODO: Make wrapper support multiple children
   children: (data: FetchedData) => JSX.Element;
 };
 
