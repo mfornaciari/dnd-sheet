@@ -4,10 +4,10 @@ import { Container } from '@/components/Container';
 
 type InputNumberProps = Readonly<{
   name: string;
-  error?: any;
+  error?: any; // TODO: Remove "any"
   minValue?: string;
   maxValue?: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<any>; // TODO: Remove "any"
   required?: boolean;
 }>;
 
@@ -32,7 +32,14 @@ function isAllowed(key: string): boolean {
   return allowedKeys.includes(key);
 }
 
-export function InputNumber({ name, error, minValue, maxValue, register, required }: InputNumberProps) {
+export function InputNumber({
+  name,
+  error,
+  minValue,
+  maxValue,
+  register,
+  required
+}: InputNumberProps) {
   const i18nName = i18next.t(name);
   const invalid = error ? true : false;
 
