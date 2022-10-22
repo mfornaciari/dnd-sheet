@@ -11,54 +11,50 @@ import { TabStructure } from '@/components/TabStructure';
 export default function App() {
   return (
     <QueryWrapper query={GET_DATA}>
-      {(data) => {
-        return (
-          <FormWrapper data={data}>
-            {(currentLevel, data, downloadURL, getValues, handleFileChange, isValid, selectedClassName) => {
-              return (
-                <>
-                  <section id="form-top">
-                    <InputText name="name" required />
+      {(data) => (
+        <FormWrapper data={data}>
+          {({ currentLevel, downloadURL, getValues, handleFileChange, isValid, selectedClassName }) => (
+            <>
+              <section id="form-top">
+                <InputText name="name" required />
 
-                    <Select name="race" optionData={data.races} required />
+                <Select name="race" optionData={data.races} required />
 
-                    <Select name="characterClass" optionData={data.characterClasses} required />
+                <Select name="characterClass" optionData={data.characterClasses} required />
 
-                    <InputNumber name="experience" minValue="0" maxValue="999999" />
+                <InputNumber name="experience" minValue="0" maxValue="999999" />
 
-                    <Container hiddenTitle="Nível">
-                      <strong className="text">Nível {currentLevel}</strong>
-                    </Container>
+                <Container hiddenTitle="Nível">
+                  <strong className="text">Nível {currentLevel}</strong>
+                </Container>
 
-                    <a
-                      role="button"
-                      id="save-button"
-                      href={isValid ? downloadURL : "#"}
-                      download={isValid ? getValues("name") : undefined}
-                      className="top-button"
-                    >
-                      <strong>Salvar</strong>
-                    </a>
+                <a
+                  role="button"
+                  id="save-button"
+                  href={isValid ? downloadURL : "#"}
+                  download={isValid ? getValues("name") : undefined}
+                  className="top-button"
+                >
+                  <strong>Salvar</strong>
+                </a>
 
-                    <label role="button" htmlFor="loading-input" className="top-button">
-                      <strong>Carregar</strong>
-                    </label>
-                    <input
-                      type="file"
-                      id="loading-input"
-                      accept=".json"
-                      onChange={event => handleFileChange(event.currentTarget.files)}
-                      hidden
-                    />
-                  </section>
+                <label role="button" htmlFor="loading-input" className="top-button">
+                  <strong>Carregar</strong>
+                </label>
+                <input
+                  type="file"
+                  id="loading-input"
+                  accept=".json"
+                  onChange={event => handleFileChange(event.currentTarget.files)}
+                  hidden
+                />
+              </section>
 
-                  <TabStructure selectedClassName={selectedClassName} />
-                </>
-              );
-            }}
-          </FormWrapper>
-        );
-      }}
+              <TabStructure selectedClassName={selectedClassName} />
+            </>
+          )}
+        </FormWrapper>
+      )}
     </QueryWrapper>
   );
 }

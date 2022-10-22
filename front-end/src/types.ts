@@ -1,11 +1,8 @@
-export type Race = Readonly<{
-  id: string;
+export type CharacterValues = Readonly<{
   name: string;
-}>
-
-export type CharacterClass = Readonly<{
-  id: string;
-  name: CharacterClassName;
+  race: string;
+  characterClass: CharacterClassName;
+  experience: string;
 }>
 
 export type CharacterClassName =
@@ -21,14 +18,7 @@ export type CharacterClassName =
   | "sorcerer"
   | "warlock"
   | "wizard"
-
-
-export type Level = Readonly<{
-  id: string;
-  level: number;
-  minExperience: number;
-  maxExperience: number;
-}>
+  ;
 
 export type FetchedData = Readonly<{
   races: Race[];
@@ -36,11 +26,21 @@ export type FetchedData = Readonly<{
   levels: Level[];
 }>
 
-export type CharacterValues = Readonly<{
+export type Race = Readonly<{
+  id: string;
   name: string;
-  race: string;
-  characterClass: CharacterClassName;
-  experience: string;
+}>
+
+export type CharacterClass = Readonly<{
+  id: string;
+  name: CharacterClassName;
+}>
+
+export type Level = Readonly<{
+  id: string;
+  level: number;
+  minExperience: number;
+  maxExperience: number;
 }>
 
 export type Option = Readonly<{

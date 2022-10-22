@@ -5,18 +5,19 @@ import { FormProvider, useForm } from "react-hook-form";
 import "@/style/Form.css";
 import { calculateLevel, findClassName, generateURL } from "@/helpers/formHelpers";
 
-type FormProps = {
+type FormChildrenArgs = Readonly<{
+  currentLevel: number,
+  downloadURL: string,
+  getValues: (fieldName: string) => CharacterValues,
+  handleFileChange: (files: FileList | null) => Promise<void>,
+  isValid: boolean,
+  selectedClassName: CharacterClassName | "characterClass",
+}>
+
+type FormProps = Readonly<{
   data: FetchedData;
-  children: (
-    currentLevel: number,
-    data: FetchedData,
-    downloadURL: string,
-    getValues: (fieldName: string) => CharacterValues,
-    handleFileChange: (files: FileList | null) => Promise<void>,
-    isValid: boolean,
-    selectedClassName: CharacterClassName | "characterClass",
-  ) => ReactElement;
-}
+  children: (arg: FormChildrenArgs) => ReactElement;
+}>
 
 const emptyValues = JSON.stringify({
   name: "",
@@ -39,7 +40,7 @@ export function FormWrapper({ data, children }: FormProps) {
 
   const { characterClasses, levels } = data;
   const selectedClassId = methods.watch("characterClass");
-  const selectedClassName = findClassName(characterClasses, selectedClassId);
+  const selectedClassName: CharacterClassName | "characterClass" = findClassName(characterClasses, selectedClassId);
   const characterExperience = parseInt(methods.watch("experience"));
   const currentLevel = calculateLevel(levels, characterExperience);
   const downloadURL = generateURL(methods.getValues());
@@ -53,10 +54,19 @@ export function FormWrapper({ data, children }: FormProps) {
     }
   }
 
+  const childrenArguments = {
+    currentLevel: currentLevel,
+    downloadURL: downloadURL,
+    getValues: methods.getValues,
+    handleFileChange: handleFileChange,
+    isValid: methods.formState.isValid,
+    selectedClassName: selectedClassName,
+  }
+
   return (
     <FormProvider {...methods}>
       <form>
-        {children(currentLevel, data, downloadURL, methods.getValues, handleFileChange, methods.formState.isValid, selectedClassName)}
+        {children(childrenArguments)}
       </form>
     </FormProvider>
   );
