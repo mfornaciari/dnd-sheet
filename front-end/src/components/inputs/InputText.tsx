@@ -1,18 +1,18 @@
-import type { FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
+import type { UseFormRegister } from 'react-hook-form';
 import i18next from 'i18next';
 import { Container } from '@/components/Container';
 
 type InputTextProps = Readonly<{
   name: string;
-  errors: FieldErrorsImpl<any>;
+  error?: any;
   placeholderText?: string;
   register: UseFormRegister<any>;
   required?: boolean;
 }>;
 
-export function InputText({ name, errors, placeholderText, register, required }: InputTextProps) {
+export function InputText({ name, error, placeholderText, register, required }: InputTextProps) {
   const i18nName = i18next.t(name);
-  const invalid = errors[name] ? true : false;
+  const invalid = error ? true : false;
 
   return (
     <Container invalid={invalid}>

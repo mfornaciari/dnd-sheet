@@ -31,14 +31,14 @@ export default function App() {
       <section id="form-top">
         <InputText
           name="name"
-          errors={errors}
+          error={errors.name}
           register={register}
           required
         />
 
         <Select
           name="race"
-          errors={errors}
+          error={errors.race}
           optionData={data.races}
           register={register}
           required
@@ -46,7 +46,7 @@ export default function App() {
 
         <Select
           name="characterClass"
-          errors={errors}
+          error={errors.characterClass}
           optionData={data.characterClasses}
           register={register}
           required
@@ -54,7 +54,7 @@ export default function App() {
 
         <InputNumber
           name="experience"
-          errors={errors}
+          error={errors.experience}
           minValue="0"
           maxValue="999999"
           register={register}

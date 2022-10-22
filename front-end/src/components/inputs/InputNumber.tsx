@@ -1,10 +1,10 @@
-import type { FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
+import type { UseFormRegister } from 'react-hook-form';
 import i18next from 'i18next';
 import { Container } from '@/components/Container';
 
 type InputNumberProps = Readonly<{
   name: string;
-  errors: FieldErrorsImpl<any>;
+  error?: any;
   minValue?: string;
   maxValue?: string;
   register: UseFormRegister<any>;
@@ -32,9 +32,9 @@ function isAllowed(key: string): boolean {
   return allowedKeys.includes(key);
 }
 
-export function InputNumber({ name, errors, minValue, maxValue, register, required }: InputNumberProps) {
+export function InputNumber({ name, error, minValue, maxValue, register, required }: InputNumberProps) {
   const i18nName = i18next.t(name);
-  const invalid = errors[name] ? true : false;
+  const invalid = error ? true : false;
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (!isAllowed(event.key)) event.preventDefault();
