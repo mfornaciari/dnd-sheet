@@ -14,6 +14,7 @@ describe("InputText", () => {
     const container = input.parentElement!;
 
     expect(input).toHaveAccessibleName("test");
+    expect(input).toHaveClass("input");
     expect(input).toHaveAttribute("placeholder", "placeholder text");
     expect(container).toHaveClass("container");
   });
