@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import i18next from 'i18next';
 import ptbr from '../locales/pt-BR.json';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import App from '@/App';
+import { App } from '@/app/App';
 
 i18next.init({
   lng: 'ptbr',

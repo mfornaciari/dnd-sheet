@@ -18,8 +18,13 @@ export default {
     ],
   },
   collectCoverage: true,
+  collectCoverageFrom: [
+    'src/app/**/*.{ts,tsx}',
+    '!src/app/**/*.css',
+    '!**/index.ts',
+  ],
   coverageProvider: 'v8',
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
   moduleNameMapper: {
     '^.+\\.css$': '<rootDir>/__mocks__/styleMock.js',
     '^@/(.*)$': '<rootDir>/src/$1',
