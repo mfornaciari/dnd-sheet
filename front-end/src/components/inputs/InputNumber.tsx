@@ -1,11 +1,13 @@
-import { useFormContext } from 'react-hook-form';
+import type { FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
 import i18next from 'i18next';
 import { Container } from '@/components/Container';
 
 type InputNumberProps = Readonly<{
   name: string;
+  errors: FieldErrorsImpl<any>;
   minValue?: string;
   maxValue?: string;
+  register: UseFormRegister<any>;
   required?: boolean;
 }>;
 
@@ -30,8 +32,7 @@ function isAllowed(key: string): boolean {
   return allowedKeys.includes(key);
 }
 
-export function InputNumber({ name, minValue, maxValue, required }: InputNumberProps) {
-  const { register, formState: { errors } } = useFormContext();
+export function InputNumber({ name, errors, minValue, maxValue, register, required }: InputNumberProps) {
   const i18nName = i18next.t(name);
   const invalid = errors[name] ? true : false;
 
