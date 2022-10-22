@@ -11,9 +11,15 @@ import { TabStructure } from '@/components/TabStructure';
 export default function App() {
   return (
     <QueryWrapper query={GET_DATA}>
-      {(data) => (
+      {data => (
         <FormWrapper data={data}>
-          {({ currentLevel, downloadURL, getValues, handleFileChange, isValid, selectedClassName }) => (
+          {({ currentLevel,
+            downloadURL,
+            getValues,
+            handleFileChange,
+            isValid,
+            selectedClassName
+          }) => (
             <>
               <section id="form-top">
                 <InputText name="name" required />
