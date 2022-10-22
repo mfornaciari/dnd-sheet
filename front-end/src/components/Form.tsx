@@ -1,7 +1,7 @@
+import type { FetchedData, CharacterValues } from "@/types";
 import { useEffect } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import "@/style/Form.css";
-import type { FetchedData, CharacterValues } from "@/types";
 import { calculateLevel, findClassName, generateURL } from "@/helpers/formHelpers";
 import { Container } from "@/components/Container";
 import { TabStructure } from "@/components/TabStructure";
