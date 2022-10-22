@@ -3,21 +3,20 @@ import user from "@testing-library/user-event";
 import { InputNumber } from "@/components/inputs/InputNumber";
 
 describe("InputNumber", () => {
-  const mockRegister = jest.fn();
-
   it("renders correctly", () => {
     render(
       <InputNumber
         name="test"
         minValue="0"
         maxValue="1"
-        register={mockRegister}
+        register={jest.fn()}
       />
     );
-    const input: HTMLInputElement = screen.getByRole("spinbutton", { name: "test" });
+    const input: HTMLInputElement = screen.getByRole("spinbutton");
     const container = input.parentElement!;
 
     expect(input).toHaveClass("input");
+    expect(input).toHaveAccessibleName("test");
     expect(input).toHaveAttribute("id", "test");
     expect(input).toHaveAttribute("min", "0");
     expect(input).toHaveAttribute("max", "1");
@@ -28,10 +27,10 @@ describe("InputNumber", () => {
     render(
       <InputNumber
         name="test"
-        register={mockRegister}
+        register={jest.fn()}
       />
     );
-    const input: HTMLInputElement = screen.getByRole("spinbutton", { name: "test" });
+    const input: HTMLInputElement = screen.getByRole("spinbutton");
 
     await user.type(input, "!-.,1a2");
 
@@ -44,10 +43,10 @@ describe("InputNumber", () => {
       <InputNumber
         name="test"
         error={true}
-        register={mockRegister}
+        register={jest.fn()}
       />
     );
-    const input: HTMLInputElement = screen.getByRole("spinbutton", { name: "test" });
+    const input: HTMLInputElement = screen.getByRole("spinbutton");
     const container = input.parentElement!;
 
     expect(container).toHaveClass("container invalid");
