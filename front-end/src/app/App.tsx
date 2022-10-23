@@ -34,14 +34,14 @@ export function App() {
       <section id="form-top">
         <InputText
           name="name"
-          error={errors.name}
+          invalid={errors.name ? true : false}
           register={register}
           required
         />
 
         <Select
           name="race"
-          error={errors.race}
+          invalid={errors.race ? true : false}
           optionData={data.races}
           register={register}
           required
@@ -49,7 +49,7 @@ export function App() {
 
         <Select
           name="characterClass"
-          error={errors.characterClass}
+          invalid={errors.characterClass ? true : false}
           optionData={data.characterClasses}
           register={register}
           required
@@ -57,13 +57,14 @@ export function App() {
 
         <InputNumber
           name="experience"
-          error={errors.experience}
+          invalid={errors.experience ? true : false}
           minValue="0"
           maxValue="999999"
           register={register}
+          required
         />
 
-        <Container hiddenTitle="Nível">
+        <Container title="Nível">
           <strong className="text">Nível {currentLevel}</strong>
         </Container>
 

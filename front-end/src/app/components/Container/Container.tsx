@@ -1,21 +1,31 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 import "./Container.css";
 import i18next from "i18next";
 
 type ContainerProps = {
-  hiddenTitle?: string;
+  title: ReactElement | string;
   invalid?: boolean;
 };
 
-export function Container({ hiddenTitle, invalid, children }: PropsWithChildren<ContainerProps>) {
+export function Container({
+  title,
+  invalid,
+  children
+}: PropsWithChildren<ContainerProps>) {
+  const titleVisible = !(typeof title === "string");
   let className = "container";
-  if (hiddenTitle) className += " hidden-titled";
+  if (!titleVisible) className += " hidden-titled";
   if (invalid) className += " invalid";
-  const role = hiddenTitle ? "region" : "presentation";
-  const ariaLabel = hiddenTitle ? i18next.t(hiddenTitle) : undefined;
+  const role = titleVisible ? "presentation" : "region";
+  const ariaLabel = titleVisible ? undefined : i18next.t(title);
 
   return (
-    <div className={className} role={role} aria-label={ariaLabel}>
+    <div
+      className={className}
+      role={role}
+      aria-label={ariaLabel}
+    >
+      {titleVisible && title}
       {children}
     </div>
   );

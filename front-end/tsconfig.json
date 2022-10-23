@@ -28,7 +28,7 @@
   },
   "include": [
     "src/**/*",
-    "test/**/*"
+    "src/test/**/*"
   ],
   "references": [
     {

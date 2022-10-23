@@ -24,7 +24,7 @@ export default {
     '!**/index.ts',
   ],
   coverageProvider: 'v8',
-  setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/test/setup.ts'],
   moduleNameMapper: {
     '^.+\\.css$': '<rootDir>/__mocks__/styleMock.js',
     '^@/(.*)$': '<rootDir>/src/$1',

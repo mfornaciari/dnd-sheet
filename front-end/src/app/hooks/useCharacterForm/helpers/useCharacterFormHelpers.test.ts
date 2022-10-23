@@ -1,6 +1,6 @@
 import { CharacterClass } from "@/types";
 import { calculateLevel, findClassName } from "./useCharacterFormHelpers";
-import fetchedDataMock from "../../../../../test/fetchedDataMock.json";
+import fetchedDataMock from "../../../../test/fetchedDataMock.json";
 
 describe("calculateLevel", () => {
   const levels = fetchedDataMock.data.levels;

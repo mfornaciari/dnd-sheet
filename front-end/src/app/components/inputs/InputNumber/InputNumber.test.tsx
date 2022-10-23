@@ -7,6 +7,7 @@ describe("InputNumber", () => {
     render(
       <InputNumber
         name="test"
+        invalid={false}
         minValue="0"
         maxValue="1"
         register={jest.fn()}
@@ -27,6 +28,7 @@ describe("InputNumber", () => {
     render(
       <InputNumber
         name="test"
+        invalid={false}
         register={jest.fn()}
       />
     );
@@ -42,7 +44,7 @@ describe("InputNumber", () => {
     render(
       <InputNumber
         name="test"
-        error={true}
+        invalid={true}
         register={jest.fn()}
       />
     );

@@ -6,6 +6,7 @@ describe("InputText", () => {
     render(
       <InputText
         name="test"
+        invalid={false}
         placeholderText="placeholder text"
         register={jest.fn()}
       />
@@ -23,7 +24,7 @@ describe("InputText", () => {
     render(
       <InputText
         name="test"
-        error={true}
+        invalid={true}
         register={jest.fn()}
       />
     );

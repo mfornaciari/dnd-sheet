@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import i18next from 'i18next';
-import ptbr from '../locales/pt-BR.json';
+import ptbr from '../../locales/pt-BR.json';
 import { CharacterValues } from '@/types';
 
 i18next.init({

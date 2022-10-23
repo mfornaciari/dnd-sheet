@@ -1,7 +1,7 @@
 import type { Option } from "@/types";
 import { render, screen, within } from "@testing-library/react";
 import i18next from "i18next";
-import fetchedDataMock from "../../../../../test/fetchedDataMock.json";
+import fetchedDataMock from "@/test/fetchedDataMock.json";
 import { Select } from "./Select";
 
 describe("Select", () => {
@@ -11,6 +11,7 @@ describe("Select", () => {
     render(
       <Select
         name="test"
+        invalid={false}
         optionData={optionDataMock}
         register={jest.fn()}
       />
@@ -32,7 +33,7 @@ describe("Select", () => {
     render(
       <Select
         name="test"
-        error={true}
+        invalid={true}
         optionData={optionDataMock}
         register={jest.fn()}
       />
