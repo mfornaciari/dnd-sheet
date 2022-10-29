@@ -1,4 +1,5 @@
 import type { FetchedData } from "@/types";
+import "./Form.css";
 import { useCharacterForm } from "@/app/hooks";
 import { ContainerUntitled, InputNumber, InputText, Select, TabStructure } from "@/app/components";
 
