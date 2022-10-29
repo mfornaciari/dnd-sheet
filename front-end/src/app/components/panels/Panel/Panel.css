@@ -1,0 +1,9 @@
+#tab-panel {
+  flex-grow: 1;
+  display: grid;
+  padding: 0.6rem;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white);
+  font-size: var(--text-size);
+}

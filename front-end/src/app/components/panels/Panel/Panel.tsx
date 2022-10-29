@@ -1,5 +1,6 @@
-import { PropsWithChildren } from "react";
-import { TabKind } from "@/types";
+import type { TabKind } from "@/types";
+import type { PropsWithChildren } from "react";
+import "./Panel.css";
 
 type TabPanelProps = {
   tabButtonId: TabKind,

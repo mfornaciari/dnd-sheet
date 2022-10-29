@@ -1,5 +1,6 @@
+import type { CharacterClassName, TabKind, Tabs } from "@/types";
+import "./TabStructure.css";
 import { useState } from "react";
-import { CharacterClassName, TabKind, Tabs } from "@/types";
 import {
   PanelPersonal,
   PanelAttributes,

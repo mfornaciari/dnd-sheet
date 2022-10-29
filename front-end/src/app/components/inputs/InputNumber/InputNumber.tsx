@@ -1,4 +1,5 @@
 import type { UseFormRegister } from "react-hook-form";
+// import "../input.css";
 import i18next from "i18next";
 import { Container } from "@/app/components";
 

@@ -19,6 +19,13 @@ strong {
   font-weight: 900;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  height: 99vh;
+  padding: 0.3rem;
+}
+
 input {
   font-family: inherit;
 }
@@ -40,13 +47,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 select {
   font-family: inherit;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  height: 99vh;
-  padding: 0.3rem;
 }
 
 #form-top {
@@ -104,22 +104,4 @@ form {
 .top-button:active {
   box-shadow: 0 0.1rem var(--light-gray);
   transform: translateY(0.1rem);
-}
-
-#tab-panel {
-  flex-grow: 1;
-  display: grid;
-  padding: 0.6rem;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--white);
-  font-size: var(--text-size);
-}
-
-.tab-list {
-  display: flex;
-  flex-flow: row nowrap;
-  gap: 0.1rem;
-  padding: 0;
-  margin: 0;
 }
