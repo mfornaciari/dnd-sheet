@@ -1,7 +1,7 @@
 import type { UseFormRegister } from "react-hook-form";
 import type { Option } from "@/types";
 import i18next from "i18next";
-import { Container } from "@/app/components";
+import { ContainerLabeled } from "@/app/components";
 
 type SelectProps = Readonly<{
   name: string;
@@ -20,12 +20,6 @@ export function Select({
 }: SelectProps) {
   const i18nName = i18next.t(name);
 
-  const labelElement = (
-    <label htmlFor={name} className="title">
-      <strong>{i18nName}</strong>
-    </label>
-  );
-
   const optionElements = optionData.map(({ name, id }) => {
     const i18nOptionName = i18next.t(name);
 
@@ -37,8 +31,9 @@ export function Select({
   });
 
   return (
-    <Container
-      title={labelElement}
+    <ContainerLabeled
+      label={i18nName}
+      labelFor={name}
       invalid={invalid}
     >
       <select
@@ -48,6 +43,6 @@ export function Select({
       >
         {optionElements}
       </select>
-    </Container>
+    </ContainerLabeled>
   );
 }

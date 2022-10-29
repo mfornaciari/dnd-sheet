@@ -1,6 +1,6 @@
 import type { UseFormRegister } from "react-hook-form";
 import i18next from "i18next";
-import { Container } from "@/app/components";
+import { ContainerLabeled } from "@/app/components";
 
 type InputTextProps = Readonly<{
   name: string;
@@ -19,15 +19,10 @@ export function InputText({
 }: InputTextProps) {
   const i18nName = i18next.t(name);
 
-  const labelElement = (
-    <label htmlFor={name} className="title">
-      <strong>{i18nName}</strong>
-    </label>
-  );
-
   return (
-    <Container
-      title={labelElement}
+    <ContainerLabeled
+      label={i18nName}
+      labelFor={name}
       invalid={invalid}
     >
       <input
@@ -37,6 +32,6 @@ export function InputText({
         className="input"
         {...register(name, { required: required })}
       />
-    </Container>
+    </ContainerLabeled>
   );
 }

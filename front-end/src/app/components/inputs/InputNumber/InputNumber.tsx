@@ -1,7 +1,6 @@
 import type { UseFormRegister } from "react-hook-form";
-// import "../input.css";
 import i18next from "i18next";
-import { Container } from "@/app/components";
+import { ContainerLabeled } from "@/app/components";
 
 type InputNumberProps = Readonly<{
   name: string;
@@ -47,14 +46,12 @@ export function InputNumber({
 }: InputNumberProps) {
   const i18nName = i18next.t(name);
 
-  const labelElement = (
-    <label htmlFor={name} className="title">
-      <strong>{i18nName}</strong>
-    </label>
-  );
-
   return (
-    <Container title={labelElement} invalid={invalid}>
+    <ContainerLabeled
+      label={i18nName}
+      labelFor={name}
+      invalid={invalid}
+    >
       <input
         type="number"
         id={name}
@@ -64,6 +61,6 @@ export function InputNumber({
         className="input"
         {...register(name, { required: required })}
       />
-    </Container>
+    </ContainerLabeled>
   );
 }
