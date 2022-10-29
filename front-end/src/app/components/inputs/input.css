@@ -1,0 +1,31 @@
+input {
+  font-family: inherit;
+}
+
+input::placeholder {
+  font-family: inherit;
+  color: var(--light-gray);
+}
+
+input[type=number] {
+  appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+select {
+  font-family: inherit;
+}
+
+.input {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: var(--text-size);
+  outline: none;
+}
