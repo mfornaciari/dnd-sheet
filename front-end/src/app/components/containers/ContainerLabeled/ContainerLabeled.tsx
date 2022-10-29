@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-type ContainerProps = {
+type ContainerLabeledProps = {
   label: string;
   labelFor: string;
   invalid?: boolean;
@@ -11,7 +11,7 @@ export function ContainerLabeled({
   labelFor,
   invalid,
   children
-}: PropsWithChildren<ContainerProps>) {
+}: PropsWithChildren<ContainerLabeledProps>) {
   let className = "container";
   if (invalid) className += " invalid";
 

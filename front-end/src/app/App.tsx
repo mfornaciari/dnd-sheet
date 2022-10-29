@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { useCharacterForm } from "@/app/hooks";
 import { GET_DATA } from "@/app/queries";
 import {
-  Container,
+  ContainerUntitled,
   InputNumber,
   InputText,
   Select,
@@ -64,9 +64,9 @@ export function App() {
           required
         />
 
-        <Container title="Nível">
+        <ContainerUntitled ariaLabel="Nível">
           <strong className="text">Nível {currentLevel}</strong>
-        </Container>
+        </ContainerUntitled>
 
         <a
           role="button"
