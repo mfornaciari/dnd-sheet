@@ -1,6 +1,8 @@
-import { CharacterClass, CharacterClassName, CharacterValues, Level } from "@/types";
+import type { CharacterClass, CharacterClassName, CharacterValues, Level } from "@/types";
 
 export function calculateLevel(levels: Level[], experience: number) {
+  if (!experience || experience < 0) return 1 // XP under 0
+
   const foundLevelInfo = levels.find(level => level.minExperience <= experience && level.maxExperience >= experience);
   if (!foundLevelInfo) return 20; // XP over 999.999
 

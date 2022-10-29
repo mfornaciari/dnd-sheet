@@ -1,4 +1,4 @@
-import { CharacterClass } from "@/types";
+import type { CharacterClass } from "@/types";
 import { calculateLevel, findClassName } from "./useCharacterFormHelpers";
 import fetchedDataMock from "../../../../test/fetchedDataMock.json";
 
@@ -19,6 +19,22 @@ describe("calculateLevel", () => {
     const result = calculateLevel(levels, experience);
 
     expect(result).toEqual(20);
+  });
+
+  it("returns 1 if experience is below defined boundaries", () => {
+    const experience = -1;
+
+    const result = calculateLevel(levels, experience);
+
+    expect(result).toEqual(1);
+  });
+
+  it("returns 1 if experience is NaN", () => {
+    const experience = NaN;
+
+    const result = calculateLevel(levels, experience);
+
+    expect(result).toEqual(1);
   });
 });
 
