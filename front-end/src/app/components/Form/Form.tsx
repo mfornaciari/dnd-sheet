@@ -20,7 +20,7 @@ export function Form({ data }: FormProps) {
   } = useCharacterForm(data);
 
   return (
-    <form>
+    <form aria-label="Formulário">
       <section id="form-top">
         <InputText
           name="name"

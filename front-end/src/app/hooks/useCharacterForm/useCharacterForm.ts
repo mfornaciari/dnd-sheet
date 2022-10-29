@@ -1,13 +1,11 @@
 import type { CharacterClassName, CharacterValues, FetchedData } from "@/types";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { calculateLevel, findClassName, generateURL } from "@/app/hooks/useCharacterForm/helpers/useCharacterFormHelpers";
-
-const emptyData: FetchedData = {
-  races: [],
-  characterClasses: [],
-  levels: []
-}
+import {
+  calculateLevel,
+  findClassName,
+  generateURL,
+} from "@/app/hooks/useCharacterForm/helpers/useCharacterFormHelpers";
 
 const emptyValues = JSON.stringify({
   name: "",
@@ -16,7 +14,7 @@ const emptyValues = JSON.stringify({
   experience: "0",
 });
 
-export function useCharacterForm(data: FetchedData | undefined) {
+export function useCharacterForm(data: FetchedData) {
   const { formState: { errors, isValid }, getValues, register, reset, watch } = useForm({
     mode: "onTouched",
     defaultValues: JSON.parse(localStorage.getItem("characterValues") || emptyValues),
@@ -28,7 +26,7 @@ export function useCharacterForm(data: FetchedData | undefined) {
     localStorage.setItem("characterValues", JSON.stringify(characterValues));
   }, [characterValues]);
 
-  const { characterClasses, levels } = data || emptyData;
+  const { characterClasses, levels } = data;
   const characterName = watch("name");
   const selectedClassId = watch("characterClass");
   const selectedClassName: CharacterClassName | "characterClass" = findClassName(characterClasses, selectedClassId);
