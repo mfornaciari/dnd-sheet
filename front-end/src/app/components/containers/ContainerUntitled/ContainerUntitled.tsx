@@ -10,7 +10,7 @@ export function ContainerUntitled({
 }: PropsWithChildren<ContainerUntitledProps>) {
   return (
     <div
-      className="container hidden-titled"
+      className="container untitled"
       role="region"
       aria-label={ariaLabel}
     >

@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactElement } from "react";
-import "./Container.css";
+// import "./Container.css";
 import i18next from "i18next";
 
 type ContainerProps = {
