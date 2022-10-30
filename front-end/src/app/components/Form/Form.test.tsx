@@ -31,6 +31,7 @@ describe("Form", () => {
     expect(localStorage.characterValues).toEqual(expectedValues);
 
     //TODO: Test that form gives invalid inputs a red outline
+    //TODO: Test save button
   });
 
   it("loads data from file", async () => {
