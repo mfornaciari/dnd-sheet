@@ -16,13 +16,16 @@ describe("Form", () => {
     const raceInput: HTMLInputElement = within(form).getByRole("combobox", { name: "Raça" });
     const classInput: HTMLInputElement = within(form).getByRole("combobox", { name: "Classe" });
     const xpInput: HTMLInputElement = within(form).getByRole("spinbutton", { name: "Experiência" });
+    const inputContainers = [nameInput, raceInput, classInput, xpInput].map(input => input.parentElement);
 
-    // Gives invalid input a red outline
-    await user.click(nameInput);
+    // Gives invalid inputs a red outline
+    await user.clear(nameInput);
+    await user.click(raceInput);
+    await user.click(classInput);
+    await user.clear(xpInput);
     await user.click(document.body);
 
-    const nameInputContainer = nameInput.parentElement;
-    expect(nameInputContainer).toHaveClass("invalid");
+    for (const container of inputContainers) { expect(container).toHaveClass("invalid") };
 
     // Saves entered data to localStorage
     await user.type(nameInput, "Bruenor");
