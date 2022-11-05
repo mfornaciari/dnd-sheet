@@ -1,22 +1,29 @@
 import type { FetchedData } from "@/types";
-import { render, screen, within } from "@testing-library/react";
+import { cleanup, render, screen, waitFor, within } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import i18next from "i18next";
 import fetchedDataMock from "@/test/fetchedDataMock.json";
 import { Form } from "./Form";
 
 describe("Form", () => {
-  afterEach(() => localStorage.clear());
+  const data = fetchedDataMock.data as FetchedData;
 
   it("works correctly", async () => {
-    const data = fetchedDataMock.data as FetchedData;
-    render(<Form data={data} />);
+    await waitFor(() => render(<Form data={data} />));
     const form: HTMLFormElement = screen.getByRole("form", { name: "Formulário" });
     const nameInput: HTMLInputElement = within(form).getByRole("textbox", { name: "Nome" });
     const raceInput: HTMLInputElement = within(form).getByRole("combobox", { name: "Raça" });
     const classInput: HTMLInputElement = within(form).getByRole("combobox", { name: "Classe" });
     const xpInput: HTMLInputElement = within(form).getByRole("spinbutton", { name: "Experiência" });
     const inputContainers = [nameInput, raceInput, classInput, xpInput].map(input => input.parentElement);
+    const saveButton = within(form).getByRole("button", { name: "Salvar" });
+
+    // Disables save button when required inputs aren't filled yet
+    expect(nameInput).toHaveDisplayValue([""]);
+    expect(raceInput).toHaveDisplayValue([]);
+    expect(classInput).toHaveDisplayValue([]);
+    expect(xpInput).toHaveDisplayValue(["0"]);
+    expect(saveButton).toHaveClass("disabled-link");
 
     // Gives invalid inputs a red outline
     await user.clear(nameInput);
@@ -41,12 +48,15 @@ describe("Form", () => {
     });
     expect(localStorage.characterValues).toEqual(expectedValues);
 
-    //TODO: Test save button
+    // Enabled save button when required fields are filled
+    expect(saveButton).not.toHaveClass("disabled-link");
+    expect(saveButton).toHaveAttribute("download", "Bruenor");
+    expect(saveButton).toHaveAttribute("href", "http://localhost:3000/mockURL");
   });
 
   it("loads data from file", async () => {
-    const data = fetchedDataMock.data as FetchedData;
-    render(<Form data={data} />);
+    localStorage.clear();
+    await waitFor(() => render(<Form data={data} />));
     const form: HTMLFormElement = screen.getByRole("form", { name: "Formulário" });
     const nameInput: HTMLInputElement = within(form).getByRole("textbox", { name: "Nome" });
     const raceInput: HTMLInputElement = within(form).getByRole("combobox", { name: "Raça" });

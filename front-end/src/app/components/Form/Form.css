@@ -52,3 +52,8 @@ form {
   box-shadow: 0 0.1rem var(--light-gray);
   transform: translateY(0.1rem);
 }
+
+.disabled-link {
+  pointer-events: none;
+  opacity: 0.5;
+}

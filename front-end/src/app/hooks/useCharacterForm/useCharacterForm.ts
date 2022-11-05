@@ -9,8 +9,8 @@ import {
 
 const emptyValues = JSON.stringify({
   name: "",
-  race: "0",
-  characterClass: "0",
+  race: "",
+  characterClass: "",
   experience: "0",
 });
 

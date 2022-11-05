@@ -61,9 +61,9 @@ export function Form({ data }: FormProps) {
         <a
           role="button"
           id="save-button"
-          href={isValid ? downloadURL : "#"}
-          download={isValid ? characterName : undefined}
-          className="top-button"
+          href={downloadURL}
+          download={characterName}
+          className={`top-button ${isValid ? "" : "disabled-link"}`}
         >
           <strong>Salvar</strong>
         </a>
