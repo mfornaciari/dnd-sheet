@@ -13,7 +13,6 @@ describe("Form", () => {
     render(<Form data={data} />);
     const form: HTMLFormElement = screen.getByRole("form", { name: "Formulário" });
     const nameInput: HTMLInputElement = within(form).getByRole("textbox", { name: "Nome" });
-    const nameInputContainer = nameInput.parentElement;
     const raceInput: HTMLInputElement = within(form).getByRole("combobox", { name: "Raça" });
     const classInput: HTMLInputElement = within(form).getByRole("combobox", { name: "Classe" });
     const xpInput: HTMLInputElement = within(form).getByRole("spinbutton", { name: "Experiência" });
@@ -22,6 +21,7 @@ describe("Form", () => {
     await user.click(nameInput);
     await user.click(document.body);
 
+    const nameInputContainer = nameInput.parentElement;
     expect(nameInputContainer).toHaveClass("invalid");
 
     // Saves entered data to localStorage
