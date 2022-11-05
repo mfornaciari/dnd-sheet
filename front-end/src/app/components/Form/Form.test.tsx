@@ -8,15 +8,23 @@ import { Form } from "./Form";
 describe("Form", () => {
   afterEach(() => localStorage.clear());
 
-  it("saves entered data to localStorage", async () => {
+  it("works correctly", async () => {
     const data = fetchedDataMock.data as FetchedData;
     render(<Form data={data} />);
     const form: HTMLFormElement = screen.getByRole("form", { name: "Formulário" });
     const nameInput: HTMLInputElement = within(form).getByRole("textbox", { name: "Nome" });
+    const nameInputContainer = nameInput.parentElement;
     const raceInput: HTMLInputElement = within(form).getByRole("combobox", { name: "Raça" });
     const classInput: HTMLInputElement = within(form).getByRole("combobox", { name: "Classe" });
     const xpInput: HTMLInputElement = within(form).getByRole("spinbutton", { name: "Experiência" });
 
+    // Gives invalid input a red outline
+    await user.click(nameInput);
+    await user.click(document.body);
+
+    expect(nameInputContainer).toHaveClass("invalid");
+
+    // Saves entered data to localStorage
     await user.type(nameInput, "Bruenor");
     await user.selectOptions(raceInput, data.races[0].name);
     await user.selectOptions(classInput, i18next.t(data.characterClasses[0].name));
@@ -30,7 +38,6 @@ describe("Form", () => {
     });
     expect(localStorage.characterValues).toEqual(expectedValues);
 
-    //TODO: Test that form gives invalid inputs a red outline
     //TODO: Test save button
   });
 
