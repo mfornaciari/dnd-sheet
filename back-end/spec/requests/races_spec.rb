@@ -3,50 +3,23 @@
 require 'rails_helper'
 
 describe 'POST /graphql' do
-  let(:races) do
-    [
-      { name: 'Anão' },
-      { name: 'Draconato' },
-      { name: 'Elfo' }
-    ]
-  end
+  let(:races_json) { File.read(Rails.public_path.join('data/races.json')) }
 
-  def create_races(race_hashes)
-    race_hashes.each { |hash| create :race, hash }
-  end
+  before { JSON.parse(races_json, symbolize_names: true).each { |hash| create :race, hash } }
 
   it 'returns all races' do
-    create_races(races)
-    race1, race2, race3 = Race.all
-    expected_response = {
-      data: {
-        races: [
-          { id: race1.id.to_s, name: 'Anão' },
-          { id: race2.id.to_s, name: 'Draconato' },
-          { id: race3.id.to_s, name: 'Elfo' }
-        ]
-      }
-    }
+    expected_response = expected_response(races_json, key: :races)
 
-    post '/graphql', params: { query: 'query { races { id name } }' }
+    graphql_query('races { id name }')
 
-    expect(format(response.body)).to eq(expected_response)
+    expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
   end
 
-  it 'finds a single race by ID and returns it' do
-    create_races(races)
-    race1 = Race.find_by(name: 'Anão')
-    expected_response = {
-      data: {
-        race: {
-          id: race1.id.to_s,
-          name: 'Anão'
-        }
-      }
-    }
+  it 'finds first race by ID and returns it' do
+    expected_response = expected_response(races_json, key: :race, first: true)
 
-    post '/graphql', params: { query: "query { race(id: #{race1.id}) { id name } }" }
+    graphql_query('race(id: 1) { id name }')
 
-    expect(format(response.body)).to eq(expected_response)
+    expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
   end
 end
