@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Bárbaro"
+  },
+  {
+    "id": "2",
+    "name": "Bardo"
+  },
+  {
+    "id": "3",
+    "name": "Bruxo"
+  },
+  {
+    "id": "4",
+    "name": "Clérigo"
+  },
+  {
+    "id": "5",
+    "name": "Druida"
+  },
+  {
+    "id": "6",
+    "name": "Feiticeiro"
+  },
+  {
+    "id": "7",
+    "name": "Guardião"
+  },
+  {
+    "id": "8",
+    "name": "Guerreiro"
+  },
+  {
+    "id": "9",
+    "name": "Ladino"
+  },
+  {
+    "id": "10",
+    "name": "Mago"
+  },
+  {
+    "id": "11",
+    "name": "Monge"
+  },
+  {
+    "id": "12",
+    "name": "Paladino"
+  }
+]

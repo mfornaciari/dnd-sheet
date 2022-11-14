@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "level": 1,
+    "min_experience": 0,
+    "max_experience": 299
+  },
+  {
+    "id": "2",
+    "level": 2,
+    "min_experience": 300,
+    "max_experience": 899
+  },
+  {
+    "id": "3",
+    "level": 3,
+    "min_experience": 900,
+    "max_experience": 2699
+  },
+  {
+    "id": "4",
+    "level": 4,
+    "min_experience": 2700,
+    "max_experience": 6499
+  },
+  {
+    "id": "5",
+    "level": 5,
+    "min_experience": 6500,
+    "max_experience": 13999
+  },
+  {
+    "id": "6",
+    "level": 6,
+    "min_experience": 14000,
+    "max_experience": 22999
+  },
+  {
+    "id": "7",
+    "level": 7,
+    "min_experience": 23000,
+    "max_experience": 33999
+  },
+  {
+    "id": "8",
+    "level": 8,
+    "min_experience": 34000,
+    "max_experience": 47999
+  },
+  {
+    "id": "9",
+    "level": 9,
+    "min_experience": 48000,
+    "max_experience": 63999
+  },
+  {
+    "id": "10",
+    "level": 10,
+    "min_experience": 64000,
+    "max_experience": 84999
+  },
+  {
+    "id": "11",
+    "level": 11,
+    "min_experience": 85000,
+    "max_experience": 99999
+  },
+  {
+    "id": "12",
+    "level": 12,
+    "min_experience": 100000,
+    "max_experience": 119999
+  },
+  {
+    "id": "13",
+    "level": 13,
+    "min_experience": 120000,
+    "max_experience": 139999
+  },
+  {
+    "id": "14",
+    "level": 14,
+    "min_experience": 140000,
+    "max_experience": 164999
+  },
+  {
+    "id": "15",
+    "level": 15,
+    "min_experience": 165000,
+    "max_experience": 194999
+  },
+  {
+    "id": "16",
+    "level": 16,
+    "min_experience": 195000,
+    "max_experience": 224999
+  },
+  {
+    "id": "17",
+    "level": 17,
+    "min_experience": 225000,
+    "max_experience": 264999
+  },
+  {
+    "id": "18",
+    "level": 18,
+    "min_experience": 265000,
+    "max_experience": 304999
+  },
+  {
+    "id": "19",
+    "level": 19,
+    "min_experience": 305000,
+    "max_experience": 354999
+  },
+  {
+    "id": "20",
+    "level": 20,
+    "min_experience": 355000,
+    "max_experience": 999999
+  }
+]
