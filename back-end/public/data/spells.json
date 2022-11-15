@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "name": "acid splash",
+    "level": 0,
+    "character_classes": ["wizard", "sorcerer"],
+    "school": "conjuration",
+    "casting_time": "1 action",
+    "range": "120 feet",
+    "components": ["verbal", "somatic"],
+    "duration": "instantaneous",
+    "description": "acid splash description"
+  }
+]
