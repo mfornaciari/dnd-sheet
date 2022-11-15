@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Level, type: :model do
-  subject(:level) { create :level, level: 1, min_experience: 0, max_experience: 300 }
+describe Level do
+  subject(:level) { create(:level, level: 1, min_experience: 0, max_experience: 300) }
 
   it { is_expected.to validate_presence_of(:level) }
   it { is_expected.to validate_presence_of(:min_experience) }

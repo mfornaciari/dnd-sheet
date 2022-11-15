@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 describe 'POST /graphql' do
-  let(:levels_json) { File.read(Rails.public_path.join('data/levels.json')) }
+  let(:levels_json) { Rails.public_path.join('data/levels.json').read }
 
-  before { JSON.parse(levels_json, symbolize_names: true).each { |hash| create :level, hash } }
+  before { JSON.parse(levels_json, symbolize_names: true).each { |hash| create(:level, hash) } }
 
   it 'returns all levels' do
     expected_response = expected_response(levels_json, key: :levels)

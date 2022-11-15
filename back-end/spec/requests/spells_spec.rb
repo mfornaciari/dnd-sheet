@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 describe 'POST /graphql' do
-  let(:spells_json) { File.read(Rails.public_path.join('data/spells.json')) }
+  let(:spells_json) { Rails.public_path.join('data/spells.json').read }
 
-  before { JSON.parse(spells_json, symbolize_names: true).each { |hash| create :spell, hash } }
+  before { JSON.parse(spells_json, symbolize_names: true).each { |hash| create(:spell, hash) } }
 
   it 'returns all spells' do
     expected_response = expected_response(spells_json, key: :spells)

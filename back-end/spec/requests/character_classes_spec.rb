@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 describe 'POST /graphql' do
-  let(:classes_json) { File.read(Rails.public_path.join('data/character_classes.json')) }
+  let(:classes_json) { Rails.public_path.join('data/character_classes.json').read }
 
-  before { JSON.parse(classes_json, symbolize_names: true).each { |hash| create :character_class, hash } }
+  before { JSON.parse(classes_json, symbolize_names: true).each { |hash| create(:character_class, hash) } }
 
   it 'returns all classes' do
     expected_response = expected_response(classes_json, key: :characterClasses)
