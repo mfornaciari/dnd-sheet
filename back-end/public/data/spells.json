@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "name": "acid arrow",
+    "level": 2,
+    "character_classes": [
+      "wizard"
+    ],
+    "school": "evocation",
+    "casting_time": "1 action",
+    "range": "90 feet",
+    "components": [
+      "verbal",
+      "somatic",
+      "material"
+    ],
+    "material_component": "acid arrow material component",
+    "duration": "instantaneous",
+    "description": "acid arrow description",
+    "at_higher_levels": "acid arrow at higher levels",
+    "ritual": false,
+    "in_srd": true
+  }
+]
