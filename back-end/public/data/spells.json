@@ -14,7 +14,7 @@
       "somatic",
       "material"
     ],
-    "material_component": "acid arrow material component",
+    "material_components": "acid arrow material components",
     "duration": "instantaneous",
     "description": "acid arrow description",
     "at_higher_levels": "acid arrow at higher levels",

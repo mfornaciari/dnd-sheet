@@ -60,10 +60,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_132952) do
     t.string "casting_time", null: false
     t.string "range", null: false
     t.enum "components", null: false, array: true, enum_type: "spell_component"
-    t.string "material_component"
+    t.string "material_components"
     t.string "duration", null: false
     t.string "description", null: false
-    t.string "at_higher_levels", null: false
+    t.string "at_higher_levels"
     t.boolean "ritual", null: false
     t.boolean "in_srd", null: false
     t.datetime "created_at", null: false

@@ -3,7 +3,9 @@
 require 'rails_helper'
 
 describe Level do
-  subject(:level) { create(:level, level: 1, min_experience: 0, max_experience: 300) }
+  subject(:level) { create(:level, JSON.parse(levels_json, symbolize_names: true).first) }
+
+  let(:levels_json) { Rails.public_path.join('data/levels.json').read }
 
   it { is_expected.to validate_presence_of(:level) }
   it { is_expected.to validate_presence_of(:min_experience) }
