@@ -14,5 +14,7 @@ FactoryBot.define do
     at_higher_levels { 'acid arrow at higher levels' }
     ritual { false }
     in_srd { true }
+
+    initialize_with { new(character_classes: CharacterClass.where(name: character_classes)) }
   end
 end

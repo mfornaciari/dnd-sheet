@@ -1,50 +1,50 @@
 [
   {
     "id": "1",
-    "name": "Bárbaro"
+    "name": "barbarian"
   },
   {
     "id": "2",
-    "name": "Bardo"
+    "name": "bard"
   },
   {
     "id": "3",
-    "name": "Bruxo"
+    "name": "cleric"
   },
   {
     "id": "4",
-    "name": "Clérigo"
+    "name": "druid"
   },
   {
     "id": "5",
-    "name": "Druida"
+    "name": "fighter"
   },
   {
     "id": "6",
-    "name": "Feiticeiro"
+    "name": "monk"
   },
   {
     "id": "7",
-    "name": "Guardião"
+    "name": "paladin"
   },
   {
     "id": "8",
-    "name": "Guerreiro"
+    "name": "ranger"
   },
   {
     "id": "9",
-    "name": "Ladino"
+    "name": "rogue"
   },
   {
     "id": "10",
-    "name": "Mago"
+    "name": "sorcerer"
   },
   {
     "id": "11",
-    "name": "Monge"
+    "name": "warlock"
   },
   {
     "id": "12",
-    "name": "Paladino"
+    "name": "wizard"
   }
 ]
