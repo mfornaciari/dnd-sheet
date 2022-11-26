@@ -12,13 +12,11 @@ describe 'POST /graphql' do
   end
 
   it 'returns all spells' do
-    expected_response = expected_response(spells_json, key: :spells)
+    expected_response = expected_response(spells_json, key: 'spells')
 
-    graphql_query(
-      'spells { id name level school castingTime range components materialComponent ' \
-      'duration description atHigherLevels ritual }'
-    )
+    graphql_query('spells { id name level characterClasses { id name } school castingTime range ' \
+                  'components materialComponents duration description atHigherLevels ritual inSrd }')
 
-    expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
+    expect(JSON.parse(response.body)).to eq(expected_response)
   end
 end

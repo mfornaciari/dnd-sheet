@@ -19,5 +19,7 @@ module Types
 
     field :level,             description: 'Finds a single level by ID',    resolver: Queries::Level
     field :levels,            description: 'Finds all levels',              resolver: Queries::Levels
+
+    field :spells,            description: 'Finds all spells',              resolver: Queries::Spells
   end
 end

@@ -8,18 +8,18 @@ describe 'POST /graphql' do
   before { JSON.parse(levels_json, symbolize_names: true).each { |hash| create(:level, hash) } }
 
   it 'returns all levels' do
-    expected_response = expected_response(levels_json, key: :levels)
+    expected_response = expected_response(levels_json, key: 'levels')
 
     graphql_query('levels { id level minExperience maxExperience }')
 
-    expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
+    expect(JSON.parse(response.body)).to eq(expected_response)
   end
 
   it 'finds first level by ID and returns it' do
-    expected_response = expected_response(levels_json, key: :level, first: true)
+    expected_response = expected_response(levels_json, key: 'level', first: true)
 
     graphql_query('level(id: 1) { id level minExperience maxExperience }')
 
-    expect(JSON.parse(response.body, symbolize_names: true)).to eq(expected_response)
+    expect(JSON.parse(response.body)).to eq(expected_response)
   end
 end

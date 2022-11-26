@@ -33,6 +33,7 @@ describe Spell do
   end
 
   it { is_expected.to allow_values(nil, 'acid arrow material components').for(:material_components) }
+  it { is_expected.to allow_values(nil, 'acid arrow at higher levels').for(:at_higher_levels) }
 
   it { is_expected.to validate_uniqueness_of(:name) }
   it { is_expected.to validate_uniqueness_of(:description) }
