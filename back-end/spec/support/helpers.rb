@@ -17,30 +17,32 @@ module TestHelpers
   private
 
   def formatted_hash(hash)
-    returned_hash = {}
-    hash.each do |key, value|
-      graphql_key = key.camelize(:lower)
-      if association?(key.singularize)
-        returned_hash[graphql_key] = value.is_a?(Array) ? value.map { |name| format_association(key, name) } : format_association(key, value)
-      else
-        returned_hash[graphql_key] = value
-      end
+    hash.to_h do |attribute, value|
+      graphql_key = attribute.camelize(:lower)
+      association?(attribute.singularize) ? [graphql_key, graphql_association(attribute, value)] : [graphql_key, value]
     end
-    returned_hash
   end
 
   def association?(key)
     ASSOCIATIONS.include?(key)
   end
 
-  def format_association(key, value)
-    model_instance = find_association(key, value)
+  def graphql_association(model, value)
+    value.is_a?(Array) ? graphql_association_array(model, value) : graphql_association_instance(model, value)
+  end
+
+  def graphql_association_array(model, name_array)
+    name_array.map { |name| graphql_association_instance(model, name) }
+  end
+
+  def graphql_association_instance(model, instance_name)
+    model_instance = find_association(model, instance_name)
     model_hash = model_instance.as_json(except: %i[created_at updated_at])
     stringify_id(model_hash)
   end
 
-  def find_association(model, name)
-    modelize(model).find_by(name: name)
+  def find_association(model, instance_name)
+    modelize(model).find_by(name: instance_name)
   end
 
   def stringify_id(model_hash)
