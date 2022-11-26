@@ -53,23 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_132952) do
     t.index ["spell_id"], name: "index_spell_character_classes_on_spell_id"
   end
 
-  create_table "spells", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "level", null: false
-    t.enum "school", null: false, enum_type: "spell_school"
-    t.string "casting_time", null: false
-    t.string "range", null: false
-    t.enum "components", null: false, array: true, enum_type: "spell_component"
-    t.string "material_components"
-    t.string "duration", null: false
-    t.string "description", null: false
-    t.string "at_higher_levels"
-    t.boolean "ritual", null: false
-    t.boolean "in_srd", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_spells_on_name", unique: true
-  end
+# Could not dump table "spells" because of following StandardError
+#   Unknown type 'spell_component' for column 'components'
 
   add_foreign_key "spell_character_classes", "character_classes"
   add_foreign_key "spell_character_classes", "spells"

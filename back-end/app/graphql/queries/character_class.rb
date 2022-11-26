@@ -2,11 +2,9 @@
 
 module Queries
   class CharacterClass < Queries::BaseQuery
-    description 'Finds a character class by ID'
-
     argument :id, ID, description: "A character class' ID in the database", required: true
 
-    type Types::CharacterClassType, null: false
+    type Types::DungeonsAndDragons::CharacterClassType, null: false
 
     def resolve(id:)
       ::CharacterClass.find(id)

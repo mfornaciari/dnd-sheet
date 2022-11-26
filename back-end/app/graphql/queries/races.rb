@@ -2,9 +2,7 @@
 
 module Queries
   class Races < Queries::BaseQuery
-    description 'Finds all races'
-
-    type [Types::RaceType], null: false
+    type [Types::DungeonsAndDragons::RaceType], null: false
 
     def resolve
       ::Race.all
