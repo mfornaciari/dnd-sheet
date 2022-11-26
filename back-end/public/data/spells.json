@@ -3,11 +3,17 @@
     "id": "1",
     "name": "acid arrow",
     "level": 2,
-    "character_classes": ["wizard"],
+    "character_classes": [
+      "wizard"
+    ],
     "school": "evocation",
     "casting_time": "1 action",
     "range": "90 feet",
-    "components": ["verbal", "somatic", "material"],
+    "components": [
+      "verbal",
+      "somatic",
+      "material"
+    ],
     "material_components": "acid arrow material components",
     "duration": "instantaneous",
     "description": "acid arrow description",

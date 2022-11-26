@@ -10,6 +10,7 @@ describe Level do
   it { is_expected.to validate_presence_of(:level) }
   it { is_expected.to validate_presence_of(:min_experience) }
   it { is_expected.to validate_presence_of(:max_experience) }
+
   it { is_expected.to validate_uniqueness_of(:level) }
   it { is_expected.to validate_uniqueness_of(:min_experience) }
   it { is_expected.to validate_uniqueness_of(:max_experience) }

@@ -9,46 +9,13 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :character_classes, [Types::CharacterClassType], null: false
+    field :character_class,   description: 'A single character class', resolver: Queries::CharacterClass
+    field :character_classes, description: 'All character classes',    resolver: Queries::CharacterClasses
 
-    def character_classes
-      CharacterClass.all
-    end
+    field :race,              description: 'A single race',            resolver: Queries::Race
+    field :races,             description: 'All races',                resolver: Queries::Races
 
-    field :character_class, Types::CharacterClassType, null: false do
-      argument :id, ID, required: true
-    end
-
-    def character_class(id:)
-      CharacterClass.find(id)
-    end
-
-    field :races, [Types::RaceType], null: false
-
-    def races
-      Race.all
-    end
-
-    field :race, Types::RaceType, null: false do
-      argument :id, ID, required: true
-    end
-
-    def race(id:)
-      Race.find(id)
-    end
-
-    field :levels, [Types::LevelType], null: false
-
-    def levels
-      Level.all
-    end
-
-    field :level, Types::LevelType, null: false do
-      argument :id, ID, required: true
-    end
-
-    def level(id:)
-      Level.find(id)
-    end
+    field :level,             description: 'A single level',           resolver: Queries::Level
+    field :levels,            description: 'All levels',               resolver: Queries::Levels
   end
 end

@@ -8,5 +8,9 @@ describe CharacterClass do
   let(:classes_json) { Rails.public_path.join('data/character_classes.json').read }
 
   it { is_expected.to validate_presence_of(:name) }
+
   it { is_expected.to validate_uniqueness_of(:name) }
+
+  it { is_expected.to have_many(:spell_character_classes).dependent(:destroy) }
+  it { is_expected.to have_many(:spells).through(:spell_character_classes) }
 end

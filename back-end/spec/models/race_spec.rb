@@ -8,5 +8,6 @@ describe Race do
   let(:races_json) { Rails.public_path.join('data/races.json').read }
 
   it { is_expected.to validate_presence_of(:name) }
+
   it { is_expected.to validate_uniqueness_of(:name) }
 end

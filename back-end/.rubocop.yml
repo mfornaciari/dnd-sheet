@@ -13,6 +13,7 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
+  - rubocop-graphql
 
 AllCops:
   NewCops: enable
@@ -20,7 +21,6 @@ AllCops:
     - bin/**/*
     - vendor/**/*
     - db/**/*
-    - app/controllers/graphql_controller.rb
 
 Style/Documentation:
   Enabled: false
