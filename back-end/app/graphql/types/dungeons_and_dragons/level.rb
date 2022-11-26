@@ -2,7 +2,7 @@
 
 module Types
   module DungeonsAndDragons
-    class LevelType < Types::BaseObject
+    class Level < Types::BaseObject
       description 'A D&D 5th edition character class level based on experience'
 
       field :id,             ID,      null: false, description: "Level's ID in the database"

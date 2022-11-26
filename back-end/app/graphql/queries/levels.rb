@@ -2,7 +2,7 @@
 
 module Queries
   class Levels < Queries::BaseQuery
-    type [Types::DungeonsAndDragons::LevelType], null: false
+    type [Types::DungeonsAndDragons::Level], null: false
 
     def resolve
       ::Level.all

@@ -2,7 +2,7 @@
 
 module Queries
   class CharacterClasses < Queries::BaseQuery
-    type [Types::DungeonsAndDragons::CharacterClassType], null: false
+    type [Types::DungeonsAndDragons::CharacterClass], null: false
 
     def resolve
       ::CharacterClass.all

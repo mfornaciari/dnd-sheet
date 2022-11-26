@@ -2,7 +2,7 @@
 
 module Queries
   class Spells < Queries::BaseQuery
-    type [Types::DungeonsAndDragons::SpellType], null: false
+    type [Types::DungeonsAndDragons::Spell], null: false
 
     def resolve
       ::Spell.all
