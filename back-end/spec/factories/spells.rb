@@ -8,10 +8,10 @@ FactoryBot.define do
     casting_time { '1 action' }
     range { '120 feet' }
     components { COMPONENTS.sample(2).to_sym }
-    material_components { 'acid arrow material components' }
+    material_components { nil }
     duration { 'instantaneous' }
     description { 'acid arrow description' }
-    at_higher_levels { 'acid arrow at higher levels' }
+    at_higher_levels { nil }
     ritual { false }
     in_srd { true }
 
