@@ -10,9 +10,9 @@
     "casting_time": "1 action",
     "range": "90 feet",
     "components": [
-      "verbal",
+      "material",
       "somatic",
-      "material"
+      "verbal"
     ],
     "material_components": "acid arrow material components",
     "duration": "instantaneous",

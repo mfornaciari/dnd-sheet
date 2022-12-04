@@ -7,7 +7,6 @@ describe Spell do
     classes_json = Rails.public_path.join('data/character_classes.json').read
     spells_json = Rails.public_path.join('data/spells.json').read
     JSON.parse(classes_json, symbolize_names: true).each { |hash| create(:character_class, hash) }
-
     create(:spell, JSON.parse(spells_json, symbolize_names: true).first)
   end
 
@@ -27,11 +26,7 @@ describe Spell do
   it { is_expected.not_to allow_value(nil).for(:in_srd) }
   it { is_expected.not_to allow_values(nil, []).for(:components) }
 
-  it do
-    expect(spell).to allow_values(ApplicationRecord::SPELL_COMPONENTS, ApplicationRecord::SPELL_COMPONENTS.first)
-      .for(:components)
-  end
-
+  it { is_expected.to allow_values(COMPONENTS, COMPONENTS.first).for(:components) }
   it { is_expected.to allow_values(nil, 'acid arrow material components').for(:material_components) }
   it { is_expected.to allow_values(nil, 'acid arrow at higher levels').for(:at_higher_levels) }
 
@@ -44,6 +39,6 @@ describe Spell do
   it do
     expect(spell).to define_enum_for(:school)
       .backed_by_column_of_type(:enum)
-      .with_values(ApplicationRecord::MAGIC_SCHOOL_NAMES.index_by(&:to_sym))
+      .with_values(MAGIC_SCHOOL_NAMES.index_by(&:to_sym))
   end
 end

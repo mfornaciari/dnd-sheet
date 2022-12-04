@@ -1,7 +1,8 @@
 class CreateSpells < ActiveRecord::Migration[7.0]
   def up
-    create_enum :spell_school, ApplicationRecord::MAGIC_SCHOOL_NAMES
-    create_enum :spell_component, ApplicationRecord::SPELL_COMPONENTS
+    create_enum :spell_school, MAGIC_SCHOOL_NAMES
+
+    create_enum :spell_component, COMPONENTS
 
     create_table :spells do |t|
       t.string :name, null: false

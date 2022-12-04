@@ -10,4 +10,4 @@ levels_json = Rails.public_path.join('data/levels.json').read
 JSON.parse(levels_json, symbolize_names: true).each { |hash| FactoryBot.create :level, hash }
 
 spells_json = Rails.public_path.join('data/spells.json').read
-JSON.parse(spells_json, symbolize_names: true).each { |hash| FactoryBot.create :spell, hash}
+JSON.parse(spells_json, symbolize_names: true).each { |hash| FactoryBot.create :spell, hash }

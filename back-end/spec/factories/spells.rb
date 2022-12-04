@@ -4,10 +4,10 @@ FactoryBot.define do
   factory :spell do
     name { 'acid arrow' }
     level { 2 }
-    school { :evocation }
+    school { MAGIC_SCHOOL_NAMES.sample.to_sym }
     casting_time { '1 action' }
     range { '120 feet' }
-    components { %i[verbal somatic material] }
+    components { COMPONENTS.sample(2).to_sym }
     material_components { 'acid arrow material components' }
     duration { 'instantaneous' }
     description { 'acid arrow description' }

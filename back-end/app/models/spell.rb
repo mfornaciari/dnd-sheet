@@ -8,7 +8,7 @@ class Spell < ApplicationRecord
 
   enum school: MAGIC_SCHOOL_NAMES.index_by(&:to_sym)
 
-  array_enum components: SPELL_COMPONENTS.index_by(&:to_sym)
+  array_enum components: COMPONENTS.index_by(&:to_sym)
 
   validates(:name,
             :level,
@@ -28,7 +28,7 @@ class Spell < ApplicationRecord
             inclusion: [true, false])
 
   validates(:components,
-            subset: SPELL_COMPONENTS)
+            subset: COMPONENTS)
 
   validates(:name,
             :description,
