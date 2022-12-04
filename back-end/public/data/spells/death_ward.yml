@@ -1,0 +1,23 @@
+id: 74
+name: Death Ward
+level: 4
+character_classes:
+  - cleric
+  - paladin
+school: abjuration
+casting_time: 1 action
+range: Touch
+components:
+  - somatic
+  - verbal
+duration: 8 hours
+description:
+  You touch a creature and grant it a measure of protection from death.
+
+  The first time the target would drop to 0 hit points as a result of taking damage,
+  the target instead drops to 1 hit point, and the spell ends.
+
+  If the spell is still in effect when the target is subjected to an effect that would kill it instantaneously
+  without dealing damage, that effect is instead negated against the target, and the spell ends.
+ritual: false
+in_srd: true

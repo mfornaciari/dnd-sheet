@@ -1,0 +1,25 @@
+id: 184
+name: Longstrider
+level: 1
+character_classes:
+  - bard
+  - druid
+  - ranger
+  - wizard
+school: transmutation
+casting_time: 1 action
+range: Touch
+components:
+  - material
+  - somatic
+  - verbal
+material_components: A pinch of dirt.
+duration: 1 hour
+description:
+  You touch a creature.
+  The target's speed increases by 10 feet until the spell ends.
+at_higher_levels:
+  When you cast this spell using a spell slot of 2nd level or higher,
+  you can target one additional creature for each spell slot above 1st.
+ritual: false
+in_srd: true

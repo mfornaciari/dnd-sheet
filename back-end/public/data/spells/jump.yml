@@ -1,0 +1,22 @@
+id: 174
+name: Jump
+level: 1
+character_classes:
+  - druid
+  - ranger
+  - sorcerer
+  - wizard
+school: transmutation
+casting_time: 1 action
+range: Touch
+components:
+  - material
+  - somatic
+  - verbal
+material_components: A grasshopper's hind leg.
+duration: 1 minute
+description:
+  You touch a creature.
+  The creature's jump distance is tripled until the spell ends.
+ritual: false
+in_srd: true

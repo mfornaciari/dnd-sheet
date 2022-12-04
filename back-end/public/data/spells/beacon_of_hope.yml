@@ -1,0 +1,20 @@
+id: 24
+name: Beacon of Hope
+level: 3
+character_classes:
+  - cleric
+school: abjuration
+casting_time: 1 action
+range: 30 feet
+components:
+  - somatic
+  - verbal
+material_components:
+duration: Concentration, up to 1 minute
+description:
+  This spell bestows hope and vitality. Choose any number of creatures
+  within range. For the duration, each target has advantage on wisdom saving throws
+  and death saving throws, and regains the maximum number of hit points possible from
+  any healing.
+ritual: false
+in_srd: true

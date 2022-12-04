@@ -1,0 +1,21 @@
+id: 247
+name: Revivify
+level: 3
+character_classes:
+  - cleric
+  - paladin
+school: conjuration
+casting_time: 1 action
+range: Touch
+components:
+  - material
+  - somatic
+  - verbal
+material_components: Diamonds worth 300gp, which the spell consumes.
+duration: Instantaneous
+description:
+  You touch a creature that has died within the last minute.
+  That creature returns to life with 1 hit point.
+  This spell can't return to life a creature that has died of old age, nor can it restore any missing body parts.
+ritual: false
+in_srd: true

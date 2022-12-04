@@ -1,0 +1,19 @@
+id: 260
+name: Shield
+level: 1
+character_classes:
+  - sorcerer
+  - wizard
+school: abjuration
+casting_time: 1 reaction, which you take when you are hit by an attack or targeted by the _magic missile_ spell
+range: Self
+components:
+  - somatic
+  - verbal
+duration: 1 round
+description:
+  An invisible barrier of magical force appears and protects you.
+  Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack,
+  and you take no damage from _magic missile_.
+ritual: false
+in_srd: true

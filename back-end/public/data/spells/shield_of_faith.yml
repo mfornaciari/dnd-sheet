@@ -1,0 +1,20 @@
+id: 261
+name: Shield of Faith
+level: 1
+character_classes:
+  - cleric
+  - paladin
+school: abjuration
+casting_time: 1 bonus action
+range: 60 feet
+components:
+  - material
+  - somatic
+  - verbal
+material_components: A small parchment with a bit of holy text written on it.
+duration: Concentration, up to 10 minutes
+description:
+  A shimmering field appears and surrounds a creature of your choice within range,
+  granting it a +2 bonus to AC for the duration.
+ritual: false
+in_srd: true
