@@ -1,0 +1,28 @@
+# loaded in config/initializers/constants.rb
+
+- id: '1'
+  name: dwarf
+
+- id: '2'
+  name: elf
+
+- id: '3'
+  name: halfling
+
+- id: '4'
+  name: human
+
+- id: '5'
+  name: dragonborn
+
+- id: '6'
+  name: gnome
+
+- id: '7'
+  name: half-elf
+
+- id: '8'
+  name: half-orc
+
+- id: '9'
+  name: tiefling

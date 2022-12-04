@@ -3,12 +3,10 @@
 require 'rails_helper'
 
 describe 'POST /graphql' do
-  let(:levels_json) { Rails.public_path.join('data/levels.json').read }
-
-  before { JSON.parse(levels_json, symbolize_names: true).each { |hash| create(:level, hash) } }
+  before { LEVELS.each { |hash| create(:level, hash) } }
 
   it 'returns all levels' do
-    expected_response = expected_response(levels_json, key: 'levels')
+    expected_response = expected_response(LEVELS, key: 'levels')
 
     graphql_query('levels { id level minExperience maxExperience }')
 
@@ -16,7 +14,7 @@ describe 'POST /graphql' do
   end
 
   it 'finds first level by ID and returns it' do
-    expected_response = expected_response(levels_json, key: 'level', first: true)
+    expected_response = expected_response(LEVELS, key: 'level', first: true)
 
     graphql_query('level(id: 1) { id level minExperience maxExperience }')
 

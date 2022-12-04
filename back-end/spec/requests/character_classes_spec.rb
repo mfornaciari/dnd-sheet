@@ -3,12 +3,10 @@
 require 'rails_helper'
 
 describe 'POST /graphql' do
-  let(:classes_json) { Rails.public_path.join('data/character_classes.json').read }
-
-  before { JSON.parse(classes_json, symbolize_names: true).each { |hash| create(:character_class, hash) } }
+  before { CHARACTER_CLASSES.each { |hash| create(:character_class, hash) } }
 
   it 'returns all classes' do
-    expected_response = expected_response(classes_json, key: 'characterClasses')
+    expected_response = expected_response(CHARACTER_CLASSES, key: 'characterClasses')
 
     graphql_query('characterClasses { id name }')
 
@@ -16,7 +14,7 @@ describe 'POST /graphql' do
   end
 
   it 'finds first class by ID and returns it' do
-    expected_response = expected_response(classes_json, key: 'characterClass', first: true)
+    expected_response = expected_response(CHARACTER_CLASSES, key: 'characterClass', first: true)
 
     graphql_query('characterClass(id: 1) { id name }')
 

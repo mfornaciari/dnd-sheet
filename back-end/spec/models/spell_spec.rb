@@ -4,10 +4,8 @@ require 'rails_helper'
 
 describe Spell do
   subject(:spell) do
-    classes_json = Rails.public_path.join('data/character_classes.json').read
-    spells_json = Rails.public_path.join('data/spells.json').read
-    JSON.parse(classes_json, symbolize_names: true).each { |hash| create(:character_class, hash) }
-    create(:spell, JSON.parse(spells_json, symbolize_names: true).first)
+    CHARACTER_CLASSES.each { |hash| create(:character_class, hash) }
+    create(:spell, SPELLS.first)
   end
 
   it { is_expected.to validate_presence_of(:name) }

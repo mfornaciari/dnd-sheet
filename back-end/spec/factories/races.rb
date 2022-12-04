@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :race do
-    name { 'Anão' }
+    name { 'dwarf' }
   end
 end

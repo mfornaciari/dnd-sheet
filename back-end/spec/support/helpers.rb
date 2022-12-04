@@ -7,9 +7,8 @@ module TestHelpers
     post '/graphql', params: { query: "query { #{query_string} }" }
   end
 
-  def expected_response(json_data, key:, first: false)
-    parsed_data = JSON.parse(json_data)
-    formatted_data = parsed_data.map { |hash| formatted_hash(hash) }
+  def expected_response(data, key:, first: false)
+    formatted_data = data.map { |hash| formatted_hash(hash) }
     returned_data = first ? formatted_data.first : formatted_data
     { 'data' => { key => returned_data } }
   end

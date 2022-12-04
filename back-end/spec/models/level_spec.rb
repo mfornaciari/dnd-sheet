@@ -3,9 +3,7 @@
 require 'rails_helper'
 
 describe Level do
-  subject(:level) { create(:level, JSON.parse(levels_json, symbolize_names: true).first) }
-
-  let(:levels_json) { Rails.public_path.join('data/levels.json').read }
+  subject(:level) { create(:level, LEVELS.first) }
 
   it { is_expected.to validate_presence_of(:level) }
   it { is_expected.to validate_presence_of(:min_experience) }
