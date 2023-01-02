@@ -3,21 +3,15 @@
 require 'rails_helper'
 
 describe 'POST /graphql' do
-  before { RACES.each { |hash| create(:race, hash) } }
+  let(:tested_races) { RACES.sort_by { |race| race['name'] } }
+
+  before { tested_races.each { |hash| create(:race, hash) } }
 
   it 'returns all races' do
-    expected_response = expected_response(RACES, key: 'races')
+    expected_response = expected_response(tested_races, key: 'races')
 
-    graphql_query('races { id name }')
+    graphql_query('races { name }')
 
-    expect(JSON.parse(response.body)).to eq(expected_response)
-  end
-
-  it 'finds first race by ID and returns it' do
-    expected_response = expected_response(RACES, key: 'race', first: true)
-
-    graphql_query('race(id: 0) { id name }')
-
-    expect(JSON.parse(response.body)).to eq(expected_response)
+    expect(JSON.parse(response.body)['data']['races']).to match_array(expected_response['data']['races'])
   end
 end

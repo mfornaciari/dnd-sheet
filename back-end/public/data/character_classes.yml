@@ -1,37 +1,37 @@
 # loaded in config/initializers/constants.rb
 
 - id: '0'
-  name: barbarian
+  name: Barbarian
 
 - id: '1'
-  name: bard
+  name: Bard
 
 - id: '2'
-  name: cleric
+  name: Cleric
 
 - id: '3'
-  name: druid
+  name: Druid
 
 - id: '4'
-  name: fighter
+  name: Fighter
 
 - id: '5'
-  name: monk
+  name: Monk
 
 - id: '6'
-  name: paladin
+  name: Paladin
 
 - id: '7'
-  name: ranger
+  name: Ranger
 
 - id: '8'
-  name: rogue
+  name: Rogue
 
 - id: '9'
-  name: sorcerer
+  name: Sorcerer
 
 - id: '10'
-  name: warlock
+  name: Warlock
 
 - id: '11'
-  name: wizard
+  name: Wizard

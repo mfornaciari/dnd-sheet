@@ -15,6 +15,6 @@ FactoryBot.define do
     ritual { false }
     in_srd { true }
 
-    initialize_with { new(character_classes: CharacterClass.where(name: character_classes)) }
+    initialize_with { new(character_classes: CharacterClass.where(name: character_classes.map(&:capitalize))) }
   end
 end

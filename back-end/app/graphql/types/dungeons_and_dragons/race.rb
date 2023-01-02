@@ -5,8 +5,7 @@ module Types
     class Race < Types::BaseObject
       description 'A D&D 5th edition playable race'
 
-      field :id,   ID,     null: false, description: "Race's ID in the database"
-      field :name, String, null: false, description: "Race's name"
+      field :name, String, null: false, description: 'Capitalized race name'
     end
   end
 end

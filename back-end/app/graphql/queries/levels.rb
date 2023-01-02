@@ -5,7 +5,7 @@ module Queries
     type [Types::DungeonsAndDragons::Level], null: false
 
     def resolve
-      ::Level.all
+      ::Level.order(:level)
     end
   end
 end

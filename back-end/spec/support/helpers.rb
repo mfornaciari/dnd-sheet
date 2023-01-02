@@ -28,7 +28,7 @@ module TestHelpers
   def filled_hash(hash, model:)
     missing_attributes = camelized_missing_attributes(hash, model: model)
     missing_attributes_hash = missing_attributes.index_with(nil)
-    hash.merge(missing_attributes_hash)
+    hash.merge(missing_attributes_hash).except('id')
   end
 
   def association?(key)
@@ -45,17 +45,11 @@ module TestHelpers
 
   def graphql_association_instance(model, instance_name)
     model_instance = find_association(model, instance_name)
-    model_hash = model_instance.as_json(except: %i[created_at updated_at])
-    stringify_id(model_hash)
+    model_instance.as_json(except: %i[id created_at updated_at])
   end
 
   def find_association(model, instance_name)
-    modelize(model).find_by(name: instance_name)
-  end
-
-  def stringify_id(model_hash)
-    model_hash['id'] = model_hash['id'].to_s
-    model_hash
+    modelize(model).find_by(name: instance_name.capitalize)
   end
 
   def modelize(model_name)
@@ -63,7 +57,7 @@ module TestHelpers
   end
 
   def camelized_missing_attributes(hash, model:)
-    model.attribute_names.map { |name| name.camelize(:lower) } - %w[createdAt updatedAt] - hash.keys
+    model.attribute_names.map { |name| name.camelize(:lower) } - %w[id createdAt updatedAt] - hash.keys
   end
 end
 

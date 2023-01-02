@@ -5,7 +5,7 @@ module Queries
     type [Types::DungeonsAndDragons::Spell], null: false
 
     def resolve
-      ::Spell.all
+      ::Spell.order(:name)
     end
   end
 end
