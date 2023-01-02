@@ -8,7 +8,10 @@ module TestHelpers
   end
 
   def expected_response(data, key:, first: false)
-    formatted_data = data.map { |hash| formatted_hash(hash) }
+    formatted_data = data.map do |hash|
+      formatted_hash = formatted_hash(hash)
+      filled_hash(formatted_hash, model: modelize(key))
+    end
     returned_data = first ? formatted_data.first : formatted_data
     { 'data' => { key => returned_data } }
   end
@@ -20,6 +23,12 @@ module TestHelpers
       graphql_key = attribute.camelize(:lower)
       association?(attribute.singularize) ? [graphql_key, graphql_association(attribute, value)] : [graphql_key, value]
     end
+  end
+
+  def filled_hash(hash, model:)
+    missing_attributes = camelized_missing_attributes(hash, model: model)
+    missing_attributes_hash = missing_attributes.index_with(nil)
+    hash.merge(missing_attributes_hash)
   end
 
   def association?(key)
@@ -51,6 +60,10 @@ module TestHelpers
 
   def modelize(model_name)
     model_name.singularize.camelize.constantize
+  end
+
+  def camelized_missing_attributes(hash, model:)
+    model.attribute_names.map { |name| name.camelize(:lower) } - %w[createdAt updatedAt] - hash.keys
   end
 end
 

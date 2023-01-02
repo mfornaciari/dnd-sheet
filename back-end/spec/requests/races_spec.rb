@@ -16,7 +16,7 @@ describe 'POST /graphql' do
   it 'finds first race by ID and returns it' do
     expected_response = expected_response(RACES, key: 'race', first: true)
 
-    graphql_query('race(id: 1) { id name }')
+    graphql_query('race(id: 0) { id name }')
 
     expect(JSON.parse(response.body)).to eq(expected_response)
   end

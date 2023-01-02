@@ -16,7 +16,7 @@ describe 'POST /graphql' do
   it 'finds first level by ID and returns it' do
     expected_response = expected_response(LEVELS, key: 'level', first: true)
 
-    graphql_query('level(id: 1) { id level minExperience maxExperience }')
+    graphql_query('level(id: 0) { id level minExperience maxExperience }')
 
     expect(JSON.parse(response.body)).to eq(expected_response)
   end
