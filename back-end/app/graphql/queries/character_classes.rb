@@ -5,7 +5,7 @@ module Queries
     type [Types::DungeonsAndDragons::CharacterClass], null: false
 
     def resolve
-      ::CharacterClass.order(:name)
+      ::CharacterClass.all
     end
   end
 end

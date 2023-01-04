@@ -6,4 +6,6 @@ class CharacterClass < ApplicationRecord
 
   has_many :spell_character_classes, dependent: :destroy
   has_many :spells, through: :spell_character_classes
+
+  default_scope -> { order(:name) }
 end

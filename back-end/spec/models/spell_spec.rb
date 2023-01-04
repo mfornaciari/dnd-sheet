@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Spell do
   subject(:spell) do
     CHARACTER_CLASSES.each { |hash| create(:character_class, hash) }
-    create(:spell, SPELLS.first)
+    build(:spell, SPELLS.first)
   end
 
   it { is_expected.to validate_presence_of(:name) }
@@ -38,5 +38,13 @@ describe Spell do
     expect(spell).to define_enum_for(:school)
       .backed_by_column_of_type(:enum)
       .with_values(MAGIC_SCHOOL_NAMES.index_by(&:to_sym))
+  end
+
+  context 'when retrieving multiple records' do
+    it 'returns records ordered by name' do
+      SPELLS[0...10].each { |spell_hash| create(:spell, spell_hash) }
+
+      expect(described_class.all).to eq described_class.order(:name)
+    end
   end
 end

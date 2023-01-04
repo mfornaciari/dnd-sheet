@@ -3,13 +3,6 @@
 class Spell < ApplicationRecord
   extend ArrayEnum
 
-  has_many :spell_character_classes, dependent: :destroy
-  has_many :character_classes, through: :spell_character_classes
-
-  enum school: MAGIC_SCHOOL_NAMES.index_by(&:to_sym)
-
-  array_enum components: COMPONENTS.index_by(&:to_sym)
-
   validates(:name,
             :level,
             :school,
@@ -33,4 +26,13 @@ class Spell < ApplicationRecord
   validates(:name,
             :description,
             uniqueness: true)
+
+  has_many :spell_character_classes, dependent: :destroy
+  has_many :character_classes, through: :spell_character_classes
+
+  enum school: MAGIC_SCHOOL_NAMES.index_by(&:to_sym)
+
+  array_enum components: COMPONENTS.index_by(&:to_sym)
+
+  default_scope -> { order(:name) }
 end

@@ -5,7 +5,7 @@ module Queries
     type [Types::DungeonsAndDragons::Race], null: false
 
     def resolve
-      ::Race.order(:name)
+      ::Race.all
     end
   end
 end

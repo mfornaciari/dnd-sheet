@@ -3,4 +3,6 @@
 class Level < ApplicationRecord
   validates :level, :min_experience, :max_experience, presence: true
   validates :level, :min_experience, :max_experience, uniqueness: true
+
+  default_scope -> { order(:level) }
 end

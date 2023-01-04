@@ -19,9 +19,14 @@ COMPONENTS = %w[
 
 # Load data from YAML files in public/data
 
-CHARACTER_CLASSES = YAML.safe_load_file(Rails.public_path.join('data/character_classes.yml')).freeze
-RACES = YAML.safe_load_file(Rails.public_path.join('data/races.yml')).freeze
-LEVELS = YAML.safe_load_file(Rails.public_path.join('data/levels.yml')).freeze
+RACES_PATH = Rails.public_path.join('data/races').freeze
+RACES = RACES_PATH.each_child.map { |filepath| YAML.safe_load_file(filepath) }.freeze
+
+CHARACTER_CLASSES_PATH = Rails.public_path.join('data/character_classes').freeze
+CHARACTER_CLASSES = CHARACTER_CLASSES_PATH.each_child.map { |filepath| YAML.safe_load_file(filepath) }.freeze
+
+LEVELS_PATH = Rails.public_path.join('data/levels').freeze
+LEVELS = LEVELS_PATH.each_child.map { |filepath| YAML.safe_load_file(filepath) }.freeze
 
 SPELLS_PATH = Rails.public_path.join('data/spells').freeze
 SPELLS = SPELLS_PATH.each_child.map { |filepath| YAML.safe_load_file(filepath) }.freeze
