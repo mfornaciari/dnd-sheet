@@ -1,7 +1,6 @@
 class CreateSpells < ActiveRecord::Migration[7.0]
   def up
     create_enum :spell_school, MAGIC_SCHOOL_NAMES
-
     create_enum :spell_component, COMPONENTS
 
     create_table :spells do |t|
@@ -22,6 +21,7 @@ class CreateSpells < ActiveRecord::Migration[7.0]
     end
 
     add_index :spells, :name, unique: true
+    add_index :spells, :description, unique: true
   end
 
   def down

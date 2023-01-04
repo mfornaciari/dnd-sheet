@@ -27,14 +27,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_132952) do
   end
 
   create_table "levels", force: :cascade do |t|
-    t.integer "level", null: false
+    t.integer "number", null: false
     t.integer "min_experience", null: false
     t.integer "max_experience", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["level"], name: "index_levels_on_level", unique: true
     t.index ["max_experience"], name: "index_levels_on_max_experience", unique: true
     t.index ["min_experience"], name: "index_levels_on_min_experience", unique: true
+    t.index ["number"], name: "index_levels_on_number", unique: true
   end
 
   create_table "races", force: :cascade do |t|
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_132952) do
     t.boolean "in_srd", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["description"], name: "index_spells_on_description", unique: true
     t.index ["name"], name: "index_spells_on_name", unique: true
   end
 
