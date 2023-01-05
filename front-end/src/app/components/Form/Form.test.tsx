@@ -1,5 +1,5 @@
 import type { FetchedData } from "@/types";
-import { cleanup, render, screen, waitFor, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import i18next from "i18next";
 import fetchedDataMock from "@/test/fetchedDataMock.json";
@@ -32,7 +32,9 @@ describe("Form", () => {
     await user.clear(xpInput);
     await user.click(document.body);
 
-    for (const container of inputContainers) { expect(container).toHaveClass("invalid") };
+    for (const container of inputContainers) {
+      expect(container).toHaveClass("invalid");
+    }
 
     // Saves entered data to localStorage
     await user.type(nameInput, "Bruenor");
@@ -42,8 +44,8 @@ describe("Form", () => {
 
     const expectedValues = JSON.stringify({
       name: "Bruenor",
-      race: fetchedDataMock.data.races[0].id,
-      characterClass: fetchedDataMock.data.characterClasses[0].id,
+      race: fetchedDataMock.data.races[0].name,
+      characterClass: fetchedDataMock.data.characterClasses[0].name,
       experience: "300",
     });
     expect(localStorage.characterValues).toEqual(expectedValues);
@@ -65,8 +67,8 @@ describe("Form", () => {
     const loadButton: HTMLInputElement = within(form).getByRole("button", { name: "Carregar" });
     const fileValues = JSON.stringify({
       name: "Jozan",
-      race: fetchedDataMock.data.races[1].id,
-      characterClass: fetchedDataMock.data.characterClasses[1].id,
+      race: fetchedDataMock.data.races[1].name,
+      characterClass: fetchedDataMock.data.characterClasses[1].name,
       experience: "0",
     });
     const file = new File([fileValues], "Jozan.json", { type: "application/json" });
@@ -76,7 +78,7 @@ describe("Form", () => {
 
     expect(localStorage.characterValues).toEqual(fileValues);
     expect(nameInput).toHaveDisplayValue("Jozan");
-    expect(raceInput).toHaveDisplayValue(fetchedDataMock.data.races[1].name);
+    expect(raceInput).toHaveDisplayValue(i18next.t(fetchedDataMock.data.races[1].name));
     expect(classInput).toHaveDisplayValue(i18next.t(fetchedDataMock.data.characterClasses[1].name));
     expect(xpInput).toHaveDisplayValue("0");
   });

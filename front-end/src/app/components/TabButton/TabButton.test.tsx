@@ -6,14 +6,7 @@ describe("TabButton", () => {
   const mockHandleClick = jest.fn();
 
   it("renders correctly when selected and title is passed", async () => {
-    render(
-      <TabButton
-        tabKind="characterClass"
-        isSelected={true}
-        handleClick={mockHandleClick}
-        title="barbarian"
-      />
-    );
+    render(<TabButton tabKind="characterClass" isSelected={true} handleClick={mockHandleClick} title="Barbarian" />);
     const button: HTMLButtonElement = screen.getByRole("tab");
 
     await user.click(button);
@@ -27,14 +20,7 @@ describe("TabButton", () => {
   });
 
   it("renders correctly when not selected", () => {
-    render(
-      <TabButton
-        tabKind="characterClass"
-        isSelected={false}
-        handleClick={mockHandleClick}
-        title="barbarian"
-      />
-    );
+    render(<TabButton tabKind="characterClass" isSelected={false} handleClick={mockHandleClick} title="Barbarian" />);
     const button: HTMLButtonElement = screen.getByRole("tab");
 
     expect(button).toHaveAttribute("aria-selected", "false");
