@@ -3,15 +3,15 @@
 require 'rails_helper'
 
 describe 'POST /graphql' do
-  let(:tested_levels) { LEVELS.sort_by { |level| level['number'] } }
-
-  before { tested_levels.each { |hash| create(:level, hash) } }
+  before { LEVELS.each { |hash| create(:level, hash) } }
 
   it 'returns all levels' do
-    expected_response = expected_response(tested_levels, key: 'levels')
+    db_records = Level.all
+    serialized_records = db_records.as_json(except: %i[id created_at updated_at])
+    expected_response = camelized_hash_array(serialized_records)
 
     graphql_query('levels { number minExperience maxExperience }')
 
-    expect(JSON.parse(response.body)['data']['levels']).to eq(expected_response['data']['levels'])
+    expect(JSON.parse(response.body)['data']['levels']).to eq(expected_response)
   end
 end

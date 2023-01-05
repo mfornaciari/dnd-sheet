@@ -5,7 +5,7 @@ module Queries
     type [Types::DungeonsAndDragons::Spell], null: false
 
     def resolve
-      ::Spell.all
+      ::Spell.includes(:character_classes)
     end
   end
 end

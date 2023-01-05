@@ -3,6 +3,8 @@
 module Types
   module DungeonsAndDragons
     class Spell < Types::BaseObject
+      description 'A D&D 5th edition magic spell'
+
       CharacterClassType = Types::DungeonsAndDragons::CharacterClass
       MagicSchoolType = Types::DungeonsAndDragons::MagicSchool
       ComponentType = Types::DungeonsAndDragons::Component
