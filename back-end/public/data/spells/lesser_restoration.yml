@@ -1,0 +1,20 @@
+name: Lesser Restoration
+level: 2
+character_classes:
+  - bard
+  - cleric
+  - druid
+  - paladin
+  - ranger
+school: abjuration
+casting_time: 1 action
+range: Touch
+components:
+  - somatic
+  - verbal
+duration: Instantaneous
+description:
+  You touch a creature and can end either one disease or one condition afflicting it.
+  The condition can be blinded, deafened, paralyzed, or poisoned.
+ritual: false
+in_srd: true

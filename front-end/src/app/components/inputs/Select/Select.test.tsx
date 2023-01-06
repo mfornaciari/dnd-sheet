@@ -1,23 +1,18 @@
-import type { Option } from "@/types";
+import type { CharacterClassName, Option } from "@/types";
 import { render, screen, within } from "@testing-library/react";
 import i18next from "i18next";
 import fetchedDataMock from "@/test/fetchedDataMock.json";
 import { Select } from "./Select";
 
 describe("Select", () => {
-  const optionDataMock = fetchedDataMock.data.characterClasses;
+  const optionDataMock = fetchedDataMock.data.characterClasses.map(
+    characterClass => characterClass.name
+  ) as CharacterClassName[];
 
   it("renders correctly", () => {
-    render(
-      <Select
-        name="test"
-        invalid={false}
-        optionData={optionDataMock}
-        register={jest.fn()}
-      />
-    );
+    render(<Select name="test" invalid={false} optionData={optionDataMock} register={jest.fn()} />);
     const input: HTMLInputElement = screen.getByRole("combobox");
-    const container = input.parentElement!
+    const container = input.parentElement;
     const inputOptions: HTMLOptionElement[] = within(input).getAllByRole("option");
 
     expect(input).toHaveAccessibleName("test");
@@ -30,14 +25,7 @@ describe("Select", () => {
   });
 
   it("has red outline when invalid", async () => {
-    render(
-      <Select
-        name="test"
-        invalid={true}
-        optionData={optionDataMock}
-        register={jest.fn()}
-      />
-    );
+    render(<Select name="test" invalid={true} optionData={optionDataMock} register={jest.fn()} />);
     const input: HTMLInputElement = screen.getByRole("combobox");
     const container = input.parentElement!;
 
@@ -50,12 +38,7 @@ function createOptionRegex(data: Option[], option: HTMLOptionElement): RegExp {
     return String(option.getAttribute("value"));
   }
 
-  function getOptionName(data: Option[], value: string): string | undefined {
-    const foundEntry = data.find(item => item.id === value);
-    if (foundEntry) return i18next.t(foundEntry.name);
-  }
-
   const value = getOptionValue(option);
-  const name = getOptionName(data, value);
+  const name = i18next.t(value);
   return new RegExp(`^${name}$`);
 }

@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :level do
-    level { 1 }
-    min_experience { 1 }
-    max_experience { 2 }
+    number { 1 }
+    min_experience { 0 }
+    max_experience { 299 }
   end
 end

@@ -1,0 +1,20 @@
+name: Protection From Energy
+level: 3
+character_classes:
+  - cleric
+  - druid
+  - ranger
+  - sorcerer
+  - wizard
+school: abjuration
+casting_time: 1 action
+range: Touch
+components:
+  - somatic
+  - verbal
+duration: Concentration, up to 1 hour
+description:
+  "For the duration, the willing creature you touch has resistance to one damage type of your choice: \
+  acid, cold, fire, lightning, or thunder."
+ritual: false
+in_srd: true

@@ -2,48 +2,82 @@
   "data": {
     "races": [
       {
-        "id": "1",
-        "name": "Anão"
+        "name": "Dwarf"
       },
       {
-        "id": "2",
-        "name": "Draconato"
+        "name": "Halfling"
       },
       {
-        "id": "3",
-        "name": "Elfo"
+        "name": "Half-orc"
       }
     ],
     "characterClasses": [
       {
-        "id": "1",
-        "name": "barbarian"
+        "name": "Barbarian"
       },
       {
-        "id": "2",
-        "name": "bard"
+        "name": "Sorcerer"
       },
       {
-        "id": "3",
-        "name": "warlock"
+        "name": "Wizard"
+      }
+    ],
+    "spells": [
+      {
+        "name": "Acid Arrow",
+        "level": 2,
+        "characterClasses": [
+          {
+            "name": "Wizard"
+          }
+        ],
+        "school": "evocation",
+        "castingTime": "1 action",
+        "range": "90 feet",
+        "components": ["material", "somatic", "verbal"],
+        "materialComponents": "Powdered rhubarb leaf and an adder's stomach.",
+        "duration": "Instantaneous",
+        "description": "A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.",
+        "atHigherLevels": "When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd.",
+        "ritual": false,
+        "inSrd": true
+      },
+      {
+        "name": "Alter Self",
+        "level": 2,
+        "characterClasses": [
+          {
+            "name": "Sorcerer"
+          },
+          {
+            "name": "Wizard"
+          }
+        ],
+        "school": "transmutation",
+        "castingTime": "1 action",
+        "range": "Self",
+        "components": ["verbal", "somatic"],
+        "materialComponents": null,
+        "duration": "Concentration, up to 1 hour",
+        "description": "You assume a different form. When you cast the spell, choose one of the following options, the effects of which last for the duration of the spell. While the spell lasts, you can end one option as an action to gain the benefits of a different one. ***Aquatic Adaptation.*** You adapt your body to an aquatic environment, sprouting gills and growing webbing between your fingers. You can breathe underwater and gain a swimming speed equal to your walking speed. ***Change Appearance.*** You transform your appearance. You decide what you look like, including your height, weight, facial features, sound of your voice, hair length, coloration, and distinguishing characteristics, if any. You can make yourself appear as a member of another race, though none of your statistics change. You also can't appear as a creature of a different size than you, and your basic shape stays the same; if you're bipedal, you can't use this spell to become quadrupedal, for instance. At any time for the duration of the spell, you can use your action to change your appearance in this way again. ***Natural Weapons.*** You grow claws, fangs, spines, horns, or a different natural weapon of your choice. Your unarmed strikes deal 1d6 bludgeoning, piercing, or slashing damage, as appropriate to the natural weapon you chose, and you are proficient with your unarmed strikes. Finally, the natural weapon is magic and you have a +1 bonus to the attack and damage rolls you make using it.",
+        "atHigherLevels": null,
+        "ritual": false,
+        "inSrd": true
       }
     ],
     "levels": [
       {
-        "id": "1",
-        "level": 1,
+        "number": 1,
         "minExperience": 0,
         "maxExperience": 299
       },
       {
-        "id": "2",
-        "level": 2,
+        "number": 2,
         "minExperience": 300,
         "maxExperience": 899
       },
       {
-        "id": "3",
-        "level": 3,
+        "number": 3,
         "minExperience": 900,
         "maxExperience": 2699
       }

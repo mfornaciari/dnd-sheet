@@ -2,6 +2,8 @@
 
 module Types
   class QueryType < Types::BaseObject
+    description 'Available queries'
+
     # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
@@ -9,46 +11,12 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :character_classes, [Types::CharacterClassType], null: false
+    field :character_classes, description: 'Finds all character classes',   resolver: Queries::CharacterClasses
 
-    def character_classes
-      CharacterClass.all
-    end
+    field :races,             description: 'Finds all races',               resolver: Queries::Races
 
-    field :character_class, Types::CharacterClassType, null: false do
-      argument :id, ID, required: true
-    end
+    field :levels,            description: 'Finds all levels',              resolver: Queries::Levels
 
-    def character_class(id:)
-      CharacterClass.find(id)
-    end
-
-    field :races, [Types::RaceType], null: false
-
-    def races
-      Race.all
-    end
-
-    field :race, Types::RaceType, null: false do
-      argument :id, ID, required: true
-    end
-
-    def race(id:)
-      Race.find(id)
-    end
-
-    field :levels, [Types::LevelType], null: false
-
-    def levels
-      Level.all
-    end
-
-    field :level, Types::LevelType, null: false do
-      argument :id, ID, required: true
-    end
-
-    def level(id:)
-      Level.find(id)
-    end
+    field :spells,            description: 'Finds all spells',              resolver: Queries::Spells
   end
 end

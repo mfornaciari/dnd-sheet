@@ -1,0 +1,22 @@
+name: Water Breathing
+level: 3
+character_classes:
+  - druid
+  - ranger
+  - sorcerer
+  - wizard
+school: transmutation
+casting_time: 1 action
+range: 30 feet
+components:
+  - material
+  - somatic
+  - verbal
+material_components: A short piece of reed or straw.
+duration: 24 hours
+description:
+  This spell gives a maximum of ten willing creatures within range and you can see,
+  the ability to breathe underwater until the end of its term.
+  Affected creatures also retain their normal breathing pattern.
+ritual: true
+in_srd: true

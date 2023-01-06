@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module TestHelpers
-  def expected_response(json_data, key:, first: false)
-    formatted_data = JSON.parse(json_data.camelize, symbolize_names: true)
-    returned_data = first ? formatted_data.first : formatted_data
-    { data: { key => returned_data } }
-  end
+  ASSOCIATIONS = %w[character_class spell].freeze
 
   def graphql_query(query_string)
     post '/graphql', params: { query: "query { #{query_string} }" }
+  end
+
+  def camelized_hash_array(hash_array)
+    hash_array.map { |hash| hash.deep_transform_keys { |key| key.camelize(:lower) } }
   end
 end
 

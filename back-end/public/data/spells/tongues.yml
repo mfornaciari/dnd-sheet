@@ -1,0 +1,21 @@
+name: Tongues
+level: 3
+character_classes:
+  - bard
+  - cleric
+  - sorcerer
+  - warlock
+  - wizard
+school: divination
+casting_time: 1 action
+range: Touch
+components:
+  - material
+  - verbal
+material_components: A small clay model of a ziggurat.
+duration: 1 hour
+description:
+  This spell grants the creature you touch the ability to understand any spoken language it hears.
+  Moreover, when the target speaks, any creature that knows at least one language and can hear the target understands what it says.
+ritual: false
+in_srd: true

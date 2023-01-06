@@ -1,5 +1,4 @@
-import type { CharacterClass } from "@/types";
-import { calculateLevel, findClassName } from "./useCharacterFormHelpers";
+import { calculateLevel } from "./useCharacterFormHelpers";
 import fetchedDataMock from "@/test/fetchedDataMock.json";
 
 describe("calculateLevel", () => {
@@ -38,25 +37,6 @@ describe("calculateLevel", () => {
   });
 });
 
-describe("findClassName", () => {
-  const characterClasses = fetchedDataMock.data.characterClasses as CharacterClass[];
-  it("returns matching class name if ID is found in the class data provided", () => {
-    const selectedClassId = "1";
-
-    const result = findClassName(characterClasses, selectedClassId);
-
-    expect(result).toEqual("barbarian");
-  });
-
-  it("returns 'characterClass' if ID is not found in the class data provided", () => {
-    const selectedClassId = "4";
-
-    const result = findClassName(characterClasses, selectedClassId);
-
-    expect(result).toEqual("characterClass");
-  });
-});
-
 describe("generateURL", () => {
   const { generateURL } = jest.requireActual("./useCharacterFormHelpers");
   window.URL.createObjectURL = jest.fn();
@@ -64,11 +44,11 @@ describe("generateURL", () => {
   it("generates URL to download provided form values as JSON file", () => {
     const formValues = {
       name: "Bruenor",
-      race: fetchedDataMock.data.races[0].id,
-      characterClass: fetchedDataMock.data.characterClasses[0].id,
+      race: fetchedDataMock.data.races[0].name,
+      characterClass: fetchedDataMock.data.characterClasses[0].name,
       experience: "300",
     };
-    const blob = new Blob([JSON.stringify(formValues)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(formValues)], { type: "application/json" });
 
     generateURL(formValues);
 

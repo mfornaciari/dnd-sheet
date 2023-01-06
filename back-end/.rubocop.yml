@@ -10,10 +10,10 @@
 # See https://docs.rubocop.org/rubocop/configuration
 
 require:
+  - rubocop-graphql
+  - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
-  - rubocop-performance
-  - rubocop-graphql
 
 AllCops:
   NewCops: enable
@@ -21,11 +21,15 @@ AllCops:
     - bin/**/*
     - vendor/**/*
     - db/**/*
-    - app/controllers/graphql_controller.rb
 
 Style/Documentation:
   Enabled: false
 Style/HashSyntax:
+  Enabled: false
+
+GraphQL/OrderedFields:
+  Enabled: false
+GraphQL/ObjectDescription:
   Enabled: false
 
 RSpec/ExampleLength:

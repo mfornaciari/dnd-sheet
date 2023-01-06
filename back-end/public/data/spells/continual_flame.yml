@@ -1,0 +1,20 @@
+name: Continual Flame
+level: 2
+character_classes:
+  - cleric
+  - wizard
+school: evocation
+casting_time: 1 action
+range: Touch
+components:
+  - material
+  - somatic
+  - verbal
+material_components: Ruby dust worth 50 gp, which the spell consumes.
+duration: Until dispelled
+description:
+  A flame, equivalent in brightness to a torch, springs forth from an object that you touch.
+  The effect looks like a regular flame, but it creates no heat and doesn't use oxygen.
+  A continual flame can be covered or hidden but not smothered or quenched.
+ritual: false
+in_srd: true

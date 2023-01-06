@@ -11,36 +11,22 @@ type SelectProps = Readonly<{
   required?: boolean;
 }>;
 
-export function Select({
-  name,
-  invalid,
-  optionData,
-  register,
-  required
-}: SelectProps) {
+export function Select({ name, invalid, optionData, register, required }: SelectProps) {
   const i18nName = i18next.t(name);
 
-  const optionElements = optionData.map(({ name, id }) => {
-    const i18nOptionName = i18next.t(name);
+  const optionElements = optionData.map(value => {
+    const i18nOptionName = i18next.t(value);
 
     return (
-      <option key={id} value={id}>
+      <option key={value} value={value}>
         {i18nOptionName}
       </option>
     );
   });
 
   return (
-    <ContainerLabeled
-      label={i18nName}
-      labelFor={name}
-      invalid={invalid}
-    >
-      <select
-        id={name}
-        className="input"
-        {...register(name, { required: required })}
-      >
+    <ContainerLabeled label={i18nName} labelFor={name} invalid={invalid}>
+      <select id={name} className="input" {...register(name, { required: required })}>
         {optionElements}
       </select>
     </ContainerLabeled>

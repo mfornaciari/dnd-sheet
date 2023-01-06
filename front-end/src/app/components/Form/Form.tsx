@@ -5,42 +5,26 @@ import { ContainerUntitled, InputNumber, InputText, Select, TabStructure } from 
 
 type FormProps = {
   data: FetchedData;
-}
+};
 
 export function Form({ data }: FormProps) {
-  const {
-    characterName,
-    currentLevel,
-    downloadURL,
-    errors,
-    handleFileChange,
-    isValid,
-    register,
-    selectedClassName,
-  } = useCharacterForm(data);
+  const { characterName, currentLevel, downloadURL, errors, handleFileChange, isValid, register, selectedClassName } =
+    useCharacterForm(data);
+
+  const raceNames = data.races.map(race => race.name);
+  const characterClassNames = data.characterClasses.map(race => race.name);
 
   return (
     <form aria-label="Formulário">
       <section id="form-top">
-        <InputText
-          name="name"
-          invalid={errors.name ? true : false}
-          register={register}
-          required
-        />
+        <InputText name="name" invalid={errors.name ? true : false} register={register} required />
 
-        <Select
-          name="race"
-          invalid={errors.race ? true : false}
-          optionData={data.races}
-          register={register}
-          required
-        />
+        <Select name="race" invalid={errors.race ? true : false} optionData={raceNames} register={register} required />
 
         <Select
           name="characterClass"
           invalid={errors.characterClass ? true : false}
-          optionData={data.characterClasses}
+          optionData={characterClassNames}
           register={register}
           required
         />

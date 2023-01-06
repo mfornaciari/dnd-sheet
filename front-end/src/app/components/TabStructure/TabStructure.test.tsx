@@ -4,9 +4,7 @@ import { TabStructure } from "./TabStructure";
 
 describe("TabStructure", () => {
   it("renders correctly and allows changing active tab", async () => {
-    render(
-      <TabStructure selectedClassName="barbarian" />
-    );
+    render(<TabStructure selectedClassName="Barbarian" />);
     let activePanel: HTMLDivElement = screen.getByRole("tabpanel");
     const tabList: HTMLDivElement = screen.getByRole("tablist", { name: "Abas" });
     const tabPersonal: HTMLButtonElement = within(tabList).getByRole("tab", { name: "Pessoal" });
