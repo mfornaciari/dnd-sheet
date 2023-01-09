@@ -38,7 +38,7 @@ describe("Form", () => {
 
     // Saves entered data to localStorage
     await user.type(nameInput, "Bruenor");
-    await user.selectOptions(raceInput, data.races[0].name);
+    await user.selectOptions(raceInput, i18next.t(data.races[0].name));
     await user.selectOptions(classInput, i18next.t(data.characterClasses[0].name));
     await user.type(xpInput, "300");
 
@@ -57,7 +57,6 @@ describe("Form", () => {
   });
 
   it("loads data from file", async () => {
-    localStorage.clear();
     await waitFor(() => render(<Form data={data} />));
     const form: HTMLFormElement = screen.getByRole("form", { name: "Formulário" });
     const nameInput: HTMLInputElement = within(form).getByRole("textbox", { name: "Nome" });
@@ -76,7 +75,7 @@ describe("Form", () => {
 
     await user.upload(loadButton, file);
 
-    expect(localStorage.characterValues).toEqual(fileValues);
+    await waitFor(() => expect(localStorage.characterValues).toEqual(fileValues));
     expect(nameInput).toHaveDisplayValue("Jozan");
     expect(raceInput).toHaveDisplayValue(i18next.t(fetchedDataMock.data.races[1].name));
     expect(classInput).toHaveDisplayValue(i18next.t(fetchedDataMock.data.characterClasses[1].name));
