@@ -1,10 +1,14 @@
+import type { FetchedData } from "@/types";
 import { render, screen, within } from "@testing-library/react";
 import user from "@testing-library/user-event";
+import fetchedDataMock from "@/test/fetchedDataMock.json";
 import { TabStructure } from "./TabStructure";
 
 describe("TabStructure", () => {
+  const data = fetchedDataMock.data as FetchedData;
+
   it("renders correctly and allows changing active tab", async () => {
-    render(<TabStructure selectedClassName="Barbarian" />);
+    render(<TabStructure data={data} selectedClassName="Barbarian" />);
     let activePanel: HTMLDivElement = screen.getByRole("tabpanel");
     const tabList: HTMLDivElement = screen.getByRole("tablist", { name: "Abas" });
     const tabPersonal: HTMLButtonElement = within(tabList).getByRole("tab", { name: "Pessoal" });

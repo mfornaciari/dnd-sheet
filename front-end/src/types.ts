@@ -8,6 +8,7 @@ export type CharacterValues = Readonly<{
 export type FetchedData = Readonly<{
   races: Race[];
   characterClasses: CharacterClass[];
+  spells: Spell[];
   levels: Level[];
 }>;
 
@@ -15,7 +16,7 @@ export type Race = Readonly<{
   name: RaceName;
 }>;
 
-export type RaceName =
+export type RaceName = Readonly<
   | "Dragonborn"
   | "Dwarf"
   | "Elf"
@@ -24,13 +25,14 @@ export type RaceName =
   | "Half-elf"
   | "Half-orc"
   | "Human"
-  | "Tiefling";
+  | "Tiefling"
+>;
 
 export type CharacterClass = Readonly<{
   name: CharacterClassName;
 }>;
 
-export type CharacterClassName =
+export type CharacterClassName = Readonly<
   | "Barbarian"
   | "Bard"
   | "Cleric"
@@ -42,14 +44,15 @@ export type CharacterClassName =
   | "Rogue"
   | "Sorcerer"
   | "Warlock"
-  | "Wizard";
+  | "Wizard"
+>;
 
 export type Spell = Readonly<{
   name: string;
   level: number;
   characterClasses: {
     name: CharacterClassName;
-  };
+  }[];
   school: MagicSchool;
   castingTime: string;
   range: string;
@@ -62,7 +65,7 @@ export type Spell = Readonly<{
   inSrd: boolean;
 }>;
 
-export type MagicSchool =
+export type MagicSchool = Readonly<
   | "abjuration"
   | "conjuration"
   | "divination"
@@ -70,9 +73,14 @@ export type MagicSchool =
   | "evocation"
   | "illusion"
   | "necromancy"
-  | "transmutation";
+  | "transmutation"
+>;
 
-export type Component = "material" | "somatic" | "verbal";
+export type Component = Readonly<
+  | "material"
+  | "somatic"
+  | "verbal"
+>;
 
 export type Level = Readonly<{
   number: number;
@@ -80,7 +88,7 @@ export type Level = Readonly<{
   maxExperience: number;
 }>;
 
-export type Option = RaceName | CharacterClassName;
+export type Option = Readonly<RaceName | CharacterClassName>;
 
 export type Tabs = Readonly<{
   personal: JSX.Element;
@@ -90,4 +98,4 @@ export type Tabs = Readonly<{
   items: JSX.Element;
 }>;
 
-export type TabKind = keyof Tabs;
+export type TabKind = Readonly<keyof Tabs>;

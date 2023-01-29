@@ -64,7 +64,7 @@ export function Form({ data }: FormProps) {
         />
       </section>
 
-      <TabStructure selectedClassName={selectedClassName} />
+      <TabStructure data={data} selectedClassName={selectedClassName} />
     </form>
   );
 }

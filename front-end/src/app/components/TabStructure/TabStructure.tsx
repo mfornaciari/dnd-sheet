@@ -1,4 +1,4 @@
-import type { CharacterClassName, TabKind, Tabs } from "@/types";
+import type { CharacterClassName, FetchedData, TabKind, Tabs } from "@/types";
 import "./TabStructure.css";
 import { useState } from "react";
 import {
@@ -13,17 +13,18 @@ import {
 const tabKinds: TabKind[] = ["personal", "attributes", "characterClass", "spells", "items"];
 
 type TabStructureProps = {
+  data: FetchedData;
   selectedClassName: CharacterClassName | "characterClass";
 }
 
-export function TabStructure({ selectedClassName }: TabStructureProps) {
+export function TabStructure({ data, selectedClassName }: TabStructureProps) {
   const [activeTab, setActiveTab] = useState<TabKind>(() => "personal");
 
   const tabPanels: Tabs = {
     personal: <PanelPersonal />,
     attributes: <PanelAttributes />,
     characterClass: <PanelCharacterClass title={selectedClassName} />,
-    spells: <PanelSpells />,
+    spells: <PanelSpells spells={data.spells} />,
     items: <PanelItems />,
   };
 

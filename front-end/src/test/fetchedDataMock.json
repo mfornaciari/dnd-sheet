@@ -43,25 +43,25 @@
         "inSrd": true
       },
       {
-        "name": "Alter Self",
-        "level": 2,
+        "name": "Alarm",
+        "level": 1,
         "characterClasses": [
           {
-            "name": "Sorcerer"
+            "name": "Ranger"
           },
           {
             "name": "Wizard"
           }
         ],
-        "school": "transmutation",
-        "castingTime": "1 action",
-        "range": "Self",
-        "components": ["verbal", "somatic"],
-        "materialComponents": null,
-        "duration": "Concentration, up to 1 hour",
-        "description": "You assume a different form. When you cast the spell, choose one of the following options, the effects of which last for the duration of the spell. While the spell lasts, you can end one option as an action to gain the benefits of a different one. ***Aquatic Adaptation.*** You adapt your body to an aquatic environment, sprouting gills and growing webbing between your fingers. You can breathe underwater and gain a swimming speed equal to your walking speed. ***Change Appearance.*** You transform your appearance. You decide what you look like, including your height, weight, facial features, sound of your voice, hair length, coloration, and distinguishing characteristics, if any. You can make yourself appear as a member of another race, though none of your statistics change. You also can't appear as a creature of a different size than you, and your basic shape stays the same; if you're bipedal, you can't use this spell to become quadrupedal, for instance. At any time for the duration of the spell, you can use your action to change your appearance in this way again. ***Natural Weapons.*** You grow claws, fangs, spines, horns, or a different natural weapon of your choice. Your unarmed strikes deal 1d6 bludgeoning, piercing, or slashing damage, as appropriate to the natural weapon you chose, and you are proficient with your unarmed strikes. Finally, the natural weapon is magic and you have a +1 bonus to the attack and damage rolls you make using it.",
+        "school": "abjuration",
+        "castingTime": "1 minute",
+        "range": "30 feet",
+        "components": ["material", "somatic", "verbal"],
+        "materialComponents": "A tiny bell and a piece of fine silver wire.",
+        "duration": "8 hours",
+        "description": "You set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a Tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won't set off the alarm. You also choose whether the alarm is mental or audible.\nA mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping.\nAn audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.",
         "atHigherLevels": null,
-        "ritual": false,
+        "ritual": true,
         "inSrd": true
       }
     ],
