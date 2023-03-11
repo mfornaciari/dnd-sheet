@@ -1,5 +1,5 @@
 import type { Spell } from "@/types";
-import { Panel } from "@/app/components";
+import { Panel, Table } from "@/app/components";
 import { SpellRow } from "./SpellRow/SpellRow";
 
 type PanelSpellsProps = {
@@ -7,28 +7,14 @@ type PanelSpellsProps = {
 };
 
 export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
+  const headerTitles = ["Nome", "Escola", "Tempo de conjuração", "Componentes", "Duração", "Ritual"];
+  const spellRows = spells.slice(0, 4).map(spell => <SpellRow spell={spell} key={spell.name} />);
+
   return (
     <Panel tabButtonId="spells">
-      <table>
-        <caption>Magias</caption>
-
-        <thead>
-          <tr aria-label="headers">
-            <th scope="col">Nome</th>
-            <th scope="col">Escola</th>
-            <th scope="col">Tempo de conjuração</th>
-            <th scope="col">Componentes</th>
-            <th scope="col">Duração</th>
-            <th scope="col">Ritual</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {spells.slice(0, 4).map(spell => (
-            <SpellRow spell={spell} key={spell.name} />
-          ))}
-        </tbody>
-      </table>
+      <Table caption="Magias" headerTitles={headerTitles}>
+        {spellRows}
+      </Table>
     </Panel>
   );
 }
