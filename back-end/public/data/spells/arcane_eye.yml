@@ -1,3 +1,4 @@
+name: Arcane Eye
 level: 4
 character_classes:
   - cleric
@@ -11,8 +12,7 @@ components:
   - verbal
 material_components: A bit of bat fur.
 duration: Concentration, up to 1 hour
-description:
-  You create an invisible, magical eye within range that hovers in the air for the duration.
+description: You create an invisible, magical eye within range that hovers in the air for the duration.
 
   You mentally receive visual information from the eye, which has normal vision and darkvision out to 30 feet.
   The eye can look in every direction.
