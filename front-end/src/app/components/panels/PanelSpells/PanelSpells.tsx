@@ -8,7 +8,7 @@ type PanelSpellsProps = {
 
 export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
   const headerTitles = ["Nome", "Escola", "Tempo de conjuração", "Componentes", "Duração", "Ritual"];
-  const spellRows = spells.slice(0, 4).map(spell => <SpellRow spell={spell} key={spell.name} />);
+  const spellRows = spells.map(spell => <SpellRow spell={spell} key={spell.name} />);
 
   return (
     <Panel tabButtonId="spells">

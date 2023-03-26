@@ -1,5 +1,4 @@
 import type { Spell } from "@/types";
-import "./SpellRow.css";
 
 type SpellRowProps = {
   spell: Spell;

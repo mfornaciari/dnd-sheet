@@ -1,6 +1,33 @@
-th {
-  border: 1px solid;
-  padding: 0 0.3rem;
+table {
+  border: 0.1rem solid var(--dark-gray);
+  border-radius: 0.4rem;
+  border-spacing: 0px;
+  padding: 0.3rem;
+  margin: auto;
+}
+
+caption {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+tr:nth-child(even) {
+  background-color: var(--dark-gray);
+  color: var(--white);
+}
+
+th[scope="col"] {
+  padding: 0.3rem 0.5rem;
   white-space: nowrap;
   text-align: left;
+  text-transform: uppercase;
+  font-size: var(--small-text-size);
+}
+
+th[scope="row"],
+td {
+  max-width: 18rem;
+  padding: 0.3rem 0.5rem;
+  text-align: left;
+  font-size: var(--small-text-size);
 }
