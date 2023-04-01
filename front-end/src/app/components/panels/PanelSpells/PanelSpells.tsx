@@ -1,6 +1,5 @@
 import type { Spell } from "@/types";
 import { Panel, Table } from "@/app/components";
-import { SpellRow } from "./SpellRow/SpellRow";
 
 type PanelSpellsProps = {
   spells: Spell[];
@@ -8,13 +7,24 @@ type PanelSpellsProps = {
 
 export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
   const headerTitles = ["Nome", "Escola", "Tempo de conjuração", "Componentes", "Duração", "Ritual"];
-  const spellRows = spells.map(spell => <SpellRow spell={spell} key={spell.name} />);
+  const spellsTableData = spells.map(spell => {
+    const {
+      __typename, // eslint-disable-line
+      characterClasses,
+      level,
+      range,
+      materialComponents,
+      description,
+      atHigherLevels,
+      inSrd,
+      ...spellTableData
+    } = spell;
+    return spellTableData;
+  });
 
   return (
     <Panel tabButtonId="spells">
-      <Table caption="Magias" headerTitles={headerTitles}>
-        {spellRows}
-      </Table>
+      <Table caption="Magias" headerTitles={headerTitles} data={spellsTableData} />
     </Panel>
   );
 }

@@ -17,15 +17,7 @@ export type Race = Readonly<{
 }>;
 
 export type RaceName = Readonly<
-  | "Dragonborn"
-  | "Dwarf"
-  | "Elf"
-  | "Gnome"
-  | "Halfling"
-  | "Half-elf"
-  | "Half-orc"
-  | "Human"
-  | "Tiefling"
+  "Dragonborn" | "Dwarf" | "Elf" | "Gnome" | "Halfling" | "Half-elf" | "Half-orc" | "Human" | "Tiefling"
 >;
 
 export type CharacterClass = Readonly<{
@@ -48,6 +40,7 @@ export type CharacterClassName = Readonly<
 >;
 
 export type Spell = Readonly<{
+  __typename: "Spell";
   name: string;
   level: number;
   characterClasses: {
@@ -76,11 +69,7 @@ export type MagicSchool = Readonly<
   | "transmutation"
 >;
 
-export type Component = Readonly<
-  | "material"
-  | "somatic"
-  | "verbal"
->;
+export type Component = Readonly<"material" | "somatic" | "verbal">;
 
 export type Level = Readonly<{
   number: number;

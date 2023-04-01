@@ -1,7 +1,11 @@
+import type { Spell } from "@/types";
 import { render, screen, within } from "@testing-library/react";
+import fetchedDataMock from "@/test/fetchedDataMock.json";
 import { Table } from "./Table";
 
 describe("Table", () => {
+  const spells = fetchedDataMock.data.spells as Spell[];
+
   it("renders correctly", () => {
     const headerTitles = ["header1", "header2"];
     render(

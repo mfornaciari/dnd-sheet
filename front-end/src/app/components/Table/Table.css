@@ -3,7 +3,6 @@ table {
   border-radius: 0.4rem;
   border-spacing: 0px;
   padding: 0.3rem;
-  margin: auto;
 }
 
 caption {
@@ -12,22 +11,18 @@ caption {
 }
 
 tr:nth-child(even) {
-  background-color: var(--dark-gray);
-  color: var(--white);
+  background-color: var(--lighter-gray);
 }
 
-th[scope="col"] {
-  padding: 0.3rem 0.5rem;
-  white-space: nowrap;
-  text-align: left;
-  text-transform: uppercase;
-  font-size: var(--small-text-size);
-}
-
-th[scope="row"],
+th,
 td {
   max-width: 18rem;
   padding: 0.3rem 0.5rem;
   text-align: left;
   font-size: var(--small-text-size);
+}
+
+th[scope="col"] {
+  white-space: nowrap;
+  text-transform: uppercase;
 }
