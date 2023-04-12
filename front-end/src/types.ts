@@ -42,7 +42,7 @@ export type CharacterClassName = Readonly<
 export type Spell = Readonly<{
   __typename: "Spell";
   name: string;
-  level: number;
+  level: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
   characterClasses: {
     name: CharacterClassName;
   }[];

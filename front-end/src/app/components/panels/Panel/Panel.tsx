@@ -3,18 +3,14 @@ import type { PropsWithChildren } from "react";
 import "./Panel.css";
 
 type TabPanelProps = {
-  tabButtonId: TabKind,
-}
+  tabButtonId: TabKind;
+  className?: string;
+};
 
-export function Panel({ tabButtonId, children }: PropsWithChildren<TabPanelProps>) {
+export function Panel({ tabButtonId, className, children }: PropsWithChildren<TabPanelProps>): JSX.Element {
   return (
-    <section
-      id="tab-panel"
-      role="tabpanel"
-      aria-labelledby={tabButtonId}
-      aria-expanded="true"
-    >
+    <section className={className} id="tab-panel" role="tabpanel" aria-labelledby={tabButtonId} aria-expanded="true">
       {children}
     </section>
-  )
+  );
 }

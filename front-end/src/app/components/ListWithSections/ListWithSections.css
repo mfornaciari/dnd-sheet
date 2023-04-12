@@ -1,0 +1,28 @@
+.list-with-sections {
+  margin: 0;
+  list-style-type: none;
+  font-size: var(--small-text-size);
+  padding: 0.5rem 0 0 0;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.list-with-sections>li {
+  margin-bottom: 0.4rem;
+}
+
+.list-with-sections>li>h2 {
+  margin: 0 0 0.2rem 0;
+  font-size: var(--small-text-size);
+  font-style: italic;
+  border-bottom: 0.1rem solid var(--dark-gray);
+}
+
+.list-with-sections>li>ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.list-with-sections>li>ul>li:hover {
+  background-color: var(--lighter-gray);
+}

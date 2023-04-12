@@ -1,30 +1,23 @@
 import type { Spell } from "@/types";
-import { Panel, Table } from "@/app/components";
+import "./PanelSpells.css";
+import { Panel, ListWithSections } from "@/app/components";
 
 type PanelSpellsProps = {
   spells: Spell[];
 };
 
 export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
-  const headerTitles = ["Nome", "Escola", "Tempo de conjuração", "Componentes", "Duração", "Ritual"];
-  const spellsTableData = spells.map(spell => {
-    const {
-      __typename, // eslint-disable-line
-      characterClasses,
-      level,
-      range,
-      materialComponents,
-      description,
-      atHigherLevels,
-      inSrd,
-      ...spellTableData
-    } = spell;
-    return spellTableData;
-  });
+  const spellLevels = [...new Set(spells.map(spell => spell.level))].sort((item, otherItem) => item - otherItem);
+  const spellNamesByLevel = spellLevels.map(level =>
+    spells.filter(spell => spell.level === level).map(spell => spell.name)
+  );
+  const sectionNames = spellLevels.map(level => `Nível ${level}`);
 
   return (
-    <Panel tabButtonId="spells">
-      <Table caption="Magias" headerTitles={headerTitles} data={spellsTableData} />
+    <Panel className="panel-spells" tabButtonId="spells">
+      <ListWithSections title="Magias disponíveis" sectionNames={sectionNames} data={spellNamesByLevel} />
+      <div>Test</div>
+      <div>Test2</div>
     </Panel>
   );
 }
