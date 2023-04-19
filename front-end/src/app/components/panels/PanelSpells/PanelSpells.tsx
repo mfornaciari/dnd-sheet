@@ -15,9 +15,19 @@ export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
 
   return (
     <Panel className="panel-spells" tabButtonId="spells">
-      <ListWithSections title="Magias disponíveis" sectionNames={sectionNames} data={spellNamesByLevel} />
-      <div>Test</div>
-      <div>Test2</div>
+      <ListWithSections
+        title="Magias disponíveis"
+        sectionNames={sectionNames}
+        data={spellNamesByLevel}
+        extraClass="spell-list"
+      />
+      <div className="spell-card">Test</div>
+      <ListWithSections
+        title="Magias conhecidas"
+        sectionNames={sectionNames}
+        data={spellNamesByLevel}
+        extraClass="spell-list"
+      />
     </Panel>
   );
 }
