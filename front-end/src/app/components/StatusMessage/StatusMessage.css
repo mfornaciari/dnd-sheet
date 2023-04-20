@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100dvh;
   border-style: solid;
   border-width: 0.15rem;
   border-radius: 0.5rem;

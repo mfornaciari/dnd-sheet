@@ -1,8 +1,9 @@
 form {
   display: flex;
   flex-direction: column;
-  height: 99vh;
-  margin: 0 5px;
+  height: 99dvh;
+  padding: 0.5dvh 0.3dvw;
+  /* margin: 0 5px; */
 }
 
 #form-top {

@@ -3,8 +3,8 @@
   --light-gray: hsl(0, 0%, 60%);
   --dark-gray: hsl(0, 0%, 40%);
   --white: hsl(0, 0%, 100%);
-  --text-size: min(3vw, 1.5rem);
-  --small-text-size: min(2vw, 1rem);
+  --text-size: min(3dvw, 1.5rem);
+  --small-text-size: min(2dvw, 1rem);
   --focus-outline: 0.15rem solid blue;
   --error-outline: 0.15rem solid red;
 }
