@@ -3,5 +3,5 @@
   padding: 0.6rem;
   background-color: var(--white);
   font-size: var(--text-size);
-  max-height: 79vh;
+  height: 0;
 }
