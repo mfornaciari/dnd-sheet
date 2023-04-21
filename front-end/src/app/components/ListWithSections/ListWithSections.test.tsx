@@ -11,12 +11,22 @@ describe("ListWithSections", () => {
       spells.filter(spell => spell.level === level).map(spell => spell.name)
     );
     const sectionNames = levels.map(level => `Nível ${level}`);
-    render(<ListWithSections title="Magias disponíveis" sectionNames={sectionNames} data={spellNamesByLevel} />);
-    const heading: HTMLHeadingElement = screen.getByRole("heading", { level: 1 });
-    const list: HTMLOListElement = screen.getByRole("list", { name: "Magias disponíveis" });
+    render(
+      <ListWithSections
+        title="Magias disponíveis"
+        sectionNames={sectionNames}
+        data={spellNamesByLevel}
+        extraClass="spells"
+      />
+    );
+    const container: HTMLDivElement = screen.getByRole("presentation");
+    const heading: HTMLHeadingElement = within(container).getByRole("heading", { level: 1 });
+    const list: HTMLOListElement = within(container).getByRole("list", { name: "Magias disponíveis" });
     const listSections: HTMLLIElement[] = within(list).getAllByRole("listitem", { name: /^Nível \d{1}$/ });
 
+    expect(container).toHaveClass("container titled spells");
     expect(heading).toHaveTextContent(/^Magias disponíveis$/);
+    expect(list).toHaveAccessibleName("Magias disponíveis");
     let sectionIndex = 0;
     for (const sectionName of sectionNames) {
       const currentSection = listSections[sectionIndex];
