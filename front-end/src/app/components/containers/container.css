@@ -16,12 +16,6 @@
   color: blue;
 }
 
-
-.titled {
-  height: 100%;
-  padding: 0.5rem 0.2rem 0.2rem 0.2rem;
-}
-
 .untitled {
   padding: 0.1rem 0.3rem;
 }
@@ -38,8 +32,4 @@
   top: -22%;
   left: 3%;
   font-size: min(0.9rem, 2dvw);
-}
-
-.for-container-titled {
-  top: -2%;
 }

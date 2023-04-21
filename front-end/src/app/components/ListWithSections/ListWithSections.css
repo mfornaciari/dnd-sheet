@@ -1,3 +1,13 @@
+.list-with-sections-title {
+  margin: 0;
+  position: absolute;
+  background-color: white;
+  top: -12px;
+  left: 7px;
+  font-size: var(--small-text-size);
+  font-weight: 900;
+}
+
 .list-with-sections {
   list-style-type: none;
   font-size: var(--small-text-size);

@@ -5,15 +5,18 @@ type ListWithSectionsProps = {
   title: string;
   sectionNames: string[];
   data: string[][];
-  extraClass?: string;
 };
 
-export function ListWithSections({ title, sectionNames, data, extraClass }: ListWithSectionsProps): JSX.Element {
+export function ListWithSections({ title, sectionNames, data }: ListWithSectionsProps): JSX.Element {
   const snakecasedTitle = title.toLowerCase().replace(/ /g, "_");
   const snakecasedSectionNames = sectionNames.map(name => name.toLowerCase().replace(/ /g, "_"));
 
   return (
-    <ContainerTitled title={title} extraClass={extraClass}>
+    <ContainerTitled>
+      <h1 id={snakecasedTitle} className="list-with-sections-title">
+        {title}
+      </h1>
+
       <ol className="list-with-sections" aria-labelledby={snakecasedTitle}>
         {data.map((group, index) => (
           <li key={sectionNames[index]} aria-labelledby={snakecasedSectionNames[index]}>
