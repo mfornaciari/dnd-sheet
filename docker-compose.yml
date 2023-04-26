@@ -25,7 +25,7 @@ services:
       TZ: America/Sao_Paulo
     env_file:
       - .env
-    command: bash -c "bin/setup && rails s -b 0.0.0.0"
+    command: bash -c "rm -f tmp/pids/server.pid && bin/setup && rails s -b 0.0.0.0"
 
   db:
     image: postgres:14.5
