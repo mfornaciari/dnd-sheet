@@ -4,10 +4,10 @@ import { ContainerTitled } from "@/app/components";
 type ListWithSectionsProps = {
   title: string;
   sectionNames: string[];
-  data: string[][];
+  listItemsBySection: JSX.Element[][];
 };
 
-export function ListWithSections({ title, sectionNames, data }: ListWithSectionsProps): JSX.Element {
+export function ListWithSections({ title, sectionNames, listItemsBySection }: ListWithSectionsProps): JSX.Element {
   const snakecasedTitle = title.toLowerCase().replace(/ /g, "_");
   const snakecasedSectionNames = sectionNames.map(name => name.toLowerCase().replace(/ /g, "_"));
 
@@ -18,15 +18,11 @@ export function ListWithSections({ title, sectionNames, data }: ListWithSections
       </h1>
 
       <ol className="list-with-sections" aria-labelledby={snakecasedTitle}>
-        {data.map((group, index) => (
+        {listItemsBySection.map((listItemsGroup, index) => (
           <li key={sectionNames[index]} aria-labelledby={snakecasedSectionNames[index]}>
             <h2 id={snakecasedSectionNames[index]}>{sectionNames[index]}</h2>
 
-            <ul>
-              {group.map(item => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            <ul>{listItemsGroup}</ul>
           </li>
         ))}
       </ol>
