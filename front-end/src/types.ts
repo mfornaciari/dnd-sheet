@@ -42,7 +42,7 @@ export type CharacterClassName = Readonly<
 export type Spell = Readonly<{
   __typename: "Spell";
   name: string;
-  level: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+  level: SpellLevel;
   characterClasses: {
     name: CharacterClassName;
   }[];
@@ -57,6 +57,8 @@ export type Spell = Readonly<{
   ritual: boolean;
   inSrd: boolean;
 }>;
+
+export type SpellLevel = Readonly<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9>;
 
 export type MagicSchool = Readonly<
   | "abjuration"

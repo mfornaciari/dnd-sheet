@@ -2,6 +2,7 @@ export * from "./containers";
 export * from "./inputs";
 export * from "./panels";
 export { Form } from "./Form/Form";
+export { ListItemClickable } from "./ListItemClickable/ListItemClickable";
 export { ListWithSections } from "./ListWithSections/ListWithSections";
 export { StatusMessage } from "./StatusMessage/StatusMessage";
 export { TabButton } from "./TabButton/TabButton";
