@@ -1,7 +1,7 @@
 import type { CharacterValues, FetchedData } from "@/types";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { calculateLevel, generateURL } from "@/app/hooks/useCharacterForm/helpers/useCharacterFormHelpers";
+import { calculateLevel, generateURL } from "./helpers/useCharacterFormHelpers";
 
 const emptyValues = JSON.stringify({
   name: "",
