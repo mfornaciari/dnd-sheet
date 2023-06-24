@@ -1,7 +1,7 @@
 import type { MouseEvent } from "react";
-import type { Spell, SpellLevel } from "@/types";
+import type { Spell } from "@/types";
 import "./PanelSpells.css";
-import { useState } from "react";
+import { useSpells } from "@/app/hooks";
 import { ListItemClickable, ListWithSections, Panel } from "@/app/components";
 
 type PanelSpellsProps = {
@@ -9,26 +9,14 @@ type PanelSpellsProps = {
 };
 
 export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
-  const [knownSpells, setKnownSpells] = useState<Spell[]>([]);
-  const allSpellsLevels = getSpellLevels(spells);
-  const knownSpellsLevels = getSpellLevels(knownSpells);
-  const allSpellsSectionNames = allSpellsLevels.map(level => `Nível ${level}`);
-  const knownSpellsSectionNames = knownSpellsLevels.map(level => `Nível ${level}`);
-  const allSpellNamesByLevel = getSpellNamesByLevel(spells, allSpellsLevels);
-  const knownSpellNamesByLevel = getSpellNamesByLevel(knownSpells, knownSpellsLevels);
-
-  function addSpell(spell: Spell): void {
-    setKnownSpells(prevKnownSpells => [spell, ...prevKnownSpells]);
-  }
-  function removeSpell(spell: Spell): void {
-    setKnownSpells(prevKnownSpells => prevKnownSpells.filter(prevSpell => prevSpell.name !== spell.name));
-  }
-  function handleAllSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
-    handleListItemClick(event, spells, addSpell);
-  }
-  function handleKnownSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
-    handleListItemClick(event, knownSpells, removeSpell);
-  }
+  const {
+    allSpellsSectionNames,
+    knownSpellsSectionNames,
+    allSpellNamesByLevel,
+    knownSpellNamesByLevel,
+    handleAllSpellsListItemClick,
+    handleKnownSpellsListItemClick,
+  } = useSpells(spells);
 
   const allSpellsListItemsByLevel = buildSpellListItemsByLevel(allSpellNamesByLevel, handleAllSpellsListItemClick);
   const knownSpellsListItemsByLevel = buildSpellListItemsByLevel(
@@ -53,30 +41,6 @@ export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
       />
     </Panel>
   );
-}
-
-function getSpellLevels(spells: Spell[]): SpellLevel[] {
-  return [...new Set(spells.map(spell => spell.level))].sort((item, otherItem) => item - otherItem);
-}
-
-function getSpellNamesByLevel(spells: Spell[], levels: SpellLevel[]): string[][] {
-  const spellNamesByLevel = levels.map(level => {
-    const currentLevelSpells = spells.filter(spell => spell.level === level);
-    return currentLevelSpells.map(spell => spell.name);
-  });
-  return spellNamesByLevel;
-}
-
-function handleListItemClick(
-  event: MouseEvent<HTMLLIElement>,
-  spellList: Spell[],
-  action: (spell: Spell) => void
-): void {
-  const spellName = event.currentTarget.textContent;
-  if (spellName !== null) {
-    const spell = spellList.find(spell => spell.name === spellName);
-    if (spell !== undefined) action(spell);
-  }
 }
 
 function buildSpellListItemsByLevel(
