@@ -1,4 +1,3 @@
-import type { MouseEvent } from "react";
 import type { Spell, SpellLevel } from "@/types";
 
 export function getSpellLevels(spells: Spell[]): SpellLevel[] {
@@ -6,21 +5,17 @@ export function getSpellLevels(spells: Spell[]): SpellLevel[] {
 }
 
 export function getSpellNamesByLevel(spells: Spell[], levels: SpellLevel[]): string[][] {
-  const spellNamesByLevel = levels.map(level => {
-    const currentLevelSpells = spells.filter(spell => spell.level === level);
-    return currentLevelSpells.map(spell => spell.name);
-  });
-  return spellNamesByLevel;
+  return levels.map(level => getLevelSpellNames(level, spells));
 }
 
-export function handleListItemClick(
-  event: MouseEvent<HTMLLIElement>,
-  spellList: Spell[],
-  action: (spell: Spell) => void
-): void {
-  const spellName = event.currentTarget.textContent;
-  if (spellName !== null) {
-    const spell = spellList.find(spell => spell.name === spellName);
-    if (spell !== undefined) action(spell);
-  }
+export function handleListItemClick(spellName: string, spellList: Spell[], action: (spell: Spell) => void): void {
+  const spell = spellList.find(spell => spell.name === spellName);
+  if (spell !== undefined) action(spell);
+}
+
+// PRIVATE
+
+function getLevelSpellNames(level: SpellLevel, spells: Spell[]): string[] {
+  const currentLevelSpells = spells.filter(spell => spell.level === level);
+  return currentLevelSpells.map(spell => spell.name);
 }

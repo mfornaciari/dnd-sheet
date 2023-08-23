@@ -43,6 +43,8 @@ export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
   );
 }
 
+// PRIVATE
+
 function buildSpellListItemsByLevel(
   spellNamesByLevel: string[][],
   handleClick: (event: MouseEvent<HTMLLIElement>) => void

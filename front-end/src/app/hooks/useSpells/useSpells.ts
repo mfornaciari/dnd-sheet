@@ -28,10 +28,12 @@ export function useSpells(spells: Spell[]): UseSpellsReturn {
     setKnownSpells(prevKnownSpells => prevKnownSpells.filter(prevSpell => prevSpell.name !== spell.name));
   }
   function handleAllSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
-    handleListItemClick(event, spells, addSpell);
+    const spellName = event.currentTarget.textContent;
+    if (spellName !== null) handleListItemClick(spellName, spells, addSpell);
   }
   function handleKnownSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
-    handleListItemClick(event, knownSpells, removeSpell);
+    const spellName = event.currentTarget.textContent;
+    if (spellName !== null) handleListItemClick(spellName, knownSpells, removeSpell);
   }
 
   return {
