@@ -6,8 +6,10 @@ type ListItemClickableProps = {
 
 export function ListItemClickable({ handleClick, children }: PropsWithChildren<ListItemClickableProps>): JSX.Element {
   return (
-    <button type="button" onClick={handleClick}>
-      {children}
-    </button>
+    <li>
+      <button type="button" onClick={handleClick}>
+        {children}
+      </button>
+    </li>
   );
 }

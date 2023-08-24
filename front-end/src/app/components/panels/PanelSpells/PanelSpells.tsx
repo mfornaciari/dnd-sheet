@@ -51,9 +51,9 @@ function buildSpellListItemsByLevel(
 ): JSX.Element[][] {
   const spellListItemsByLevel = spellNamesByLevel.map(group =>
     group.map(spellName => (
-      <li key={spellName}>
-        <ListItemClickable handleClick={handleClick}>{spellName}</ListItemClickable>
-      </li>
+      <ListItemClickable key={spellName} handleClick={handleClick}>
+        {spellName}
+      </ListItemClickable>
     ))
   );
   return spellListItemsByLevel;

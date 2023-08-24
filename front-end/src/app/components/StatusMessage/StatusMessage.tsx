@@ -3,7 +3,7 @@ import i18next from "i18next";
 
 type StatusMessageProps = {
   message: string;
-}
+};
 
 export function StatusMessage({ message }: StatusMessageProps) {
   const i18nMessage = i18next.t(message);

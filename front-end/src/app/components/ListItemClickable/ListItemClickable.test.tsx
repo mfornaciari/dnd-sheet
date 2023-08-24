@@ -9,13 +9,17 @@ describe("ListItemClickable", () => {
       counter += 1;
     }
 
-    render(<ListItemClickable handleClick={handleClick}>Click me</ListItemClickable>);
+    render(
+      <ListItemClickable key="key" handleClick={handleClick}>
+        Click me
+      </ListItemClickable>
+    );
 
-    const listButton: HTMLButtonElement = screen.getByRole("button");
-    expect(listButton).toHaveTextContent(/^Click me$/);
-    expect(listButton).toHaveAccessibleName("Click me");
+    const listItem: HTMLLIElement = screen.getByRole("listitem");
+    expect(listItem).toHaveTextContent(/^Click me$/);
+    expect(listItem).toHaveAccessibleName("Click me");
 
-    await user.click(listButton);
+    await user.click(listItem);
 
     expect(counter).toEqual(1);
   });

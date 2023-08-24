@@ -29,7 +29,8 @@ export function useSpells(spells: Spell[]): UseSpellsReturn {
   }
   function handleAllSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
     const spellName = event.currentTarget.textContent;
-    if (spellName !== null) handleListItemClick(spellName, spells, addSpell);
+    const knownSpellNames = knownSpells.map(spell => spell.name);
+    if (spellName !== null && !knownSpellNames.includes(spellName)) handleListItemClick(spellName, spells, addSpell);
   }
   function handleKnownSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
     const spellName = event.currentTarget.textContent;
