@@ -1,7 +1,19 @@
-import type { CharacterValues, FetchedData } from "@/types";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import type { CharacterClassName, FetchedData } from "@/types";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { calculateLevel, generateURL } from "./helpers/useCharacterFormHelpers";
+
+type UseCharacterFormReturn = {
+  characterName: string;
+  currentLevel: number;
+  downloadURL: string;
+  errors: FieldErrors;
+  handleFileChange: (file: File) => void;
+  isValid: boolean;
+  register: UseFormRegister<any>;
+  selectedClassName: CharacterClassName;
+};
 
 const emptyValues = JSON.stringify({
   name: "",
@@ -10,7 +22,7 @@ const emptyValues = JSON.stringify({
   experience: "0",
 });
 
-export function useCharacterForm(data: FetchedData) {
+export function useCharacterForm(data: FetchedData): UseCharacterFormReturn {
   const {
     formState: { errors, isValid },
     getValues,
@@ -19,7 +31,7 @@ export function useCharacterForm(data: FetchedData) {
     watch,
   } = useForm({
     mode: "onTouched",
-    defaultValues: JSON.parse(localStorage.getItem("characterValues") || emptyValues),
+    defaultValues: JSON.parse(localStorage.getItem("characterValues") ?? emptyValues),
   });
 
   const characterValues = watch();
@@ -35,13 +47,16 @@ export function useCharacterForm(data: FetchedData) {
   const currentLevel = calculateLevel(levels, characterExperience);
   const downloadURL = generateURL(getValues());
 
-  async function handleFileChange(files: FileList | null) {
-    if (files) {
-      const currentFile = files[0];
-      const textValues = await currentFile.text();
-      const jsonValues: CharacterValues = JSON.parse(textValues);
-      reset(jsonValues);
-    }
+  function handleFileChange(file: File): void {
+    const reader = new FileReader();
+    reader.onload = event => {
+      const stringValues = event.target?.result;
+      if (typeof stringValues === "string") {
+        const jsonValues = JSON.parse(stringValues);
+        reset(jsonValues);
+      }
+    };
+    reader.readAsText(file);
   }
 
   return {

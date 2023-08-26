@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import { ListItemClickable } from "./ListItemClickable";
 
@@ -9,17 +9,14 @@ describe("ListItemClickable", () => {
       counter += 1;
     }
 
-    render(
-      <ListItemClickable key="key" handleClick={handleClick}>
-        Click me
-      </ListItemClickable>
-    );
+    render(<ListItemClickable onClick={handleClick}>Click me</ListItemClickable>);
 
     const listItem: HTMLLIElement = screen.getByRole("listitem");
-    expect(listItem).toHaveTextContent(/^Click me$/);
-    expect(listItem).toHaveAccessibleName("Click me");
+    const button: HTMLButtonElement = within(listItem).getByRole("button");
+    expect(button).toHaveTextContent(/^Click me$/);
+    expect(button).toHaveAccessibleName("Click me");
 
-    await user.click(listItem);
+    await user.click(button);
 
     expect(counter).toEqual(1);
   });

@@ -1,13 +1,13 @@
 import type { MouseEventHandler, PropsWithChildren } from "react";
 
 type ListItemClickableProps = {
-  handleClick: MouseEventHandler;
+  onClick: MouseEventHandler;
 };
 
-export function ListItemClickable({ handleClick, children }: PropsWithChildren<ListItemClickableProps>): JSX.Element {
+export function ListItemClickable({ onClick, children }: PropsWithChildren<ListItemClickableProps>): JSX.Element {
   return (
     <li>
-      <button type="button" onClick={handleClick}>
+      <button type="button" onClick={onClick}>
         {children}
       </button>
     </li>

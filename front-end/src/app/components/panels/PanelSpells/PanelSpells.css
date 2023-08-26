@@ -9,4 +9,86 @@
 
 .spell-card {
   flex-grow: 100;
+  margin: 0 1rem;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-radius: 0.4rem;
+  border-color: var(--dark-gray);
+  padding: 1rem;
+  overflow-y: scroll;
+}
+
+.spell-card>h1 {
+  margin: 0;
+  text-align: center;
+}
+
+#spell-card-school {
+  grid-area: spell-card-school;
+}
+
+#spell-card-level {
+  grid-area: spell-card-level;
+}
+
+#spell-card-classes {
+  grid-area: spell-card-classes;
+}
+
+#spell-card-casting-time {
+  grid-area: spell-card-casting-time;
+}
+
+#spell-card-range {
+  grid-area: spell-card-range;
+}
+
+#spell-card-duration {
+  grid-area: spell-card-duration;
+}
+
+#spell-card-components {
+  grid-area: spell-card-components;
+}
+
+#spell-card-material-components {
+  grid-area: spell-card-material-components;
+}
+
+#spell-card-description {
+  grid-area: spell-card-description;
+}
+
+#spell-card-at-higher-levels {
+  grid-area: spell-card-at-higher-levels;
+}
+
+#spell-card-ritual {
+  grid-area: spell-card-ritual;
+}
+
+.spell-card-data {
+  display: grid;
+  grid-template-areas:
+    'spell-card-school spell-card-level spell-card-classes'
+    'spell-card-casting-time spell-card-range spell-card-duration'
+    'spell-card-components spell-card-components spell-card-components'
+    'spell-card-material-components spell-card-material-components spell-card-material-components'
+    'spell-card-description spell-card-description spell-card-description'
+    'spell-card-at-higher-levels spell-card-at-higher-levels spell-card-at-higher-levels'
+    'spell-card-ritual spell-card-ritual spell-card-ritual';
+  grid-gap: 1rem;
+  font-size: var(--small-text-size);
+}
+
+.spell-card-inline-entry {
+  display: flex;
+}
+
+.spell-card-term {
+  font-weight: bold;
+}
+
+.spell-card-definition {
+  margin-left: 0.5rem;
 }

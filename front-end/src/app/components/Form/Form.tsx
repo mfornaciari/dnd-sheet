@@ -7,7 +7,7 @@ type FormProps = {
   data: FetchedData;
 };
 
-export function Form({ data }: FormProps) {
+export function Form({ data }: FormProps): JSX.Element {
   const { characterName, currentLevel, downloadURL, errors, handleFileChange, isValid, register, selectedClassName } =
     useCharacterForm(data);
 
@@ -17,13 +17,13 @@ export function Form({ data }: FormProps) {
   return (
     <form aria-label="Formulário">
       <section id="form-top">
-        <InputText name="name" invalid={errors.name ? true : false} register={register} required />
+        <InputText name="name" invalid={errors.name !== undefined} register={register} required />
 
-        <Select name="race" invalid={errors.race ? true : false} optionData={raceNames} register={register} required />
+        <Select name="race" invalid={errors.race !== undefined} optionData={raceNames} register={register} required />
 
         <Select
           name="characterClass"
-          invalid={errors.characterClass ? true : false}
+          invalid={errors.characterClass !== undefined}
           optionData={characterClassNames}
           register={register}
           required
@@ -31,7 +31,7 @@ export function Form({ data }: FormProps) {
 
         <InputNumber
           name="experience"
-          invalid={errors.experience ? true : false}
+          invalid={errors.experience !== undefined}
           minValue="0"
           maxValue="999999"
           register={register}
@@ -59,7 +59,11 @@ export function Form({ data }: FormProps) {
           type="file"
           id="loading-input"
           accept=".json"
-          onChange={event => handleFileChange(event.currentTarget.files)}
+          onChange={event => {
+            if (event.currentTarget.files !== null) {
+              handleFileChange(event.currentTarget.files[0]);
+            }
+          }}
           hidden
         />
       </section>

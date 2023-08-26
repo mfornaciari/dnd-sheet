@@ -75,7 +75,9 @@ describe("Form", () => {
 
     await user.upload(loadButton, file);
 
-    await waitFor(() => expect(localStorage.characterValues).toEqual(fileValues));
+    await waitFor(() => {
+      expect(localStorage.characterValues).toEqual(fileValues);
+    });
     expect(nameInput).toHaveDisplayValue("Jozan");
     expect(raceInput).toHaveDisplayValue(i18next.t(fetchedDataMock.data.races[1].name));
     expect(classInput).toHaveDisplayValue(i18next.t(fetchedDataMock.data.characterClasses[1].name));
