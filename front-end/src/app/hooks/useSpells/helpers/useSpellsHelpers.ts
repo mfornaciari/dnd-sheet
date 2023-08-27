@@ -8,11 +8,6 @@ export function getSpellNamesByLevel(spells: Spell[], levels: SpellLevel[]): str
   return levels.map(level => getLevelSpellNames(level, spells));
 }
 
-export function handleListItemClick(spellName: string, spellList: Spell[], action: (spell: Spell) => void): void {
-  const spell = spellList.find(spell => spell.name === spellName);
-  if (spell !== undefined) action(spell);
-}
-
 // PRIVATE
 
 function getLevelSpellNames(level: SpellLevel, spells: Spell[]): string[] {

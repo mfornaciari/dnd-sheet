@@ -1,5 +1,5 @@
 import type { Spell } from "@/types";
-import { getSpellLevels, getSpellNamesByLevel, handleListItemClick } from "./useSpellsHelpers";
+import { getSpellLevels, getSpellNamesByLevel } from "./useSpellsHelpers";
 import fetchedDataMock from "@/test/fetchedDataMock.json";
 
 describe("getSpellLevels", () => {
@@ -20,33 +20,5 @@ describe("getSpellNamesByLevel", () => {
     const spellNamesByLevel = getSpellNamesByLevel(spells, levels);
 
     expect(spellNamesByLevel).toEqual([["Alarm"], ["Acid Arrow"]]);
-  });
-});
-
-describe("handleListItemClick", () => {
-  it("calls a function on a spell if it's found in a list of spells", () => {
-    const spellName = fetchedDataMock.data.spells[0].name;
-    const spellList = fetchedDataMock.data.spells as Spell[];
-    let result = null;
-    function action(spell: Spell): void {
-      result = spell.name;
-    }
-
-    handleListItemClick(spellName, spellList, action);
-
-    expect(result).toEqual(spellName);
-  });
-
-  it("does not call a function on a spell if it's not found in a list of spells", () => {
-    const spellName = "Test name";
-    const spellList = fetchedDataMock.data.spells as Spell[];
-    let result = null;
-    function action(spell: Spell): void {
-      result = spell.name;
-    }
-
-    handleListItemClick(spellName, spellList, action);
-
-    expect(result).toBeNull();
   });
 });

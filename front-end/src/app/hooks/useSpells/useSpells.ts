@@ -1,16 +1,18 @@
 import type { MouseEvent } from "react";
 import type { Spell } from "@/types";
 import { useState } from "react";
-import { getSpellLevels, getSpellNamesByLevel, handleListItemClick } from "./helpers/useSpellsHelpers";
+import { getSpellLevels, getSpellNamesByLevel } from "./helpers/useSpellsHelpers";
 
 type UseSpellsReturn = {
+  addSelectedSpell: () => void;
   allSpellNamesByLevel: string[][];
   allSpellsSectionNames: string[];
-  handleAllSpellsListItemClick: (event: MouseEvent<HTMLLIElement>) => void;
-  handleKnownSpellsListItemClick: (event: MouseEvent<HTMLLIElement>) => void;
+  handleSpellsListItemClick: (event: MouseEvent<HTMLLIElement>) => void;
   knownSpellNamesByLevel: string[][];
   knownSpellsSectionNames: string[];
+  removeSelectedSpell: () => void;
   selectedSpell: Spell;
+  selectedSpellIsKnown: boolean;
 };
 
 export function useSpells(spells: Spell[]): UseSpellsReturn {
@@ -23,34 +25,29 @@ export function useSpells(spells: Spell[]): UseSpellsReturn {
   const allSpellNamesByLevel = getSpellNamesByLevel(spells, allSpellsLevels);
   const knownSpellNamesByLevel = getSpellNamesByLevel(knownSpells, knownSpellsLevels);
 
-  // function addSpell(spell: Spell): void {
-  //   setKnownSpells(prevKnownSpells => [spell, ...prevKnownSpells]);
-  // }
-  function removeSpell(spell: Spell): void {
-    setKnownSpells(prevKnownSpells => prevKnownSpells.filter(prevSpell => prevSpell.name !== spell.name));
+  const selectedSpellIsKnown = knownSpells.includes(selectedSpell);
+
+  function addSelectedSpell(): void {
+    setKnownSpells(prevKnownSpells => [selectedSpell, ...prevKnownSpells]);
   }
-  function handleAllSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
+  function removeSelectedSpell(): void {
+    setKnownSpells(prevKnownSpells => prevKnownSpells.filter(prevSpell => prevSpell.name !== selectedSpell.name));
+  }
+  function handleSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
     const spellName = event.currentTarget.textContent;
     const spell = spells.find(spell => spell.name === spellName);
     if (spell !== undefined) setSelectedSpell(prevSelectedSpell => spell);
   }
-  // function handleAllSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
-  //   const spellName = event.currentTarget.textContent;
-  //   const knownSpellNames = knownSpells.map(spell => spell.name);
-  //   if (spellName !== null && !knownSpellNames.includes(spellName)) handleListItemClick(spellName, spells, addSpell);
-  // }
-  function handleKnownSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
-    const spellName = event.currentTarget.textContent;
-    if (spellName !== null) handleListItemClick(spellName, knownSpells, removeSpell);
-  }
 
   return {
+    addSelectedSpell,
     allSpellNamesByLevel,
     allSpellsSectionNames,
-    handleAllSpellsListItemClick,
-    handleKnownSpellsListItemClick,
+    handleSpellsListItemClick,
     knownSpellNamesByLevel,
     knownSpellsSectionNames,
+    removeSelectedSpell,
     selectedSpell,
+    selectedSpellIsKnown,
   };
 }

@@ -10,8 +10,9 @@ describe("PanelSpells", () => {
 
     render(<PanelSpells spells={spells} />);
 
+    // Shows spell card upon clicking on a spell in the list with all spells
     const allSpellsList: HTMLOListElement = screen.getByRole("list", { name: "Magias disponíveis" });
-    const acidArrowButton: HTMLButtonElement = within(allSpellsList).getByRole("button", { name: "Acid Arrow" });
+    let acidArrowButton: HTMLButtonElement = within(allSpellsList).getByRole("button", { name: "Acid Arrow" });
     await user.click(acidArrowButton);
     const spellCard: HTMLDivElement = screen.getByRole("region", { name: "Acid Arrow" });
     const spellCardHeading: HTMLHeadingElement = within(spellCard).getByRole("heading", { level: 1 });
@@ -45,5 +46,38 @@ describe("PanelSpells", () => {
     );
     expect(spellCardTerms[10]).toHaveTextContent(/^Ritual:$/);
     expect(spellCardDefinitions[10]).toHaveTextContent(/^Não$/);
+
+    // Has button to add spell to list of known spells
+    let addSpellButton: HTMLButtonElement = within(spellCard).getByRole("button");
+
+    expect(addSpellButton).toHaveTextContent(/^Adicionar às conhecidas$/);
+    expect(addSpellButton).toHaveAccessibleName("Adicionar às conhecidas");
+
+    // Adds spell to list of known spells upon clicking the button
+    await user.click(addSpellButton);
+
+    const knownSpellsList: HTMLOListElement = screen.getByRole("list", { name: "Magias conhecidas" });
+    expect(knownSpellsList).toHaveTextContent("Acid Arrow");
+
+    // Shows spell card upon clicking on a spell in the list with all spells
+    const alarmButton = within(allSpellsList).getByRole("button", { name: "Alarm" });
+    await user.click(alarmButton);
+    addSpellButton = within(spellCard).getByRole("button");
+    await user.click(addSpellButton);
+    acidArrowButton = within(knownSpellsList).getByRole("button", { name: "Acid Arrow" });
+    await user.click(acidArrowButton);
+
+    expect(spellCard).toHaveTextContent("Acid Arrow");
+
+    // Has button to remove known spell from list of known spells
+    const removeSpellButton: HTMLButtonElement = within(spellCard).getByRole("button");
+
+    expect(removeSpellButton).toHaveTextContent(/^Remover das conhecidas$/);
+    expect(removeSpellButton).toHaveAccessibleName("Remover das conhecidas");
+
+    // Removes spell from list of known spells upon clicking the button
+    await user.click(removeSpellButton);
+
+    expect(knownSpellsList).not.toHaveTextContent("Acid Arrow");
   });
 });

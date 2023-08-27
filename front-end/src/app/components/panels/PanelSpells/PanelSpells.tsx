@@ -1,4 +1,3 @@
-import type { MouseEvent } from "react";
 import type { Spell } from "@/types";
 import "./PanelSpells.css";
 import { useSpells } from "@/app/hooks";
@@ -10,20 +9,39 @@ type PanelSpellsProps = {
 
 export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
   const {
+    addSelectedSpell,
     allSpellNamesByLevel,
     allSpellsSectionNames,
-    handleAllSpellsListItemClick,
-    handleKnownSpellsListItemClick,
+    handleSpellsListItemClick,
     knownSpellNamesByLevel,
     knownSpellsSectionNames,
+    removeSelectedSpell,
     selectedSpell,
+    selectedSpellIsKnown,
   } = useSpells(spells);
 
-  const allSpellsListItemsByLevel = buildSpellListItemsByLevel(allSpellNamesByLevel, handleAllSpellsListItemClick);
-  const knownSpellsListItemsByLevel = buildSpellListItemsByLevel(
-    knownSpellNamesByLevel,
-    handleKnownSpellsListItemClick
-  );
+  function buildSpellListItemsByLevel(spellNamesByLevel: string[][]): JSX.Element[][] {
+    return spellNamesByLevel.map(group =>
+      group.map(spellName => (
+        <ListItemClickable key={spellName} onClick={handleSpellsListItemClick}>
+          {spellName}
+        </ListItemClickable>
+      ))
+    );
+  }
+  function buildSpellCardButton(text: string, handler: () => void): JSX.Element {
+    return (
+      <button type="button" onClick={handler}>
+        {text}
+      </button>
+    );
+  }
+
+  const allSpellsListItemsByLevel = buildSpellListItemsByLevel(allSpellNamesByLevel);
+  const knownSpellsListItemsByLevel = buildSpellListItemsByLevel(knownSpellNamesByLevel);
+  const spellCardButton = selectedSpellIsKnown
+    ? buildSpellCardButton("Remover das conhecidas", removeSelectedSpell)
+    : buildSpellCardButton("Adicionar às conhecidas", addSelectedSpell);
 
   return (
     <Panel className="panel-spells" tabButtonId="spells">
@@ -35,6 +53,8 @@ export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
 
       <section aria-labelledby="spell-card-heading" className="spell-card">
         <h1 id="spell-card-heading">{selectedSpell.name}</h1>
+
+        {spellCardButton}
 
         <dl className="spell-card-data">
           <div role="presentation" id="spell-card-school" className="spell-card-inline-entry">
@@ -106,20 +126,6 @@ export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
 }
 
 // PRIVATE
-
-function buildSpellListItemsByLevel(
-  spellNamesByLevel: string[][],
-  handleClick: (event: MouseEvent<HTMLLIElement>) => void
-): JSX.Element[][] {
-  const spellListItemsByLevel = spellNamesByLevel.map(group =>
-    group.map(spellName => (
-      <ListItemClickable key={spellName} onClick={handleClick}>
-        {spellName}
-      </ListItemClickable>
-    ))
-  );
-  return spellListItemsByLevel;
-}
 
 function parseArray(array: string[]): string {
   const joinedString = array.join(", ");
