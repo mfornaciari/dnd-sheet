@@ -1,15 +1,12 @@
 import type { MouseEvent } from "react";
-import type { Spell } from "@/types";
+import type { LevelSpellNames, Spell } from "@/types";
 import { useState } from "react";
-import { getSpellLevels, getSpellNamesByLevel } from "./helpers/useSpellsHelpers";
 
 type UseSpellsReturn = {
   addSelectedSpell: () => void;
-  allSpellNamesByLevel: string[][];
-  allSpellsSectionNames: string[];
-  handleSpellsListItemClick: (event: MouseEvent<HTMLLIElement>) => void;
-  knownSpellNamesByLevel: string[][];
-  knownSpellsSectionNames: string[];
+  allSpellNamesByLevel: LevelSpellNames[];
+  handleSpellsListItemClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  knownSpellNamesByLevel: LevelSpellNames[];
   removeSelectedSpell: () => void;
   selectedSpell: Spell;
   selectedSpellIsKnown: boolean;
@@ -18,13 +15,8 @@ type UseSpellsReturn = {
 export function useSpells(spells: Spell[]): UseSpellsReturn {
   const [knownSpells, setKnownSpells] = useState<Spell[]>([]);
   const [selectedSpell, setSelectedSpell] = useState<Spell>(spells[0]);
-  const allSpellsLevels = getSpellLevels(spells);
-  const knownSpellsLevels = getSpellLevels(knownSpells);
-  const allSpellsSectionNames = allSpellsLevels.map(level => `Nível ${level}`);
-  const knownSpellsSectionNames = knownSpellsLevels.map(level => `Nível ${level}`);
-  const allSpellNamesByLevel = getSpellNamesByLevel(spells, allSpellsLevels);
-  const knownSpellNamesByLevel = getSpellNamesByLevel(knownSpells, knownSpellsLevels);
-
+  const allSpellNamesByLevel = getSpellNamesByLevel(spells);
+  const knownSpellNamesByLevel = getSpellNamesByLevel(knownSpells);
   const selectedSpellIsKnown = knownSpells.includes(selectedSpell);
 
   function addSelectedSpell(): void {
@@ -33,7 +25,7 @@ export function useSpells(spells: Spell[]): UseSpellsReturn {
   function removeSelectedSpell(): void {
     setKnownSpells(prevKnownSpells => prevKnownSpells.filter(prevSpell => prevSpell.name !== selectedSpell.name));
   }
-  function handleSpellsListItemClick(event: MouseEvent<HTMLLIElement>): void {
+  function handleSpellsListItemClick(event: MouseEvent<HTMLButtonElement>): void {
     const spellName = event.currentTarget.textContent;
     const spell = spells.find(spell => spell.name === spellName);
     if (spell !== undefined) setSelectedSpell(prevSelectedSpell => spell);
@@ -42,12 +34,28 @@ export function useSpells(spells: Spell[]): UseSpellsReturn {
   return {
     addSelectedSpell,
     allSpellNamesByLevel,
-    allSpellsSectionNames,
     handleSpellsListItemClick,
     knownSpellNamesByLevel,
-    knownSpellsSectionNames,
     removeSelectedSpell,
     selectedSpell,
     selectedSpellIsKnown,
   };
+}
+
+// PRIVATE
+
+function getSpellNamesByLevel(spells: Spell[]): LevelSpellNames[] {
+  return spells.reduce(spellReducer, []).sort((object, otherObject) => (object.level > otherObject.level ? 1 : -1));
+}
+
+function spellReducer(result: LevelSpellNames[], currentSpell: Spell): LevelSpellNames[] {
+  const currentLevel = currentSpell.level;
+  let objectInResult = result.find(object => object.level === currentLevel);
+  if (objectInResult === undefined) {
+    const newObject = { level: currentLevel, spellNames: [] };
+    result.push(newObject);
+    objectInResult = newObject;
+  }
+  objectInResult.spellNames.push(currentSpell.name);
+  return result;
 }

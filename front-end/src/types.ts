@@ -79,7 +79,17 @@ export type Level = Readonly<{
   maxExperience: number;
 }>;
 
+export type LevelSpellNames = {
+  level: number;
+  spellNames: string[];
+};
+
 export type Option = Readonly<RaceName | CharacterClassName>;
+
+export type SectionObject = {
+  title: string;
+  elements: JSX.Element[];
+};
 
 export type Tabs = Readonly<{
   personal: JSX.Element;

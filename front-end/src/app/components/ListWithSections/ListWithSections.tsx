@@ -1,15 +1,15 @@
+import type { SectionObject } from "@/types";
+import { ListSection } from "../ListSection/ListSection";
 import "./ListWithSections.css";
 import { ContainerTitled } from "@/app/components";
 
 type ListWithSectionsProps = {
   title: string;
-  sectionNames: string[];
-  listItemsBySection: JSX.Element[][];
+  sectionObjects: SectionObject[];
 };
 
-export function ListWithSections({ title, sectionNames, listItemsBySection }: ListWithSectionsProps): JSX.Element {
+export function ListWithSections({ title, sectionObjects }: ListWithSectionsProps): JSX.Element {
   const snakecasedTitle = title.toLowerCase().replace(/ /g, "_");
-  const snakecasedSectionNames = sectionNames.map(name => name.toLowerCase().replace(/ /g, "_"));
 
   return (
     <ContainerTitled>
@@ -18,13 +18,11 @@ export function ListWithSections({ title, sectionNames, listItemsBySection }: Li
       </h1>
 
       <ol className="list-with-sections" aria-labelledby={snakecasedTitle}>
-        {listItemsBySection.map((listItemsGroup, index) => (
-          <li key={sectionNames[index]} aria-labelledby={snakecasedSectionNames[index]}>
-            <h2 id={snakecasedSectionNames[index]}>{sectionNames[index]}</h2>
-
-            <ul>{listItemsGroup}</ul>
-          </li>
-        ))}
+        {sectionObjects.map(object => {
+          const { title, elements } = object;
+          const snakecasedTitle = title.toLowerCase().replace(/ /g, "_");
+          return <ListSection key={snakecasedTitle} title={title} elements={elements} />;
+        })}
       </ol>
     </ContainerTitled>
   );
