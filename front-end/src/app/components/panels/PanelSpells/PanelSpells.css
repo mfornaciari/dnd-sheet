@@ -7,6 +7,12 @@
   flex-grow: 1;
 }
 
+.spell-list-button {
+  all: unset;
+  width: 100%;
+  cursor: pointer;
+}
+
 .spell-card {
   flex-grow: 100;
   margin: 0 1rem;
@@ -21,6 +27,31 @@
 .spell-card>h1 {
   margin: 0;
   text-align: center;
+}
+
+#spell-card-button {
+  display: block;
+  margin: 5px auto auto auto;
+  border: 0.1rem solid var(--dark-gray);
+  border-radius: 0.4rem;
+  box-shadow: 0 0.2rem var(--light-gray);
+  background: none;
+  cursor: pointer;
+  font-size: var(--small-text-size);
+  font-weight: 900;
+}
+
+#spell-card-button:hover {
+  background: var(--light-gray);
+}
+
+#spell-card-button:focus {
+  outline: var(--focus-outline);
+}
+
+#spell-card-button:active {
+  box-shadow: 0 0.1rem var(--light-gray);
+  transform: translateY(0.1rem);
 }
 
 #spell-card-school {

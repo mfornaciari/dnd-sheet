@@ -29,7 +29,7 @@ export function PanelSpells({ spells }: PanelSpellsProps): JSX.Element {
     const snakecasedSpellName = spellName.toLowerCase().replace(/ /g, "_");
 
     return (
-      <button type="button" key={snakecasedSpellName} onClick={handleSpellsListItemClick}>
+      <button type="button" key={snakecasedSpellName} onClick={handleSpellsListItemClick} className="spell-list-button">
         {spellName}
       </button>
     );
@@ -125,7 +125,7 @@ function parseArray(array: string[]): string {
 
 function buildSpellCardButton(text: string, handler: () => void): JSX.Element {
   return (
-    <button type="button" onClick={handler}>
+    <button type="button" onClick={handler} id="spell-card-button">
       {text}
     </button>
   );
